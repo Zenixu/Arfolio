@@ -1,0 +1,31 @@
+/* Afterglow — tema personal Rchibnu (profil). Override di atas token dasar. */
+
+:root[data-theme="dark"][data-site="profile"] {
+  --bg: #14121A;
+  --bg-elevated: #1D1A26;
+  --border: #2E2939;
+  --text: #EAE6F0;
+  --text-muted: #9A93A8;
+  --accent: #E3A57C;      /* senja hangat / Afterglow */
+  --accent-hover: #EFBE9C;
+  --wisteria: #B79CE0;
+  --mirror: #9AA6B2;
+  --ramen: #F3E7D6;
+  --gradient: linear-gradient(135deg, #E3A57C, #B79CE0);
+}
+
+:root[data-theme="light"][data-site="profile"] {
+  --bg: #FBF7F2;
+  --bg-elevated: #FFFFFF;
+  --border: #EADFD2;
+  --text: #241F2B;
+  --text-muted: #6B6274;
+  --accent: #C97F4E;
+  --accent-hover: #B36C3D;
+  --wisteria: #8E6FC0;
+}
+
+[data-site="profile"] .afterglow-gradient {
+  background: var(--gradient, linear-gradient(135deg, #E3A57C, #B79CE0));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}

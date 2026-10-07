@@ -1,0 +1,228 @@
+{
+  "identity": {
+    "fullName": "Ibnu Hambal Al Bantani Rch",
+    "displayName": "Ibnu Hambal",
+    "handle": "rchibnu",
+    "brand": "aruthtale",
+    "role": "Fullstack Developer",
+    "headline": "Building functional, interactive, and user-centric web applications.",
+    "age": 17,
+    "location": "Cianjur, Jawa Barat, Indonesia",
+    "status": "Sedang PKL di PT ASQI Digital Innovation",
+    "photo": null,
+    "logo": null,
+    "logoNote": "Logo personal Rchibnu menyusul."
+  },
+  "bio": {
+    "short": "Fullstack Developer berusia 17 tahun yang membangun aplikasi web fungsional, interaktif, dan berpusat pada pengguna.",
+    "paragraphs": [
+      "Hai, saya Ibnu Hambal Al Bantani Rch — seorang Fullstack Developer yang membangun aplikasi web yang fungsional, interaktif, dan berpusat pada pengguna.",
+      "Saat ini saya pelajar kelas 12 di SMK Negeri 1 Cianjur, jurusan Rekayasa Perangkat Lunak (RPL), dan sedang menjalani PKL di PT ASQI Digital Innovation.",
+      "Saya sangat tertarik pada perkembangan teknologi — terutama AI, pengembangan web, dan kini mulai mendalami automation. Rasa ingin tahu inilah yang akhirnya mendorong saya membangun brand sendiri bernama aruthtale."
+    ]
+  },
+  "interests": [
+    "Teknologi",
+    "Artificial Intelligence",
+    "Web Development",
+    "Automation"
+  ],
+  "education": {
+    "school": "SMK Negeri 1 Cianjur",
+    "major": "Rekayasa Perangkat Lunak (RPL)",
+    "grade": "Kelas 12",
+    "status": "Aktif"
+  },
+  "experience": [
+    {
+      "type": "internship",
+      "role": "Praktik Kerja Lapangan (PKL)",
+      "organization": "PT ASQI Digital Innovation",
+      "period": "2026 — sekarang",
+      "current": true,
+      "description": "Menjalani PKL dengan fokus pada pengembangan aplikasi web."
+    },
+    {
+      "type": "project",
+      "role": "Project Leader",
+      "organization": "SMK N 1 Cianjur — Tangible Coding Tournament",
+      "period": "2024",
+      "current": false,
+      "description": "Memimpin proyek pada Tangible Coding Tournament tingkat sekolah."
+    },
+    {
+      "type": "education",
+      "role": "Pelajar RPL",
+      "organization": "SMK Negeri 1 Cianjur",
+      "period": "2023 — sekarang",
+      "current": true,
+      "description": "Menempuh pendidikan jurusan Rekayasa Perangkat Lunak."
+    }
+  ],
+  "timeline": [
+    {
+      "year": "2023",
+      "title": "Mulai menekuni Rekayasa Perangkat Lunak",
+      "detail": "Masuk SMK Negeri 1 Cianjur jurusan RPL."
+    },
+    {
+      "year": "2024",
+      "title": "Menjadi Project Leader",
+      "detail": "Memimpin proyek pada Tangible Coding Tournament SMK N 1 Cianjur."
+    },
+    {
+      "year": "2024",
+      "title": "Juara II STEAM Fair (Internasional)",
+      "detail": "Kategori Adult pada Computational Thinking Competition, UNS Surakarta."
+    },
+    {
+      "year": "2026",
+      "title": "Sertifikasi & PKL",
+      "detail": "Meraih sejumlah sertifikat Dicoding dan mulai PKL di PT ASQI Digital Innovation."
+    },
+    {
+      "year": "2026",
+      "title": "Membangun aruthtale",
+      "detail": "Membuat brand pengembangan web sendiri."
+    }
+  ],
+  "skills": {
+    "groups": [
+      {
+        "name": "Frontend",
+        "items": [
+          "HTML",
+          "CSS",
+          "JavaScript",
+          "TypeScript",
+          "React 19",
+          "Next.js",
+          "Vite",
+          "Tailwind CSS v4"
+        ]
+      },
+      {
+        "name": "Backend",
+        "items": [
+          "Node.js",
+          "Express",
+          "Laravel 12",
+          "PostgreSQL",
+          "Supabase"
+        ]
+      },
+      {
+        "name": "Mobile",
+        "items": [
+          "Capacitor",
+          "Android"
+        ]
+      },
+      {
+        "name": "Konsep",
+        "items": [
+          "OOP",
+          "Prinsip SOLID",
+          "Manajemen Proyek",
+          "RBAC & Auth",
+          "Computational Thinking"
+        ]
+      },
+      {
+        "name": "Tools",
+        "items": [
+          "Git",
+          "GitHub",
+          "Vercel",
+          "Cloudflare Workers",
+          "Figma",
+          "Vitest"
+        ]
+      },
+      {
+        "name": "Sedang Dipelajari",
+        "items": [
+          "AI",
+          "Automation"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "email": "maybe4zen@gmail.com",
+    "github": "https://www.github.com/Zenixu",
+    "instagram": "https://www.instagram.com/zennrch",
+    "linkedin": null,
+    "x": null
+  },
+  "cv": null,
+  "cvNote": "CV (PDF) menyusul.",
+  "theme": {
+    "name": "Afterglow",
+    "concept": "quiet introspection",
+    "tagline": "Sesuatu yang sudah berlalu, tetapi masih meninggalkan rasa.",
+    "summary": "Tema personal Rchibnu: tenang, reflektif, hangat seadanya. Bukan untuk menonjolkan diri, tetapi untuk melihat ke dalam dan bertanya, 'sebenarnya aku seperti apa?'",
+    "sequence": [
+      "Indigo",
+      "Wisteria",
+      "Fox",
+      "Autumn",
+      "Drizzle",
+      "Mirror",
+      "Ramen",
+      "Afterglow"
+    ],
+    "elements": [
+      {
+        "name": "Indigo",
+        "meaning": "Dalam, tenang, tidak terlalu terang-terangan."
+      },
+      {
+        "name": "Wisteria",
+        "meaning": "Lembut, puitis, sedikit nostalgic."
+      },
+      {
+        "name": "Fox",
+        "meaning": "Mengamati dulu, tidak selalu menunjukkan seluruh dirinya."
+      },
+      {
+        "name": "Autumn",
+        "meaning": "Perubahan, nostalgia, fase transisi."
+      },
+      {
+        "name": "Drizzle",
+        "meaning": "Emosi yang hadir tanpa harus menjadi dramatis."
+      },
+      {
+        "name": "Mirror",
+        "meaning": "Kecenderungan melihat kembali ke diri sendiri dan bertanya, 'sebenarnya aku seperti apa?'"
+      },
+      {
+        "name": "Ramen",
+        "meaning": "Sisi hangat dan sederhana yang menyeimbangkan semuanya."
+      },
+      {
+        "name": "Afterglow",
+        "meaning": "Sesuatu yang sudah berlalu tetapi masih meninggalkan rasa."
+      }
+    ],
+    "core": [
+      "Mirror",
+      "Afterglow"
+    ],
+    "note": "Dari delapan metafora, Mirror + Afterglow dianggap paling mengikat: melihat ke dalam, lalu merasakan sisa cahayanya. Delapan nama ini bukan aesthetic acak — ia cara memandang diri sendiri.",
+    "palette": {
+      "mode": "dark",
+      "bg": "#14121A",
+      "bgElevated": "#1D1A26",
+      "border": "#2E2939",
+      "text": "#EAE6F0",
+      "textMuted": "#9A93A8",
+      "afterglow": "#E3A57C",
+      "wisteria": "#B79CE0",
+      "mirror": "#9AA6B2",
+      "ramen": "#F3E7D6",
+      "gradient": "linear-gradient(135deg, #E3A57C 0%, #B79CE0 100%)"
+    }
+  }
+}

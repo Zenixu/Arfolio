@@ -1,0 +1,679 @@
+[
+  {
+    "slug": "arplication",
+    "type": "project",
+    "title": "Arplication",
+    "summary": "Modular client-side utility suite untuk Web & Android — downloader media, catatan lokal, dan Pomodoro. Semua diproses di perangkat (privasi penuh).",
+    "year": 2026,
+    "role": "Creator & Developer",
+    "duration": "berjalan",
+    "category": "application",
+    "tags": [
+      "React 19",
+      "Vite",
+      "Tailwind CSS v4",
+      "CapacitorJS"
+    ],
+    "featured": true,
+    "thumbnail": "/images/projects/arplication/thumb.webp",
+    "gallery": [],
+    "links": {
+      "live": null,
+      "repo": "https://github.com/Aruthtale/Arplication"
+    },
+    "metrics": [
+      {
+        "label": "Modul",
+        "value": 4
+      },
+      {
+        "label": "Platform",
+        "value": 2
+      }
+    ],
+    "highlights": [
+      "Arloader — downloader media (TikTok, YouTube, Instagram, Spotify, X, Pinterest) tanpa watermark, 100% on-device.",
+      "ArNote — catatan local-first dengan pencarian penuh dan widget home-screen Android.",
+      "Ardoro — pendamping fokus Pomodoro (dalam pengembangan).",
+      "Design system \"Neon Protocol\" dengan aksen Mint & Coral."
+    ],
+    "body": "content/work/arplication.mdx"
+  },
+  {
+    "slug": "routinezie",
+    "type": "project",
+    "title": "RoutineZie",
+    "summary": "Aplikasi manajemen rutinitas harian & workout untuk Android dan Web, bergaya manga neubrutalism (hitam-putih, border tebal, screentone).",
+    "year": 2026,
+    "role": "Creator & Developer",
+    "duration": "berjalan",
+    "category": "application",
+    "tags": [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS v4",
+      "Dexie",
+      "Capacitor 7"
+    ],
+    "featured": true,
+    "thumbnail": "/images/projects/routinezie/thumb.webp",
+    "gallery": [],
+    "links": {
+      "live": null,
+      "repo": "https://github.com/Aruthtale/RoutineZie"
+    },
+    "metrics": [
+      {
+        "label": "Platform",
+        "value": 2
+      }
+    ],
+    "highlights": [
+      "Jadwal harian Senin–Minggu dengan hitung mundur ke kegiatan berikutnya.",
+      "Mode workout terpandu: set/reps, timer istirahat, panel CARA, haptics.",
+      "Log & progres: checklist makan, berat mingguan (InkChart), log tidur, konsistensi 7 hari.",
+      "Chat AI berbahasa Indonesia dengan guardrail + notifikasi lokal tahan reboot."
+    ],
+    "body": "content/work/routinezie.mdx"
+  },
+  {
+    "slug": "arutha",
+    "type": "project",
+    "title": "Arutha",
+    "summary": "Aplikasi self-improvement & kesehatan mental berkonsep RPG: hidup pengguna diperlakukan sebagai quest besar, tiap tindakan nyata memberi progres karakter.",
+    "year": 2026,
+    "role": "Creator & Developer",
+    "duration": "proyek lomba",
+    "category": "application",
+    "tags": [
+      "Google Gemini",
+      "AI",
+      "RPG",
+      "Dark Theme"
+    ],
+    "featured": true,
+    "thumbnail": "/images/projects/arutha/thumb.webp",
+    "gallery": [],
+    "links": {
+      "live": null,
+      "repo": "https://github.com/Aruthtale/Arutha"
+    },
+    "metrics": [],
+    "highlights": [
+      "Konsep \"Hidup adalah RPG\" dengan tema Dark RPG sinematik.",
+      "Sistem 5 dimensi statistik: JIWA, RAGA, HARTA, ILMU, KARMA.",
+      "AI Game Master (Google Gemini) membuat Daily Quest personal berdasarkan mood & statistik terendah."
+    ],
+    "body": "content/work/arutha.mdx"
+  },
+  {
+    "slug": "arverz",
+    "type": "project",
+    "title": "Arverz (AruthtaleWA)",
+    "summary": "Asisten pengembang & otomasi Linux berbasis WhatsApp untuk Arch Linux/EndeavourOS + KDE Plasma Wayland. Berjalan sebagai background service.",
+    "year": 2026,
+    "role": "Creator & Developer",
+    "duration": "berjalan",
+    "category": "automation",
+    "tags": [
+      "Node.js",
+      "WhatsApp",
+      "Google Gemini",
+      "OpenRouter",
+      "Firebase",
+      "systemd"
+    ],
+    "featured": true,
+    "thumbnail": "/images/projects/arverz/thumb.webp",
+    "gallery": [],
+    "links": {
+      "live": null,
+      "repo": "https://github.com/Aruthtale/AruthtaleWA"
+    },
+    "metrics": [],
+    "highlights": [
+      "Multi-model AI: Gemini 1.5 Pro dengan fallback otomatis ke OpenRouter (Qwen/DeepSeek).",
+      "Otomasi screenshot (grim), idle monitoring (KDE DBus), resource watcher CPU/RAM.",
+      "System health check & keamanan via whitelist nomor pemilik.",
+      "Terintegrasi systemd user service + penyimpanan Firebase Firestore."
+    ],
+    "body": "content/work/arverz.mdx"
+  },
+  {
+    "slug": "specta",
+    "type": "project",
+    "title": "Specta",
+    "summary": "Aplikasi manajemen/absensi berbasis QR dengan backend Laravel, frontend web Vite+Tailwind, dan aplikasi mobile Flutter (Specta-Admin-Mobile).",
+    "year": 2026,
+    "role": "Creator & Developer",
+    "duration": "berjalan",
+    "category": "application",
+    "tags": [
+      "Laravel",
+      "Sanctum",
+      "Socialite",
+      "Flutter",
+      "Vite",
+      "Tailwind CSS",
+      "QR Code"
+    ],
+    "featured": true,
+    "thumbnail": "/images/projects/specta/thumb.webp",
+    "gallery": [],
+    "links": {
+      "live": null,
+      "repo": null
+    },
+    "metrics": [
+      {
+        "label": "Platform",
+        "value": 3
+      }
+    ],
+    "highlights": [
+      "Backend Laravel dengan auth API (Sanctum) & OAuth (Socialite).",
+      "Generate QR Code (simple-qrcode) & export PDF (dompdf).",
+      "Manipulasi gambar (intervention/image) untuk foto/watermark.",
+      "Aplikasi mobile admin berbasis Flutter.",
+      "Catatan: sumber masih lokal (Projects/Done/Specta)."
+    ],
+    "body": "content/work/specta.mdx"
+  },
+  {
+    "slug": "loketkita",
+    "type": "project",
+    "title": "LoketKita.com (Ticketing SaaS)",
+    "summary": "Platform ticketing independen untuk dua ceruk komunitas Indonesia: event musik/gig dan cosplay/anime fest. Model pay-per-event, hasil penjualan 100% milik penyelenggara.",
+    "year": 2026,
+    "role": "Creator & Developer",
+    "duration": "berjalan",
+    "category": "saas",
+    "tags": [
+      "Laravel 12",
+      "Supabase",
+      "PostgreSQL",
+      "Tailwind CSS",
+      "Google OAuth"
+    ],
+    "featured": false,
+    "thumbnail": "/images/projects/loketkita/thumb.webp",
+    "gallery": [],
+    "links": {
+      "live": null,
+      "repo": "https://github.com/Zenixu/TICKETING-SAAS"
+    },
+    "metrics": [],
+    "highlights": [
+      "Dua template tiket khas: Fast-Track/VIP (musik) & Merch Bundling/Coswalk Pass (cosplay).",
+      "RBAC tiga peran: user, organizer, admin.",
+      "Check-in lapangan kilat via scanner QR Code.",
+      "Skema database Supabase PostgreSQL production-ready dengan kolom JSONB untuk addon."
+    ],
+    "body": "content/work/loketkita.mdx"
+  },
+  {
+    "slug": "rhea",
+    "type": "project",
+    "title": "Rhea",
+    "summary": "Eksperimen awal berbasis runtime Bun (bun init). Basis untuk pengembangan berikutnya.",
+    "year": 2026,
+    "role": "Creator & Developer",
+    "duration": "eksperimen",
+    "category": "experiment",
+    "tags": [
+      "Bun",
+      "TypeScript"
+    ],
+    "featured": false,
+    "thumbnail": "/images/projects/rhea/thumb.webp",
+    "gallery": [],
+    "links": {
+      "live": null,
+      "repo": "https://github.com/Aruthtale/Rhea"
+    },
+    "metrics": [],
+    "highlights": [
+      "Dibuat dengan `bun init` (Bun v1.4.2)."
+    ],
+    "body": "content/work/rhea.mdx"
+  },
+  {
+    "slug": "aruthtale-bot",
+    "type": "project",
+    "title": "Aruthtale_Bot",
+    "summary": "Bot pendukung ekosistem aruthtale (repo belum memiliki README).",
+    "year": 2026,
+    "role": "Creator & Developer",
+    "duration": "berjalan",
+    "category": "bot",
+    "tags": [
+      "Bot"
+    ],
+    "featured": false,
+    "thumbnail": "/images/projects/aruthtale-bot/thumb.webp",
+    "gallery": [],
+    "links": {
+      "live": null,
+      "repo": "https://github.com/Aruthtale/Aruthtale_Bot"
+    },
+    "metrics": [],
+    "highlights": [
+      "Detail menyusul — README belum tersedia."
+    ],
+    "body": "content/work/aruthtale-bot.mdx"
+  },
+  {
+    "slug": "bun-course",
+    "type": "lab",
+    "title": "Bun Course",
+    "summary": "Belajar runtime Bun (repo tidak lagi publik).",
+    "year": 2026,
+    "tags": [
+      "Bun",
+      "JavaScript"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/bun-course"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": true,
+    "thumb": null
+  },
+  {
+    "slug": "maybehtml",
+    "type": "lab",
+    "title": "Maybe HTML",
+    "summary": "Latihan dasar HTML & CSS (repo tidak lagi publik).",
+    "year": 2026,
+    "tags": [
+      "HTML",
+      "CSS"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/maybehtml"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": true,
+    "thumb": null
+  },
+  {
+    "slug": "html-css-exercise1",
+    "type": "lab",
+    "title": "HTML/CSS Exercise 1",
+    "summary": "Latihan struktur & styling halaman (repo tidak lagi publik).",
+    "year": 2026,
+    "tags": [
+      "HTML",
+      "CSS"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/HTML-CSS-Exercise1"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": true,
+    "thumb": null
+  },
+  {
+    "slug": "javascript",
+    "type": "lab",
+    "title": "JavaScript Exercises",
+    "summary": "Kumpulan tugas-tugas JavaScript.",
+    "year": 2026,
+    "tags": [
+      "JavaScript"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/JavaScript"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/javascript/thumb.webp"
+  },
+  {
+    "slug": "zlisttask",
+    "type": "lab",
+    "title": "ZListTask (To-Do List)",
+    "summary": "To-do list sederhana dengan penyimpanan lokal.",
+    "year": 2026,
+    "tags": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/MyToDoList"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/zlisttask/thumb.webp"
+  },
+  {
+    "slug": "qrcode",
+    "type": "lab",
+    "title": "QR Code Generator",
+    "summary": "Generator QR Code berbasis Python.",
+    "year": 2026,
+    "tags": [
+      "Python",
+      "qrcode"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/QrCode"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/qrcode/thumb.webp"
+  },
+  {
+    "slug": "laravel-pos",
+    "type": "lab",
+    "title": "Laravel POS",
+    "summary": "Latihan sistem point-of-sale dengan Laravel.",
+    "year": 2026,
+    "tags": [
+      "Laravel 12",
+      "Vite",
+      "Tailwind CSS"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/Laravel-Pos"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/laravel-pos/thumb.webp"
+  },
+  {
+    "slug": "ziebukutamu",
+    "type": "lab",
+    "title": "ZieBukuTamu (Guest Book)",
+    "summary": "Buku tamu digital dengan login, laporan, dan export Excel.",
+    "year": 2026,
+    "tags": [
+      "PHP",
+      "MySQL",
+      "PhpSpreadsheet"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/ZieBukuTamu"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/ziebukutamu/thumb.webp"
+  },
+  {
+    "slug": "ziemart",
+    "type": "lab",
+    "title": "ZieMart",
+    "summary": "E-commerce latihan: backend + frontend.",
+    "year": 2026,
+    "tags": [
+      "Laravel",
+      "React",
+      "MySQL"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/ZieMart"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/ziemart/thumb.webp"
+  },
+  {
+    "slug": "komikizen",
+    "type": "lab",
+    "title": "Komikizen",
+    "summary": "Situs baca komik sederhana berbasis PHP.",
+    "year": 2026,
+    "tags": [
+      "PHP",
+      "MySQL"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/Komikizen"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/komikizen/thumb.webp"
+  },
+  {
+    "slug": "ku-money",
+    "type": "lab",
+    "title": "Ku-Money",
+    "summary": "Latihan aplikasi pencatat keuangan.",
+    "year": 2026,
+    "tags": [
+      "Flutter",
+      "Dart"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/Ku-Money"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/ku-money/thumb.webp"
+  },
+  {
+    "slug": "react-learning",
+    "type": "lab",
+    "title": "React Learning",
+    "summary": "Latihan React: beberapa mini-project (First, Second, tic-tac-toe).",
+    "year": 2026,
+    "tags": [
+      "React",
+      "JavaScript"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/React-Learning"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/react-learning/thumb.webp"
+  },
+  {
+    "slug": "muslim-app",
+    "type": "lab",
+    "title": "Muslim App",
+    "summary": "Aplikasi muslim (Flutter) — latihan mobile.",
+    "year": 2026,
+    "tags": [
+      "Flutter",
+      "Dart"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/muslim_app"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/muslim-app/thumb.webp"
+  },
+  {
+    "slug": "invenzie",
+    "type": "lab",
+    "title": "Invenzie (Inventory)",
+    "summary": "Sistem inventaris berbasis Laravel dengan auth API.",
+    "year": 2026,
+    "tags": [
+      "Laravel 12",
+      "Sanctum",
+      "Tailwind CSS"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/Invenzie"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/invenzie/thumb.webp"
+  },
+  {
+    "slug": "data-siswa",
+    "type": "lab",
+    "title": "Data Siswa",
+    "summary": "CRUD data siswa: API Node/Express + app Flutter.",
+    "year": 2026,
+    "tags": [
+      "Flutter",
+      "Node.js",
+      "Express",
+      "MySQL"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/Data-Siswa"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/data-siswa/thumb.webp"
+  },
+  {
+    "slug": "react-fullstack",
+    "type": "lab",
+    "title": "React Fullstack",
+    "summary": "Latihan fullstack: Laravel 11 API + React CRUD.",
+    "year": 2026,
+    "tags": [
+      "Laravel 11",
+      "React",
+      "REST API"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/ReactFullstack"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/react-fullstack/thumb.webp"
+  },
+  {
+    "slug": "z-api-pokemon",
+    "type": "lab",
+    "title": "Z-API Pokémon",
+    "summary": "Latihan konsumsi API Pokémon.",
+    "year": 2026,
+    "tags": [
+      "HTML",
+      "JavaScript",
+      "API"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/Z-API-Pokemon"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/z-api-pokemon/thumb.webp"
+  },
+  {
+    "slug": "pythonzie",
+    "type": "lab",
+    "title": "Pythonzie",
+    "summary": "Kumpulan latihan Python.",
+    "year": 2026,
+    "tags": [
+      "Python"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/PYTHONZIE"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/pythonzie/thumb.webp"
+  },
+  {
+    "slug": "tefa-pos-merch",
+    "type": "lab",
+    "title": "TEFA POS Merch",
+    "summary": "POS merchandise dengan Next.js + Prisma + AI SDK.",
+    "year": 2026,
+    "tags": [
+      "Next.js",
+      "TypeScript",
+      "Prisma",
+      "Auth"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/TEFA-POS-MERCH"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/tefa-pos-merch/thumb.webp"
+  },
+  {
+    "slug": "cozwin-coffee-landingpage",
+    "type": "lab",
+    "title": "Cozwin Coffee Landing Page",
+    "summary": "Landing page kedai kopi dengan animasi halus.",
+    "year": 2026,
+    "tags": [
+      "React 19",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion",
+      "Lenis"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/cozwin-coffe-landingpage"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/cozwin-coffee-landingpage/thumb.webp"
+  },
+  {
+    "slug": "tanjosu-landing-page",
+    "type": "lab",
+    "title": "Tanjosu Landing Page",
+    "summary": "Landing page dengan tipografi Playfair Display.",
+    "year": 2026,
+    "tags": [
+      "React 19",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion"
+    ],
+    "featured": false,
+    "links": {
+      "repo": "https://github.com/Zenixu/Tanjosu-Landing-Page"
+    },
+    "commits": 0,
+    "activity": "2026",
+    "archived": false,
+    "thumb": "/images/lab/tanjosu-landing-page/thumb.webp"
+  }
+]

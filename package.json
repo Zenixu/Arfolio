@@ -1,0 +1,15 @@
+{
+  "name": "arufolio",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.26.0",
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "dev:showcase": "pnpm --filter @arufolio/showcase dev",
+    "dev:profile": "pnpm --filter @arufolio/profile dev",
+    "build": "pnpm -r build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "data:validate": "pnpm --filter @arufolio/data validate"
+  }
+}

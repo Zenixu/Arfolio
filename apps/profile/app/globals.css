@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "@arufolio/ui/tokens.css";
+@import "@arufolio/ui/afterglow.css";
+
+/* Tailwind v4 hanya memindai file di dalam app secara default.
+   packages/ui ada DI LUAR folder app -> harus didaftarkan eksplisit,
+   kalau tidak semua utility class di komponen bersama diabaikan. */
+@source "../../../packages/ui/src";
+
+/* Peta variabel next/font -> token desain */
+:root {
+  --font-display: var(--font-geist), system-ui, sans-serif;
+  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+@theme {
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+}

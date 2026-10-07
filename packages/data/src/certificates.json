@@ -1,0 +1,154 @@
+[
+  {
+    "id": "dicoding-front-end-web-pemula",
+    "title": "Belajar Membuat Front-End Web untuk Pemula",
+    "issuer": "Dicoding Indonesia",
+    "credentialId": "6RPN7Y609X2M",
+    "date": "2026-04-15",
+    "validUntil": "2029-04-15",
+    "durationHours": 45,
+    "type": "course",
+    "skills": [
+      "DOM",
+      "BOM",
+      "Event",
+      "Web Storage"
+    ],
+    "file": "Sertifikat/dicoding-front-end-web-pemula.pdf",
+    "verifyUrl": "https://www.dicoding.com/certificates/6RPN7Y609X2M",
+    "featured": true,
+    "image": "/certificates/dicoding-front-end-web-pemula.webp",
+    "thumb": "/certificates/dicoding-front-end-web-pemula-thumb.webp"
+  },
+  {
+    "id": "dicoding-dasar-pemrograman-web",
+    "title": "Belajar Dasar Pemrograman Web",
+    "issuer": "Dicoding Indonesia",
+    "credentialId": "81P2OVNRYZOY",
+    "date": "2026-04-02",
+    "validUntil": "2029-04-02",
+    "type": "course",
+    "skills": [
+      "HTML",
+      "CSS",
+      "Semantic HTML"
+    ],
+    "file": "Sertifikat/dicoding-dasar-pemrograman-web.pdf",
+    "verifyUrl": "https://www.dicoding.com/certificates/81P2OVNRYZOY",
+    "featured": true,
+    "image": "/certificates/dicoding-dasar-pemrograman-web.webp",
+    "thumb": "/certificates/dicoding-dasar-pemrograman-web-thumb.webp"
+  },
+  {
+    "id": "dicoding-dasar-javascript",
+    "title": "Belajar Dasar Pemrograman JavaScript",
+    "issuer": "Dicoding Indonesia",
+    "credentialId": "6RPN7RJN8X2M",
+    "date": "2026-04-30",
+    "validUntil": "2029-04-30",
+    "type": "course",
+    "skills": [
+      "JavaScript",
+      "Node.js",
+      "Struktur Data"
+    ],
+    "file": "Sertifikat/dicoding-dasar-javascript.pdf",
+    "verifyUrl": "https://www.dicoding.com/certificates/6RPN7RJN8X2M",
+    "featured": true,
+    "image": "/certificates/dicoding-dasar-javascript.webp",
+    "thumb": "/certificates/dicoding-dasar-javascript-thumb.webp"
+  },
+  {
+    "id": "dicoding-prinsip-solid",
+    "title": "Belajar Prinsip Pemrograman SOLID",
+    "issuer": "Dicoding Indonesia",
+    "credentialId": "72ZDJ09RLZYW",
+    "date": "2026-04-06",
+    "validUntil": "2029-04-06",
+    "type": "course",
+    "skills": [
+      "OOP",
+      "SOLID",
+      "Software Design"
+    ],
+    "file": "Sertifikat/dicoding-prinsip-solid.pdf",
+    "verifyUrl": "https://www.dicoding.com/certificates/72ZDJ09RLZYW",
+    "featured": true,
+    "image": "/certificates/dicoding-prinsip-solid.webp",
+    "thumb": "/certificates/dicoding-prinsip-solid-thumb.webp"
+  },
+  {
+    "id": "dicoding-manajemen-proyek",
+    "title": "Belajar Dasar Manajemen Proyek",
+    "issuer": "Dicoding Indonesia",
+    "credentialId": "1OP8RNWKVZQK",
+    "date": "2026-04-02",
+    "validUntil": "2029-04-02",
+    "type": "course",
+    "skills": [
+      "Manajemen Proyek",
+      "Agile",
+      "Waterfall"
+    ],
+    "file": "Sertifikat/dicoding-manajemen-proyek.pdf",
+    "verifyUrl": "https://www.dicoding.com/certificates/1OP8RNWKVZQK",
+    "featured": false,
+    "image": "/certificates/dicoding-manajemen-proyek.webp",
+    "thumb": "/certificates/dicoding-manajemen-proyek-thumb.webp"
+  },
+  {
+    "id": "dicoding-financial-literacy",
+    "title": "Introduction to Financial Literacy",
+    "issuer": "Dicoding Indonesia (Coding Camp × DBS Foundation)",
+    "credentialId": "N9ZO2KWW6PG5",
+    "date": "2026-01-14",
+    "validUntil": "2029-01-14",
+    "type": "course",
+    "skills": [
+      "Literasi Finansial",
+      "Investasi",
+      "Manajemen Pinjaman"
+    ],
+    "file": "Sertifikat/dicoding-financial-literacy.pdf",
+    "verifyUrl": "https://www.dicoding.com/certificates/N9ZO2KWW6PG5",
+    "featured": false,
+    "image": "/certificates/dicoding-financial-literacy.webp",
+    "thumb": "/certificates/dicoding-financial-literacy-thumb.webp"
+  },
+  {
+    "id": "uns-steam-fair-2024",
+    "title": "Juara II — STEAM Fair Computational Thinking Competition 2024",
+    "issuer": "Universitas Sebelas Maret (UNS) Surakarta",
+    "credentialId": "27/UN27.02/KM.05.03/2024",
+    "date": "2024-09-30",
+    "type": "award",
+    "award": "Juara II (Kategori Adult)",
+    "skills": [
+      "Computational Thinking",
+      "Problem Solving"
+    ],
+    "file": "Sertifikat/uns-steam-fair-2024-juara-2.pdf",
+    "verifyUrl": "https://kegiatan.fkip.uns.ac.id/verify/20",
+    "featured": true,
+    "image": "/certificates/uns-steam-fair-2024.webp",
+    "thumb": "/certificates/uns-steam-fair-2024-thumb.webp"
+  },
+  {
+    "id": "smkn1-tangible-coding-2024",
+    "title": "Tangible Coding Tournament 2024",
+    "issuer": "SMK Negeri 1 Cianjur",
+    "credentialId": null,
+    "date": "2024-09-30",
+    "type": "award",
+    "role": "Project Leader",
+    "skills": [
+      "Tangible Coding",
+      "Kepemimpinan"
+    ],
+    "file": "Sertifikat/smkn1-cianjur-tangible-coding-2024.pdf",
+    "verifyUrl": null,
+    "featured": false,
+    "image": "/certificates/smkn1-tangible-coding-2024.webp",
+    "thumb": "/certificates/smkn1-tangible-coding-2024-thumb.webp"
+  }
+]

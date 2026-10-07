@@ -1,0 +1,86 @@
+{
+  "brand": {
+    "name": "aruthtale",
+    "handle": "aruthtale",
+    "tagline": "Proof, not promises.",
+    "domain": "aruthtales.my.id",
+    "description": "Studio pengembangan web yang mengubah ide menjadi aplikasi fungsional, interaktif, dan berpusat pada pengguna.",
+    "logo": null,
+    "logoNote": "Logo aruthtale & Rchibnu menyusul."
+  },
+  "philosophy": {
+    "summary": "aruthtale adalah kisah yang ditulis dengan kecerdikan, kerendahan hati, dan ketulusan — setiap karya adalah satu bab dari perjalanan yang terus tumbuh.",
+    "nameOrigin": {
+      "full": "aruthtale",
+      "parts": [
+        "Arsene",
+        "Rue",
+        "Hyacinth",
+        "Tale"
+      ],
+      "explanation": "Nama aruthtale bukan sekadar label. Ia lahir dari gabungan empat unsur yang masing-masing membawa makna: 'Aruth' (Arsene + Rue + Hyacinth) dan 'Tale' (kisah). Setiap hurufnya sengaja dipilih untuk mewakili cara kerja dan nilai di baliknya."
+    },
+    "elements": [
+      {
+        "element": "Arsene (Ar)",
+        "symbol": "Arsene Lupin — sang gentleman pencuri dalam karya Maurice Leblanc",
+        "meaning": "Kecerdikan, keanggunan, dan keberanian. 'Ars' juga bermakna seni atau keahlian (bahasa Latin). Mewakili craftsmanship: setiap karya dikerjakan dengan cerdas, presisi, dan elegan."
+      },
+      {
+        "element": "Rue (Ru)",
+        "symbol": "Bunga/herba Rue (Ruta) — lambang penyesalan, ingatan, dan perlindungan",
+        "meaning": "Kerendahan hati dan ingatan. Setiap proyek menyimpan pelajaran; kesalahan menjadi penyesalan yang menuntun pada perbaikan, bukan alasan berhenti."
+      },
+      {
+        "element": "Hyacinth (Th)",
+        "symbol": "Bunga Hyacinth — dari mitos Yunani Hyacinthus; lambang ketulusan, pengabdian, dan pembaruan",
+        "meaning": "Ketulusan dan pengabdian. Mengerjakan sesuatu dengan sepenuh hati, dan berani terlahir kembali lebih baik di setiap karya berikutnya."
+      },
+      {
+        "element": "Tale",
+        "symbol": "Kisah atau cerita",
+        "meaning": "Setiap proyek adalah sebuah kisah: ada masalah, ada perjalanan, dan ada penyelesaian. aruthtale adalah tempat kisah-kisah itu diceritakan dan dibuktikan."
+      }
+    ],
+    "statement": "Kami tidak menjual janji, kami menulis kisah — lalu membuktikannya lewat karya."
+  },
+  "services": [
+    {
+      "slug": "portfolio",
+      "name": "Portfolio Website",
+      "description": "Situs personal atau profesional yang menampilkan karya dengan rapi dan meyakinkan."
+    },
+    {
+      "slug": "digital-gift",
+      "name": "Digital Gift",
+      "description": "Hadiah digital interaktif yang dibuat khusus untuk momen tertentu."
+    },
+    {
+      "slug": "saas",
+      "name": "SaaS",
+      "description": "Aplikasi berbasis langganan dengan arsitektur modern dan skalabel."
+    },
+    {
+      "slug": "pos",
+      "name": "POS",
+      "description": "Sistem kasir dan manajemen penjualan untuk bisnis."
+    },
+    {
+      "slug": "application",
+      "name": "Web Application",
+      "description": "Aplikasi web fungsional sesuai kebutuhan bisnis atau pribadi."
+    },
+    {
+      "slug": "custom",
+      "name": "Custom Project",
+      "description": "Punya ide lain? Banyak hal bisa diwujudkan — mari kita bahas."
+    }
+  ],
+  "contact": {
+    "email": "aruthtale@gmail.com",
+    "github": "https://www.github.com/aruthtale",
+    "instagram": "https://www.instagram.com/aruthtale",
+    "linkedin": null,
+    "x": null
+  }
+}
