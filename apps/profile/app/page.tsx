@@ -3,7 +3,7 @@ import {
   SectionHeading, Reveal, Button, Tag, ProfileCard, SocialLinks,
   SpotlightCard, TechList, Marquee, TechStack, CountUp,
   GitHub, Instagram, Mail, ArrowUpRight, Trophy, Briefcase, MapPin, Quote,
-  Parallax, TextReveal, RchibnuMark,
+  Parallax, TextReveal, RchibnuMark, VideoBanner,
 } from "@arufolio/ui";
 
 /** Warna tiap tahap tema — urutan senja dari gelap ke terang. */
@@ -34,6 +34,9 @@ export default function ProfileHome() {
     <>
       {/* ═══════════════════════ HERO + KARTU PROFIL ═══════════════════════ */}
       <section className="relative overflow-hidden pt-[clamp(56px,10vh,112px)] pb-[clamp(40px,6vh,72px)]">
+        {/* Latar bergerak versi Afterglow (senja hangat) — 47 KB + poster. */}
+        <VideoBanner src="/media/banner-aurora.mp4" poster="/media/banner-poster.webp" opacity={0.44} />
+
         <Parallax speed={0.14} className="pointer-events-none absolute inset-0">
           <div
             aria-hidden="true"
@@ -62,10 +65,21 @@ export default function ProfileHome() {
               </p>
             </Reveal>
 
-            <h1 className="display max-w-[14ch] text-balance">
+            <h1 className="display max-w-[16ch] text-balance">
               <TextReveal text="Hai, saya" delay={80} />{" "}
               <TextReveal text={identity.displayName + "."} delay={260} className="afterglow-gradient" />
             </h1>
+
+            {/* Nama lengkap + brand — sebelumnya keduanya tidak muncul di UI */}
+            <Reveal delay={340}>
+              <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
+                <span className="text-sm font-medium text-[var(--text)]">{identity.fullName}</span>
+                <span className="h-3 w-px bg-[var(--border-strong)]" aria-hidden="true" />
+                <span className="font-mono text-[11px] text-[var(--text-muted)]">
+                  brand <span className="afterglow-gradient font-medium">aruthtale</span> · @{identity.handle}
+                </span>
+              </div>
+            </Reveal>
 
             <Reveal delay={420}>
               <p className="lede mt-6">{identity.headline}</p>

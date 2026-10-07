@@ -256,45 +256,64 @@ export function Parallax({
 }
 
 /* ------------------------------------------------------------------ *
- * TextReveal — judul muncul kata demi kata (bukan blok sekaligus).
- * Tiap kata punya topengnya sendiri, jadi geraknya terasa "ditulis".
+ * TextReveal — judul muncul kata demi kata.
+ *
+ * PELAJARAN PENTING (bug nyata): versi pertama memakai `overflow:hidden`
+ * pada pembungkus kata. Kalau animasinya tidak pernah jalan — JS gagal,
+ * React belum hydrate, atau observer tidak menyala — teks TERTUTUP
+ * SELAMANYA dan halaman tampak kosong. Dua kesalahan yang diperbaiki:
+ *   1. Teks SELALU terlihat tanpa JS (state tersembunyi hanya via .js).
+ *   2. Ada pengaman waktu: apa pun yang terjadi, teks muncul <= 1,8 dtk.
+ * `overflow:clip` + ruang ekstra di bawah supaya ekor huruf (p, y, g)
+ * tidak terpotong — penyebab "Proof, not promises" terlihat terpangkas.
  * ------------------------------------------------------------------ */
 export function TextReveal({
-  text, className, delay = 0, stagger = 55, as: Tag = "span",
+  text, children, className, delay = 0, stagger = 55, as: Tag = "span",
 }: {
-  text: string; className?: string; delay?: number; stagger?: number;
-  as?: "span" | "h1" | "h2" | "p";
+  text?: string; children?: ReactNode; className?: string;
+  delay?: number; stagger?: number;
+  as?: "span" | "h1" | "h2" | "p" | "div";
 }) {
   const ref = useRef<HTMLElement>(null);
   const [on, setOn] = useState(false);
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setOn(true); return; }
+
+    let done = false;
+    const reveal = () => { if (!done) { done = true; setOn(true); } };
+
     const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setOn(true); io.disconnect(); } },
-      { threshold: 0.2 }
+      ([e]) => { if (e.isIntersecting) { reveal(); io.disconnect(); } },
+      { threshold: 0.1, rootMargin: "0px 0px -4% 0px" }
     );
     io.observe(el);
-    return () => io.disconnect();
+
+    // Pengaman: kalau observer tak pernah menyala, tetap tampilkan.
+    const safety = window.setTimeout(reveal, 1800);
+
+    return () => { io.disconnect(); window.clearTimeout(safety); };
   }, []);
-  const words = text.split(" ");
+
+  const content = text ?? children;
+  const words = typeof content === "string" ? content.split(" ") : null;
   const Component = Tag as unknown as React.ElementType;
+
+  // Konten non-teks: tidak perlu animasi per kata, cukup tampil.
+  if (!words) {
+    return <Component ref={ref as React.Ref<never>} className={className}>{content}</Component>;
+  }
+
   return (
     <Component ref={ref as React.Ref<never>} className={className}>
       {words.map((w, i) => (
-        <span key={`${w}-${i}`} className="inline-block overflow-hidden align-bottom">
-          <span
-            className="inline-block"
-            style={{
-              transform: on ? "translateY(0)" : "translateY(110%)",
-              opacity: on ? 1 : 0,
-              transition: `transform 800ms var(--ease-out) ${delay + i * stagger}ms, opacity 500ms linear ${delay + i * stagger}ms`,
-            }}
-          >
+        <span key={`${w}-${i}`} className="word-mask" data-reveal={on ? "on" : "off"}>
+          <span className="word-inner" style={{ transitionDelay: `${delay + i * stagger}ms` }}>
             {w}
           </span>
-          {i < words.length - 1 && <span>&nbsp;</span>}
+          {i < words.length - 1 && <span className="word-gap"> </span>}
         </span>
       ))}
     </Component>

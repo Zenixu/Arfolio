@@ -4,6 +4,7 @@ export { cn } from "./lib/cn";
 export * from "./components/Icon";
 export { AruthtaleMark, RchibnuMark, Mark } from "./components/Logo";
 export { TechIcon, TechStack, techIconSlug, hasTechIcon } from "./components/TechIcon";
+export { VideoBanner } from "./components/Banner";
 
 /* Primitif */
 export { Tag } from "./components/Tag";

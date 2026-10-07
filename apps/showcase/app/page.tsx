@@ -4,8 +4,8 @@ import {
 import {
   ProjectCard, SectionHeading, Reveal, Button, Tag,
   Marquee, CountUp, SpotlightCard, TechStack, ArrowRight, ArrowDown, Quote, Star,
-  Parallax, TextReveal, ScrollTicker, AruthtaleMark,
-  Code, Layers, Shield, Globe, Sparkle, MapPin,
+  Parallax, TextReveal, ScrollTicker, AruthtaleMark, VideoBanner,
+  Code, Layers, Shield, Globe, Sparkle, MapPin, ArrowUpRight,
 } from "@arufolio/ui";
 
 /** Teknologi untuk marquee — diambil dari tag proyek + daftar inti. */
@@ -30,6 +30,10 @@ export default function HomePage() {
     <>
       {/* ═══════════════════════ HERO ═══════════════════════ */}
       <section className="relative overflow-hidden pt-[clamp(64px,12vh,132px)] pb-[clamp(48px,8vh,96px)]">
+        {/* Latar bergerak: klip aurora 58 KB + poster WebP.
+            Mati otomatis saat pengguna minta gerak dikurangi. */}
+        <VideoBanner src="/media/banner-aurora.mp4" poster="/media/banner-poster.webp" opacity={0.5} />
+
         {/* Bercak gradien yang mengapung pelan + bergerak mengikuti gulir */}
         <Parallax speed={0.16} className="pointer-events-none absolute inset-0">
           <div
@@ -71,8 +75,25 @@ export default function HomePage() {
             <TextReveal text="not promises." delay={240} className="grad-text" />
           </h1>
 
+          {/* Identitas pemilik — sebelumnya nama ini tidak terlihat sama sekali */}
+          <Reveal delay={360}>
+            <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[color-mix(in_srgb,var(--bg-elevated)_70%,transparent)] px-3.5 py-1.5 backdrop-blur-sm">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+                <span className="text-[0.8125rem] font-medium">Ibnu Hambal</span>
+                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
+                  Fullstack Developer
+                </span>
+              </span>
+              <span className="font-mono text-[11px] text-[var(--text-muted)]">
+                brand <span className="text-[var(--accent)]">aruthtale</span> · handle{" "}
+                <span className="text-[var(--text)]">rchibnu</span>
+              </span>
+            </div>
+          </Reveal>
+
           <Reveal delay={420}>
-            <p className="lede mt-7">
+            <p className="lede mt-6">
               {aruthtale.brand.description} Setiap karya di sini adalah satu bab — bukan
               pajangan, tapi bukti bahwa sesuatu benar-benar dibangun.
             </p>
@@ -84,6 +105,13 @@ export default function HomePage() {
               <Button href="https://rchibnu.aruthtales.my.id" variant="ghost" size="lg">
                 Kenal Saya
               </Button>
+              <a
+                href="/contact"
+                className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]"
+              >
+                Mulai percakapan
+                <ArrowUpRight size={13} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
             </div>
           </Reveal>
 
@@ -143,17 +171,19 @@ export default function HomePage() {
 
       {/* ═══════════════════════ PITA PERNYATAAN ═══════════════════════
           Teks raksasa bergaris yang bergerak mengikuti gulir — memberi
-          "napas" pada halaman, bukan bagian yang diam & kaku. */}
-      <section className="relative overflow-hidden border-y border-[var(--border)] py-16 sm:py-20" aria-label={philosophy.statement}>
+          "napas" pada halaman, bukan bagian yang diam & kaku.
+          Ruang bawah ekstra supaya ekor huruf (p, y, g) tidak terpangkas. */}
+      <section className="relative overflow-hidden border-y border-[var(--border)] py-14 sm:py-20" aria-label={philosophy.statement}>
         <ScrollTicker baseSpeed={0.32}>
-          <div className="flex items-center gap-10 whitespace-nowrap">
+          <div className="flex items-center gap-8 whitespace-nowrap sm:gap-10">
             {[0, 1].map((k) => (
-              <span key={k} className="inline-flex items-center gap-10">
+              <span key={k} className="inline-flex items-center gap-8 sm:gap-10">
                 <span
-                  className="font-bold leading-none tracking-[-0.04em]"
+                  className="pb-[0.14em] font-bold tracking-[-0.04em]"
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontSize: "clamp(2.4rem, 7vw, 6rem)",
+                    fontSize: "clamp(1.9rem, 7vw, 6rem)",
+                    lineHeight: 1.06,
                     color: "transparent",
                     WebkitTextStroke: "1px var(--border-strong)",
                   }}
@@ -162,10 +192,11 @@ export default function HomePage() {
                 </span>
                 <AruthtaleMark size={40} className="shrink-0" />
                 <span
-                  className="font-bold leading-none tracking-[-0.04em]"
+                  className="pb-[0.14em] font-bold tracking-[-0.04em]"
                   style={{
                     fontFamily: "var(--font-display)",
-                    fontSize: "clamp(2.4rem, 7vw, 6rem)",
+                    fontSize: "clamp(1.9rem, 7vw, 6rem)",
+                    lineHeight: 1.06,
                     color: "transparent",
                     WebkitTextStroke: "1px color-mix(in srgb, var(--accent) 55%, transparent)",
                   }}
@@ -232,12 +263,20 @@ export default function HomePage() {
           description={`${projects.length} proyek nyata — dari aplikasi Android sampai platform SaaS. Tiap proyek punya peran, stack, dan hasil yang bisa diperiksa.`}
           action={<Button href="/work" variant="link">Semua karya</Button>}
         />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {featuredProjects.slice(0, 6).map((p, i) => (
-            <Reveal key={p.slug} delay={i * 70} className="h-full">
-              <ProjectCard project={p} index={i} />
-            </Reveal>
-          ))}
+
+        {/* Di HP kartu ini jadi rel yang digeser ke samping (snap per kartu);
+            di layar lebar kembali menjadi grid 2–3 kolom. */}
+        <div className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)] md:hidden">
+          <ArrowRight size={12} /> Geser ke samping
+        </div>
+        <div className="rail-hint">
+          <div className="snap-rail">
+            {featuredProjects.slice(0, 6).map((p, i) => (
+              <Reveal key={p.slug} delay={i * 70} className="h-full">
+                <ProjectCard project={p} index={i} />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

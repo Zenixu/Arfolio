@@ -71,9 +71,16 @@
 }
 [data-site="profile"] .display { font-size: clamp(2.6rem, 6.6vw, 5.2rem); line-height: 1.0; }
 
-/* Teks bergradien senja */
+/* Teks bergradien senja.
+   Sama seperti .grad-text: gradien harus dipasang pada tiap .word-inner
+   di dalam TextReveal, sebab `background-clip:text` pada induk tidak
+   melukis anak yang punya transform. */
 .afterglow-gradient {
-  background: var(--gradient, linear-gradient(135deg, #E3A57C, #B79CE0));
+  --grad-fill: var(--gradient, linear-gradient(135deg, #E3A57C, #B79CE0));
+}
+.afterglow-gradient,
+.afterglow-gradient .word-inner {
+  background: var(--grad-fill);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 
@@ -94,7 +101,11 @@
   background: linear-gradient(90deg, var(--accent), var(--wisteria));
 }
 [data-site="profile"] .grad-text {
-  background: linear-gradient(100deg, var(--text) 0%, var(--text) 40%, var(--accent) 76%, var(--wisteria) 100%);
+  --grad-fill: linear-gradient(100deg, var(--text) 0%, var(--text) 40%, var(--accent) 76%, var(--wisteria) 100%);
+}
+[data-site="profile"] .grad-text,
+[data-site="profile"] .grad-text .word-inner {
+  background: var(--grad-fill);
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 [data-site="profile"] .index-num { color: var(--accent); }
