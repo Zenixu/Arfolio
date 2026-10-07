@@ -747,19 +747,25 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 }
 
 /* Jumlah ganjil: kartu terakhir dibiarkan melebar penuh supaya tidak
-   menyisakan lubang kosong di ujung baris. */
-.vault__grid--odd .vault__cell:last-child { grid-column: 1 / -1; }
-.vault__grid--odd .vault__cell:last-child .vault-item { flex-direction: row; }
-.vault__grid--odd .vault__cell:last-child .vault-item__media {
-  flex: 0 0 42%; aspect-ratio: auto; min-height: 8.5rem;
+   menyisakan lubang kosong di ujung baris.
+   PENTING: hanya berlaku di layar lebar (kisi 6 kolom). Di HP kisi 2 kolom
+   sudah rapi sendiri (1 kartu penuh + 4 kartu dalam 2 baris), jadi aturan
+   ini TIDAK boleh ikut aktif di sana — kalau ikut, kartu terakhir berubah
+   jadi mendatar sendirian sementara kartu lain tegak (terlihat berantakan). */
+@media (min-width: 1024px) {
+  .vault__grid--odd .vault__cell:last-child { grid-column: 1 / -1; }
+  .vault__grid--odd .vault__cell:last-child .vault-item { flex-direction: row; }
+  .vault__grid--odd .vault__cell:last-child .vault-item__media {
+    flex: 0 0 42%; aspect-ratio: auto; min-height: 8.5rem;
+  }
+  .vault__grid--odd .vault__cell:last-child .vault-item__media img {
+    position: absolute; inset: 0; height: 100%; width: 100%;
+  }
+  .vault__grid--odd .vault__cell:last-child .vault-item__body {
+    flex: 1; justify-content: center; padding: 0.95rem 1.05rem;
+  }
+  .vault__grid--odd .vault__cell:last-child .vault-item__title { font-size: 1rem; }
 }
-.vault__grid--odd .vault__cell:last-child .vault-item__media img {
-  position: absolute; inset: 0; height: 100%; width: 100%;
-}
-.vault__grid--odd .vault__cell:last-child .vault-item__body {
-  flex: 1; justify-content: center; padding: 0.95rem 1.05rem;
-}
-.vault__grid--odd .vault__cell:last-child .vault-item__title { font-size: 1rem; }
 
 /* Layar lebar: ritme editorial asimetris — lebar 4/6 dan 2/6 bergantian,
    jadi tidak terbaca sebagai kisi seragam. Kartu lebar memakai tata letak
