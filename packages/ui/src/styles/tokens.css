@@ -497,33 +497,47 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 }
 
 /* ------------------------------------------------------------------ *
- * CertificateDeck — kipas kartu sertifikat.
+ * CertificateDeck — tumpukan kartu sertifikat.
  *
  * Cara kerja: setiap kartu diletakkan ABSOLUT di tengah panggung, lalu
- * digeser dengan `translateX` dan dimiringkan dengan `rotate` yang
- * keduanya dikalikan `--d` (jarak kartu ke kartu tengah, bisa negatif).
- * Jadi satu variabel mengatur seluruh busur — tambah kartu tidak perlu
- * mengubah CSS.
+ * digeser/dimiringkan/dikecilkan memakai variabel `--d` (jarak kartu ke
+ * kartu tengah, bisa negatif) dan `--ad` (nilai absolutnya). Satu variabel
+ * mengatur seluruh susunan — tambah sertifikat tidak perlu mengubah CSS.
  *
- * Kartu tengah (--d: 0) sengaja tidak miring dan paling besar; makin jauh
- * makin kecil + makin miring, sehingga terbaca sebagai busur ke belakang.
+ * Bentuk kartu: LANDSCAPE (rasio ~1.39) mengikuti bentuk sertifikat asli.
+ * Sebelumnya potret, sehingga gambar sertifikat tampil kecil & banyak
+ * ruang terbuang di atas-bawah.
+ *
+ * Dua sikap:
+ * — LAYAR LEBAR: kartu renggang dengan celah lega di kanan-kiri, miring
+ *   tipis saja, sehingga tiap sertifikat masih terbaca.
+ * — HP (<= 40rem): celah dipersempit, kemiringan diperbesar, dan kartu
+ *   belakang didorong naik + dikecilkan, jadi terbaca sebagai TUMPUKAN
+ *   yang menggeser ke belakang — bukan barisan yang melebar keluar layar.
  * ------------------------------------------------------------------ */
 .cert-deck {
-  --deck-w: clamp(13rem, 30vw, 17.5rem);   /* lebar satu kartu */
-  --deck-gap: clamp(3.1rem, 12vw, 8.25rem); /* jarak geser antar kartu */
-  --deck-rot: 7deg;                         /* besar kemiringan per langkah */
-  --deck-h: calc(var(--deck-w) * 1.36);     /* rasio kartu (potret) */
+  --deck-w: clamp(14rem, 32vw, 24rem);      /* lebar kartu (landscape) */
+  /* Geser mendatar dihitung dari LEBAR KARTU, bukan vw. Kalau memakai vw,
+     celahnya mengecil di layar sedang sehingga kartu kembali bertumpuk —
+     padahal kartu bertumpuk hanya diinginkan di HP. Faktor 1.02 membuat
+     tepi kartu tetangga lewat sedikit dari tepi kartu tengah, jadi terlihat
+     celah nyata di semua ukuran desktop. */
+  --deck-gap: calc(var(--deck-w) * 1.02);
+  --deck-rot: 3.5deg;                       /* kemiringan per langkah */
+  --deck-y: 0.45rem;                        /* dorong ke belakang (naik) */
+  --deck-scale: 0.1;                        /* pengecilan per langkah */
+  --deck-h: calc(var(--deck-w) * 0.72);     /* rasio landscape ~1.39 */
 }
 .cert-deck__stage {
   position: relative;
-  height: calc(var(--deck-h) + 2.5rem);
+  height: calc(var(--deck-h) + 3rem);
   margin-inline: auto;
   max-width: 100%;
-  /* `clip` penting: kartu di luar busur (|d| > 2) tetap ada di DOM demi
+  /* `clip` penting: kartu di luar susunan (|d| > 3) tetap ada di DOM demi
      animasi mulus, tetapi TIDAK boleh menambah lebar gulir halaman. Klip
-     juga memberi efek kartu terpotong di tepi seperti kipas sungguhan. */
+     juga memberi efek kartu terpotong di tepi seperti tumpukan sungguhan. */
   overflow: clip;
-  padding-top: 0.75rem;
+  padding-top: 1.25rem;
   outline: none;
 }
 .cert-deck__stage:focus-visible { border-radius: var(--radius-lg); box-shadow: 0 0 0 2px var(--accent); }
@@ -533,11 +547,12 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
   width: var(--deck-w); height: var(--deck-h);
   margin-left: calc(var(--deck-w) / -2);
   border: 0; padding: 0; background: none; cursor: pointer;
-  transform-origin: 50% 115%;
+  transform-origin: 50% 120%;
   transform:
     translateX(calc(var(--d) * var(--deck-gap)))
+    translateY(calc(var(--ad) * var(--deck-y) * -1))
     rotate(calc(var(--d) * var(--deck-rot)))
-    scale(calc(1 - min(abs(var(--d)), 2) * 0.09));
+    scale(calc(1 - min(var(--ad), 3) * var(--deck-scale)));
   transition:
     transform 620ms var(--ease-out),
     opacity 420ms ease,
@@ -585,8 +600,8 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 /* Judul di kaki kartu */
 .cert-card__caption {
   position: absolute; inset-inline: 0; bottom: 0;
-  display: block; padding: 2.4rem 0.85rem 0.75rem;
-  background: linear-gradient(to top, color-mix(in srgb, #05050a 88%, transparent), transparent);
+  display: block; padding: 1.9rem 0.9rem 0.7rem;
+  background: linear-gradient(to top, color-mix(in srgb, #05050a 90%, transparent), transparent);
   text-align: left;
 }
 .cert-card__title {
@@ -594,6 +609,9 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
   font-size: 0.78rem; line-height: 1.3; font-weight: 500; color: #fff;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
 }
+/* Kartu tengah: label kaki disembunyikan — judulnya sudah tampil di bawah
+   kipas, dan label ini menutupi bagian tanda tangan sertifikat. */
+.cert-card.is-active .cert-card__caption { opacity: 0; }
 
 /* Panah navigasi */
 .cert-deck__nav {
@@ -602,14 +620,15 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
   width: 2.6rem; height: 2.6rem; margin-top: -1.3rem;
   border-radius: 999px; cursor: pointer;
   border: 1px solid var(--border-strong);
-  background: color-mix(in srgb, var(--bg-elevated) 88%, transparent);
-  color: var(--text-muted);
+  background: color-mix(in srgb, var(--bg-elevated) 94%, transparent);
+  color: var(--text);
+  box-shadow: 0 6px 20px -8px rgba(0,0,0,.8);
   backdrop-filter: blur(6px);
   transition: color 220ms ease, border-color 220ms ease, transform 220ms var(--ease-out);
 }
 .cert-deck__nav:hover { color: var(--accent); border-color: var(--accent); }
-.cert-deck__nav--prev { left: max(0px, calc(50% - var(--deck-gap) * 2.35 - 1.3rem)); }
-.cert-deck__nav--next { right: max(0px, calc(50% - var(--deck-gap) * 2.35 - 1.3rem)); }
+.cert-deck__nav--prev { left: max(0px, calc(50% - var(--deck-gap) * 2.7 - 1.3rem)); }
+.cert-deck__nav--next { right: max(0px, calc(50% - var(--deck-gap) * 2.7 - 1.3rem)); }
 .cert-deck__nav--prev:hover { transform: translateX(-3px); }
 .cert-deck__nav--next:hover { transform: translateX(3px); }
 
@@ -643,10 +662,21 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 }
 .cert-dot.is-active { width: 20px; background: var(--accent); }
 
+/* HP: kartu nyaris bertumpuk — celah kecil, miring lebih banyak, dan
+   makin ke belakang makin naik + mengecil, sehingga terbaca sebagai
+   tumpukan yang menggeser ke belakang (bukan melebar keluar layar). */
 @media (max-width: 40rem) {
-  .cert-deck { --deck-gap: clamp(2.4rem, 13vw, 3.6rem); --deck-w: clamp(11rem, 52vw, 14rem); }
-  .cert-deck__nav--prev { left: 0.15rem; }
-  .cert-deck__nav--next { right: 0.15rem; }
+  .cert-deck {
+    --deck-w: min(86vw, 21rem);
+    --deck-gap: 1.15rem;
+    --deck-rot: 5.5deg;
+    --deck-y: 0.9rem;
+    --deck-scale: 0.085;
+  }
+  .cert-deck__stage { height: calc(var(--deck-h) + 5.5rem); }
+  .cert-deck__nav--prev { left: 0.1rem; }
+  .cert-deck__nav--next { right: 0.1rem; }
+  .cert-card__title { font-size: 0.72rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -88,6 +88,9 @@ export function CertificateDeck({
               className={cn("cert-card", isActive && "is-active")}
               style={{
                 ["--d" as string]: String(d),
+                // Jarak absolut ke kartu tengah. Dipakai CSS untuk membesarkan
+                // & meredupkan kartu tanpa perlu `abs()` di kalkulasi.
+                ["--ad" as string]: String(Math.abs(d)),
                 // Kartu jauh ditarik ke belakang & diredupkan, bukan dibuang,
                 // supaya animasinya mulus saat bergeser.
                 opacity: far ? 0 : isActive ? 1 : Math.max(0.32, 0.85 - Math.abs(d) * 0.28),
