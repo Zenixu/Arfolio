@@ -1281,3 +1281,68 @@ a.vault-item:hover .vault-item__title { color: var(--accent); }
   .vault__door, .vault__dial, .vault__plate { transition: none !important; }
   .vault__dial-ring { animation: none; }
 }
+
+/* ============================ Ledger ============================
+   Blok statistik bergaya KOLOFON CETAK, bukan "4 angka raksasa
+   berjajar" ala template SaaS. Tiap baris = satu entri buku besar:
+   nomor indeks, label, titik pemandu (leader dots) yang meregang
+   mengisi ruang, angka tabular, lalu catatan kecil. Catatan itulah
+   yang membuat angkanya jelas — 8 apa, 21 apa.
+   Referensi arah: specimen sheet / masthead majalah cetak. */
+.ledger {
+  margin-top: 4rem;
+  border-top: 1px solid var(--border-strong);
+  border-bottom: 1px solid var(--border);
+}
+.ledger__head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1rem; padding: .8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.ledger__row {
+  position: relative;
+  display: flex; align-items: baseline; gap: .9rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--border);
+  transition: padding-inline .4s var(--ease-out);
+}
+.ledger__row:last-child { border-bottom: 0; }
+/* Garis aksen yang tumbuh dari kiri saat baris disorot */
+.ledger__row::before {
+  content: ""; position: absolute; inset-block: 0; inset-inline-start: 0;
+  width: 2px; background: var(--accent);
+  transform: scaleY(0); transform-origin: top;
+  transition: transform .4s var(--ease-out);
+}
+.ledger__row:hover { padding-inline-start: 1.1rem; }
+.ledger__row:hover::before { transform: scaleY(1); }
+.ledger__label {
+  font-size: clamp(.95rem, 1.4vw, 1.0625rem);
+  font-weight: 500; color: var(--text); white-space: nowrap;
+}
+.ledger__dots {
+  flex: 1 1 auto; align-self: center; height: 1px; min-width: 1.5rem;
+  background-image: radial-gradient(circle, var(--border-strong) 1px, transparent 1px);
+  background-size: 7px 1px; background-repeat: repeat-x;
+  opacity: .65; transition: opacity .3s var(--ease-out);
+}
+.ledger__row:hover .ledger__dots { opacity: 1; }
+.ledger__num {
+  font-family: var(--font-mono); font-variant-numeric: tabular-nums;
+  font-size: clamp(1.5rem, 3vw, 2.125rem); font-weight: 500;
+  line-height: 1; letter-spacing: -.03em; color: var(--text);
+  transition: color .3s var(--ease-out);
+}
+.ledger__row:hover .ledger__num { color: var(--accent); }
+.ledger__note {
+  font-family: var(--font-mono); font-size: .625rem; text-transform: uppercase;
+  letter-spacing: .14em; color: var(--text-muted); white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .ledger { margin-top: 3rem; }
+  .ledger__row { gap: .7rem; padding: .95rem 0; }
+  .ledger__note { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ledger__row, .ledger__row::before, .ledger__dots, .ledger__num { transition: none !important; }
+}

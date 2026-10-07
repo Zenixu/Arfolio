@@ -1,7 +1,7 @@
 {
   "identity": {
     "fullName": "Ibnu Hambal Al Bantani Rch",
-    "displayName": "",
+    "displayName": "Ibnu",
     "handle": "RchIbnu",
     "brand": "aruthtale",
     "role": "Fullstack Developer",
@@ -54,14 +54,14 @@
       "type": "education",
       "role": "Pelajar RPL",
       "organization": "SMK Negeri 1 Cianjur",
-      "period": "2023",
+      "period": "2024",
       "current": true,
       "description": "Menempuh pendidikan jurusan Rekayasa Perangkat Lunak."
     }
   ],
   "timeline": [
     {
-      "year": "2023",
+      "year": "2024",
       "title": "Mulai menekuni Rekayasa Perangkat Lunak",
       "detail": "Masuk SMK Negeri 1 Cianjur jurusan RPL."
     },

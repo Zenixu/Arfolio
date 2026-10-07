@@ -69,7 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CursorDot />
 
         <Navbar
-          brand="rchibnu"
+          brand="RchIbnu"
           site="profile"
           links={nav.profile}
           right={<ThemeToggle />}
@@ -105,6 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             },
           ]}
           socials={socials}
+          status={{ available: true, location: "Cianjur, Indonesia" }}
         />
       </body>
     </html>

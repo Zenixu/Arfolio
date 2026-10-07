@@ -103,6 +103,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             },
           ]}
           socials={socials}
+          status={{ available: true, location: "Cianjur, Indonesia", since: "2024" }}
         />
       </body>
     </html>

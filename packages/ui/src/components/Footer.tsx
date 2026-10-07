@@ -1,5 +1,4 @@
 import type { ReactNode } from "react";
-import { cn } from "../lib/cn";
 import { Mail, ArrowUpRight, WhatsApp } from "./Icon";
 import { Mark } from "./Logo";
 import { waLink } from "../lib/wa";
@@ -7,31 +6,34 @@ import { waLink } from "../lib/wa";
 export type SocialLink = { label: string; href: string; icon?: ReactNode };
 
 /**
- * Footer — bukan sekadar grid 3 kolom yang kaku.
+ * Footer — kolofon editorial, bukan grid 3 kolom yang kaku.
  *
- * Yang membuatnya hidup:
- * 1. Baris pembuka: logo asli + satu kalimat penutup + tombol "mulai percakapan".
- * 2. Peta tautan; tiap tautan punya garis pendek yang tumbuh saat hover.
- * 3. Wordmark raksasa bergaris (outline) yang terpotong tepi bawah — kolofon
- *    halaman cetak, bukan footer template.
- * 4. Baris hak cipta + tombol "ke atas".
+ * ATURAN KONSISTENSI (dulu dilanggar, itu yang membuatnya terasa "jelek"):
+ * — SETIAP bagian punya perlakuan yang sama: judul `mono-label` + daftar
+ *   tautan biasa. Tidak ada satu bagian yang dibungkus kotak ber-border
+ *   sementara yang lain telanjang. Pemisah antar-zona hanya garis tipis
+ *   di atas (pembuka) dan di bawah (hak cipta).
+ * — Deretan sosial tidak lagi jadi pil ber-border sendiri; ia jadi kolom
+ *   daftar yang sama seperti kolom lain, hanya ditambah ikon.
  *
- * Di HP tata letaknya dirapikan: dua kolom tautan berdampingan (bukan satu
- * kolom panjang), jejaring jadi deretan pil mendatar, dan tombol CTA selebar
- * layar supaya mudah disentuh.
+ * Tata letak 4 kolom di layar lebar (dulu hanya terisi 3 sehingga sisi
+ * kanan menganga kosong): dua kolom tautan + jejaring + satu kolom status.
+ * Kolom status inilah tempat yang tepat untuk "Tersedia untuk proyek ·
+ * Cianjur · Est." — informasi itu terlalu berisik bila dipasang di puncak
+ * hero, tetapi wajar di kaki halaman.
  */
 export function Footer({
-  brand, tagline, columns, socials, crossLink, note, site = "showcase", email, whatsapp,
+  brand, tagline, columns, socials, note, site = "showcase", email, whatsapp, status,
 }: {
   brand: string;
   tagline?: string;
   columns: { title: string; links: { label: string; href: string }[] }[];
   socials?: SocialLink[];
-  crossLink?: ReactNode;
   note?: string;
   site?: "showcase" | "profile";
   email?: string;
   whatsapp?: string;
+  status?: { available?: boolean; location?: string; since?: string };
 }) {
   const year = new Date().getFullYear();
 
@@ -91,8 +93,10 @@ export function Footer({
           )}
         </div>
 
-        {/* ── Peta tautan + jejaring ── */}
-        <div className="grid grid-cols-2 gap-x-6 gap-y-9 py-10 sm:gap-10 sm:py-12 lg:grid-cols-4">
+        {/* ── Peta tautan + jejaring + status ──
+            Semua kolom memakai perlakuan yang SAMA (judul mono-label +
+            daftar tautan), jadi tidak ada lagi bagian yang "beda sendiri". */}
+        <div className="grid grid-cols-2 gap-x-6 gap-y-10 py-10 sm:gap-10 sm:py-12 lg:grid-cols-4">
           {columns.map((c) => (
             <nav key={c.title} aria-label={c.title}>
               <p className="mono-label mb-4 sm:mb-5">{c.title}</p>
@@ -115,32 +119,49 @@ export function Footer({
             </nav>
           ))}
 
-          {/* Blok Jejaring diberi border tipis supaya terasa sebagai satu panel
-              (dulu deretan pil telanjang, tenggelam di antara kolom tautan). */}
-          <div className="col-span-2 rounded-[var(--radius-lg)] border border-[var(--border)] bg-[color-mix(in_srgb,var(--bg-elevated)_55%,transparent)] p-5 sm:p-6 lg:col-span-1">
-            <p className="mono-label mb-4 sm:mb-5">Jejaring</p>
-            {/* Deretan pil mendatar — lebih enak disentuh daripada daftar tegak */}
-            <ul className="flex flex-wrap gap-2">
-              {socials?.map((s) => (
-                <li key={s.href}>
-                  <a
-                    href={s.href}
-                    target={s.href.startsWith("mailto:") ? undefined : "_blank"}
-                    rel="noreferrer"
-                    aria-label={s.label}
-                    title={s.label}
-                    className="group/s inline-flex items-center gap-2.5 rounded-full border border-[var(--border)] py-1.5 pl-1.5 pr-4 text-[0.8125rem] text-[var(--text-muted)] transition-all duration-200 [transition-timing-function:var(--ease-out)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:text-[var(--accent)]"
-                  >
-                    <span className="grid h-7 w-7 place-items-center rounded-full border border-[var(--border)] transition-colors duration-200 group-hover/s:border-[var(--accent)]">
-                      {s.icon ?? <Mail size={14} />}
-                    </span>
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            {crossLink && <div className="mt-5">{crossLink}</div>}
-          </div>
+          {/* Jejaring — sekarang kolom daftar biasa (dulu pil di dalam kotak
+              ber-border, satu-satunya bagian yang tampil beda). */}
+          {socials && socials.length > 0 && (
+            <nav aria-label="Jejaring">
+              <p className="mono-label mb-4 sm:mb-5">Jejaring</p>
+              <ul className="space-y-2.5 text-sm sm:space-y-3">
+                {socials.map((s) => (
+                  <li key={s.href}>
+                    <a
+                      href={s.href}
+                      target={s.href.startsWith("mailto:") ? undefined : "_blank"}
+                      rel="noreferrer"
+                      className="group/link inline-flex items-center gap-2.5 text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--text)]"
+                    >
+                      <span className="text-[var(--text-muted)] transition-colors duration-200 group-hover/link:text-[var(--accent)]">
+                        {s.icon ?? <Mail size={15} />}
+                      </span>
+                      {s.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
+
+          {/* Status — tempat yang wajar untuk ketersediaan & lokasi. */}
+          {status && (
+            <div>
+              <p className="mono-label mb-4 sm:mb-5">Status</p>
+              <ul className="space-y-2.5 text-sm text-[var(--text-muted)] sm:space-y-3">
+                {status.available && (
+                  <li className="inline-flex items-center gap-2 text-[var(--text)]">
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent-2)]" aria-hidden="true" />
+                    Available for projects
+                  </li>
+                )}
+                {status.location && <li>{status.location}</li>}
+                {status.since && (
+                  <li className="font-mono text-[11px] uppercase tracking-[0.14em]">Est. {status.since}</li>
+                )}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 

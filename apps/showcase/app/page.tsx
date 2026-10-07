@@ -1,11 +1,11 @@
 import {
-  featuredProjects, projects, lab, aruthtale,
+  featuredProjects, projects, lab, aruthtale, certificates, github,
 } from "@arufolio/data";
 import {
   ProjectCard, SectionHeading, Reveal, Button, Tag,
   Marquee, CountUp, SpotlightCard, TechStack, ArrowRight, ArrowDown, Quote, Star,
   Parallax, TextReveal, ScrollTicker, AruthtaleMark, VideoBanner,
-  Code, Layers, Shield, Globe, Sparkle, MapPin, ArrowUpRight, LearningVault,
+  Code, Layers, Shield, Globe, Sparkle, ArrowUpRight, LearningVault,
   CrossLink,
 } from "@arufolio/ui";
 
@@ -52,62 +52,29 @@ export default function HomePage() {
         </Parallax>
 
         <div className="container relative">
-          {/* Baris meta atas ala editorial */}
-          <Reveal>
-            <div className="mb-8 flex flex-wrap items-center gap-x-5 gap-y-2">
-              <span className="mono-label inline-flex items-center gap-2">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent-2)] opacity-70" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--accent-2)]" />
-                </span>
-                Tersedia untuk proyek
-              </span>
-              <span className="h-3 w-px bg-[var(--border-strong)]" aria-hidden="true" />
-              <span className="mono-label inline-flex items-center gap-1.5"><MapPin size={11} /> Cianjur, Indonesia</span>
-              <span className="h-3 w-px bg-[var(--border-strong)]" aria-hidden="true" />
-              <span className="mono-label">Est. 2026</span>
-            </div>
-          </Reveal>
-
           {/* Judul utama — muncul kata demi kata */}
           <h1 className="display max-w-[15ch] text-balance">
-            <TextReveal text="Karya," delay={80} />
+            <TextReveal text="Work," delay={80} />
             <br />
-            <TextReveal text="bukan kata." delay={240} className="grad-text" />
+            <TextReveal text="not words." delay={240} className="grad-text" />
           </h1>
 
-          {/* Identitas pemilik — sebelumnya nama ini tidak terlihat sama sekali */}
           <Reveal delay={360}>
-            <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2">
-              <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[color-mix(in_srgb,var(--bg-elevated)_70%,transparent)] px-3.5 py-1.5 backdrop-blur-sm">
-                <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
-                <span className="text-[0.8125rem] font-medium">Ibnu Hambal</span>
-                <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-[var(--text-muted)]">
-                  Fullstack Developer
-                </span>
-              </span>
-              <span className="font-mono text-[11px] text-[var(--text-muted)]">
-                brand <span className="text-[var(--accent)]">aruthtale</span> · handle{" "}
-                <span className="text-[var(--text)]">rchibnu</span>
-              </span>
-            </div>
-          </Reveal>
-
-          <Reveal delay={420}>
-            <p className="lede mt-6">
-              {aruthtale.brand.description} Setiap karya di sini adalah satu bab — bukan
-              pajangan, tapi bukti bahwa sesuatu benar-benar dibangun.
+            <p className="lede mt-7">
+              A web development studio turning ideas into functional, interactive,
+              user-centered applications. Every piece of work here is a chapter — not a
+              display, but proof that something was actually built.
             </p>
           </Reveal>
 
           <Reveal delay={480}>
             <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Button href="/work" size="lg" withArrow>Lihat Karya</Button>
+              <Button href="/work" size="lg" withArrow>See the Work</Button>
               <a
                 href="/contact"
                 className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]"
               >
-                Mulai percakapan
+                Start a conversation
                 <ArrowUpRight size={13} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
@@ -126,34 +93,54 @@ export default function HomePage() {
             />
           </Reveal>
 
-          {/* Statistik — angka berhitung naik saat masuk viewport */}
+          {/* ── Buku besar (ledger) ──
+              Dulu blok ini adalah 4 angka raksasa berjajar — pola template
+              yang terasa generik. Sekarang bergaya kolofon cetak: tiap entri
+              punya label, titik pemandu, angka tabular, DAN catatan kecil
+              yang menjelaskan angkanya. Angka tanpa keterangan = tidak jelas;
+              catatan inilah yang membuatnya bisa dipercaya. */}
           <Reveal delay={540}>
-            <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-[var(--border)] pt-9 sm:grid-cols-4">
-              <div>
-                <dd className="font-mono text-[clamp(1.75rem,3.4vw,2.5rem)] font-medium leading-none tracking-tight">
-                  <CountUp to={projects.length} />
-                </dd>
-                <dt className="mono-label mt-2.5">Proyek nyata</dt>
+            <div className="ledger">
+              <div className="ledger__head">
+                <span className="mono-label">By the numbers</span>
+                <span className="mono-label">Ledger · 2024 — now</span>
               </div>
-              <div>
-                <dd className="font-mono text-[clamp(1.75rem,3.4vw,2.5rem)] font-medium leading-none tracking-tight">
-                  <CountUp to={lab.length} />
-                </dd>
-                <dt className="mono-label mt-2.5">Eksperimen</dt>
+
+              <div className="ledger__row">
+                <span className="ledger__label">Real projects</span>
+                <span className="ledger__dots" aria-hidden="true" />
+                <span className="ledger__num"><CountUp to={projects.length} /></span>
+                <span className="ledger__note">Shipped &amp; documented</span>
               </div>
-              <div>
-                <dd className="font-mono text-[clamp(1.75rem,3.4vw,2.5rem)] font-medium leading-none tracking-tight">
-                  <CountUp to={services.length} />
-                </dd>
-                <dt className="mono-label mt-2.5">Layanan</dt>
+
+              <div className="ledger__row">
+                <span className="ledger__label">Experiments</span>
+                <span className="ledger__dots" aria-hidden="true" />
+                <span className="ledger__num"><CountUp to={lab.length} /></span>
+                <span className="ledger__note">Built to learn</span>
               </div>
-              <div>
-                <dd className="font-mono text-[clamp(1.75rem,3.4vw,2.5rem)] font-medium leading-none tracking-tight">
-                  2026
-                </dd>
-                <dt className="mono-label mt-2.5">Berdiri sejak</dt>
+
+              <div className="ledger__row">
+                <span className="ledger__label">Certificates</span>
+                <span className="ledger__dots" aria-hidden="true" />
+                <span className="ledger__num"><CountUp to={certificates.length} /></span>
+                <span className="ledger__note">Verified programs</span>
               </div>
-            </dl>
+
+              <div className="ledger__row">
+                <span className="ledger__label">Commits</span>
+                <span className="ledger__dots" aria-hidden="true" />
+                <span className="ledger__num"><CountUp to={github.commits} /></span>
+                <span className="ledger__note">on GitHub · @{github.login}</span>
+              </div>
+
+              <div className="ledger__row">
+                <span className="ledger__label">Services offered</span>
+                <span className="ledger__dots" aria-hidden="true" />
+                <span className="ledger__num"><CountUp to={services.length} /></span>
+                <span className="ledger__note">Open for work</span>
+              </div>
+            </div>
           </Reveal>
         </div>
 
@@ -174,7 +161,7 @@ export default function HomePage() {
         <div className="container">
           <Reveal delay={640}>
             <span className="mt-10 inline-flex items-center gap-2 font-mono text-[11px] text-[var(--text-muted)]">
-              <ArrowDown size={14} /> Karya, lab, dan kisahnya
+              <ArrowDown size={14} /> Work, lab, and the story behind them
             </span>
           </Reveal>
         </div>
@@ -199,7 +186,7 @@ export default function HomePage() {
                     WebkitTextStroke: "1px var(--border-strong)",
                   }}
                 >
-                  Karya, bukan kata
+                  Work, not words
                 </span>
                 <AruthtaleMark size={40} className="shrink-0" />
                 <span
