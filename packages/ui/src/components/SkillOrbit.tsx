@@ -46,10 +46,10 @@ const CONCEPT_ICON: Record<string, IconCmp> = {
   automation: Workflow,
 };
 
-/** Jari-jari lintasan (rem) — harus satuan panjang, lihat catatan CSS. */
-const RADII = [3.2, 4.8, 6.1];
+/** Jari-jari & ukuran ikon ditentukan CSS (variabel `--r1`/`--r2`/`--face`
+ *  di tokens.css) supaya otomatis mengecil di layar kecil tanpa JS. */
 /** Durasi putar per lintasan (detik) — makin luar makin lambat. */
-const DURATIONS = [46, 38, 30];
+const DURATIONS = [52, 40];
 
 export function SkillOrbit({
   groups, className,
@@ -62,12 +62,20 @@ export function SkillOrbit({
       {groups.map((g, gi) => {
         const Hub = CATEGORY_ICON[g.name.trim().toLowerCase()] ?? Layers;
         const count = g.items.length;
-        // 1–3 item: satu lintasan. 4–6: dua. Lebih: tiga.
-        const ringCount = count <= 3 ? 1 : count <= 6 ? 2 : 3;
+        // 1–3 item: satu lintasan. 4+: dua lintasan. Dua lintasan (bukan tiga)
+        // memberi jarak antar-cincin yang cukup lebar sehingga ikon tidak
+        // pernah saling menimpa — inilah perbaikan "orbit bertabrakan".
+        const ringCount = count <= 3 ? 1 : 2;
 
-        // Sebar item bergiliran ke tiap lintasan supaya jaraknya rata.
-        const buckets: number[][] = Array.from({ length: ringCount }, () => []);
-        g.items.forEach((_, i) => buckets[i % ringCount].push(i));
+        // Bagi item sekontinu mungkin (bukan bergiliran) supaya sebaran sudut
+        // tiap cincin rata, bukan menumpuk di satu sisi.
+        const per = Math.ceil(count / ringCount);
+        const buckets: number[][] = [];
+        for (let r = 0; r < ringCount; r++) {
+          const idx: number[] = [];
+          for (let i = r * per; i < Math.min((r + 1) * per, count); i++) idx.push(i);
+          if (idx.length) buckets.push(idx);
+        }
 
         return (
           <article
@@ -91,7 +99,7 @@ export function SkillOrbit({
                   key={ri}
                   className="orbit-ring"
                   aria-hidden="true"
-                  style={{ ["--r" as string]: `${RADII[ri]}rem` }}
+                  style={{ ["--r" as string]: `var(--r${ri + 1})` }}
                 />
               ))}
 
@@ -104,8 +112,10 @@ export function SkillOrbit({
               {buckets.map((bucket, ri) =>
                 bucket.map((itemIndex, j) => {
                   const name = g.items[itemIndex];
-                  const angle = (360 / bucket.length) * j + ri * 26;
-                  const dur = DURATIONS[ri];
+                  // +45° pada cincin luar supaya tidak pernah segaris lurus
+                  // dengan cincin dalam (jarak terjaga walau jumlahnya sama).
+                  const angle = (360 / bucket.length) * j + ri * 45;
+                  const dur = DURATIONS[ri] ?? DURATIONS[DURATIONS.length - 1];
                   const dir = ri % 2 === 0 ? 1 : -1;
                   const Concept = CONCEPT_ICON[name.trim().toLowerCase()];
                   const hasLogo = hasTechIcon(name);
@@ -115,7 +125,7 @@ export function SkillOrbit({
                       className="orbit-sat"
                       style={{
                         ["--a" as string]: `${angle}deg`,
-                        ["--r" as string]: `${RADII[ri]}rem`,
+                        ["--r" as string]: `var(--r${ri + 1})`,
                         ["--dur" as string]: `${dur}s`,
                         ["--dir" as string]: String(dir),
                       }}

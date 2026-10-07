@@ -43,7 +43,7 @@ export function ProfileCard({
               <img
                 src={photo}
                 alt={`Foto ${name}`}
-                className="h-full w-full object-cover"
+                className="h-full w-full object-cover object-top"
                 loading="lazy"
               />
             ) : (
@@ -104,22 +104,29 @@ export function ProfileCard({
             </dl>
           )}
 
-          {/* Meta 2×2 */}
+          {/* Meta — daftar spesifikasi: label kiri, nilai kanan. Baris penuh
+              selebar kartu, jadi tidak ada lubang kosong seperti pada kisi
+              2×2 sebelumnya (nilai panjang vs pendek bikin kolom pincang). */}
           {meta && meta.length > 0 && (
-            <dl className="mt-5 grid grid-cols-2 gap-x-5 gap-y-4 border-t border-[var(--border)] pt-5">
+            <dl className="mt-5 border-t border-[var(--border)] pt-1">
               {meta.map((m) => (
-                <div key={m.label} className="min-w-0">
-                  <dt className="mono-label">{m.label}</dt>
-                  <dd className="mt-1 text-sm leading-snug break-words">{m.value}</dd>
+                <div
+                  key={m.label}
+                  className="flex items-baseline justify-between gap-4 border-b border-[var(--border)] py-2.5 last:border-b-0"
+                >
+                  <dt className="mono-label shrink-0">{m.label}</dt>
+                  <dd className="text-right text-sm leading-snug break-words">{m.value}</dd>
                 </div>
               ))}
             </dl>
           )}
 
-          {/* Jejaring sosial — barisnya sendiri, rata bawah */}
+          {/* Jejaring sosial — label di atas, ikon di bawahnya. Ditumpuk
+              (bukan label-kiri/ikon-kanan) karena kolom teks kartu sempit,
+              sehingga ikon tidak terlempar jauh dari labelnya. */}
           {socials && socials.length > 0 && (
-            <div className="mt-auto flex items-center justify-between gap-4 border-t border-[var(--border)] pt-5">
-              <span className="mono-label">Jejaring</span>
+            <div className="mt-auto space-y-3 border-t border-[var(--border)] pt-5">
+              <span className="mono-label block">Jejaring</span>
               <SocialLinks items={socials} size="sm" />
             </div>
           )}

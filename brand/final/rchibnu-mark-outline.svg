@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Rchibnu — R and I monogram">
+  <title>Rchibnu — R · I</title>
+  <g fill="none" stroke="currentColor" stroke-width="19" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M104 48h44M104 208h44"/>
+    <path d="M126 48v160"/>
+    <path d="M126 66h24a33 33 0 0 1 0 66h-24"/>
+    <path d="M150 132l44 76"/>
+  </g>
+</svg>

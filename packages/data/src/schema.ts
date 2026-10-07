@@ -65,6 +65,7 @@ export const CertificateSchema = z.object({
 
 const Socials = z.object({
   email: z.string().email().nullable().optional(),
+  whatsapp: z.string().nullable().optional(),
   github: z.string().url().nullable().optional(),
   instagram: z.string().url().nullable().optional(),
   linkedin: z.string().url().nullable().optional(),

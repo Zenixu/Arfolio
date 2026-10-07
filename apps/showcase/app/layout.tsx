@@ -3,7 +3,7 @@ import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from "next/font/
 import { sites, nav } from "@arufolio/config";
 import {
   Navbar, Footer, ThemeToggle, ScrollProgress, CursorDot,
-  GitHub, Instagram, Mail,
+  GitHub, Instagram, Mail, WhatsApp,
 } from "@arufolio/ui";
 import { aruthtale } from "@arufolio/data";
 import "./globals.css";
@@ -44,6 +44,7 @@ const socials = [
   { label: "GitHub", href: aruthtale.contact.github ?? "#", icon: <GitHub size={16} /> },
   { label: "Instagram", href: aruthtale.contact.instagram ?? "#", icon: <Instagram size={16} /> },
   { label: "Email", href: `mailto:${aruthtale.contact.email}`, icon: <Mail size={16} /> },
+  { label: "WhatsApp", href: `https://wa.me/${aruthtale.contact.whatsapp}`, icon: <WhatsApp size={16} /> },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -83,6 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           tagline={aruthtale.brand.tagline}
           note={aruthtale.brand.domain}
           email={aruthtale.contact.email ?? undefined}
+          whatsapp={aruthtale.contact.whatsapp ?? undefined}
           columns={[
             {
               title: "Jelajahi",

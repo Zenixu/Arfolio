@@ -3,7 +3,7 @@ import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { sites, nav } from "@arufolio/config";
 import {
   Navbar, Footer, ThemeToggle, ScrollProgress, CursorDot,
-  GitHub, Instagram, Mail,
+  GitHub, Instagram, Mail, WhatsApp,
 } from "@arufolio/ui";
 import { rchibnu } from "@arufolio/data";
 import "./globals.css";
@@ -45,6 +45,7 @@ const socials = [
   { label: "GitHub", href: rchibnu.contact.github ?? "#", icon: <GitHub size={16} /> },
   { label: "Instagram", href: rchibnu.contact.instagram ?? "#", icon: <Instagram size={16} /> },
   { label: "Email", href: `mailto:${rchibnu.contact.email}`, icon: <Mail size={16} /> },
+  { label: "WhatsApp", href: `https://wa.me/${rchibnu.contact.whatsapp}`, icon: <WhatsApp size={16} /> },
 ];
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -82,8 +83,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           brand="Rchibnu"
           site="profile"
           tagline={rchibnu.theme.tagline}
-          note={`Tema: ${rchibnu.theme.name}`}
           email={rchibnu.contact.email ?? undefined}
+          whatsapp={rchibnu.contact.whatsapp ?? undefined}
           columns={[
             {
               title: "Profil",

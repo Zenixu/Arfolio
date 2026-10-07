@@ -3,7 +3,7 @@ export const sites = {
   showcase: {
     name: "aruthtale",
     url: "https://aruthtales.my.id",
-    title: "aruthtale — Proof, not promises.",
+    title: "Aruthtale",
     description:
       "Studio pengembangan web yang mengubah ide menjadi aplikasi fungsional, interaktif, dan rapi.",
   },

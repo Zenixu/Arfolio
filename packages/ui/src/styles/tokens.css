@@ -139,6 +139,15 @@ body::after {
   letter-spacing: -.035em;
   font-variation-settings: "wdth" 100;
 }
+
+/* Judul hero 3 baris (mis. nama orang) — versi lebih kecil supaya blok teks
+   tidak memaksa kolom tetangganya jadi terlalu tinggi. Ukuran 66px dipilih
+   dari uji: pada 1280px ia membuat nama panjang jadi DUA baris, sehingga
+   tinggi kolom teks hampir sama dengan kartu profil.
+   Ditulis `.display.display--sm` (bukan `.display--sm`) supaya menang
+   cascade atas `.display` — keduanya kelas tunggal, jadi tanpa ini urutan
+   aturan yang menentukan dan ukuran bisa tidak berubah. */
+.display.display--sm { font-size: clamp(2.4rem, 5.1vw, 4.125rem); }
 h1, .h1 { font-family: var(--font-display); font-size: clamp(2rem, 4.4vw, 3.25rem); line-height: 1.04; font-weight: 700; letter-spacing: -.03em; }
 h2, .h2 { font-family: var(--font-display); font-size: clamp(1.6rem, 3.1vw, 2.3rem); line-height: 1.12; font-weight: 650; letter-spacing: -.022em; }
 h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35rem); line-height: 1.24; font-weight: 600; letter-spacing: -.014em; }
@@ -328,6 +337,76 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 }
 .shine:hover::after { transform: translateX(120%); }
 
+/* ── CrossLink: kartu lintas-situs (Kenal Saya / Lihat Karya) ───────────────
+   Dua jalur ini adalah alasan utama orang berpindah antar situs, jadi
+   dibuat seperti kartu kecil — bukan tombol ghost biasa. Garis gradien di
+   tepi kiri menyala saat hover; kartu terangkat 2 px. */
+.crosslink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  max-width: 22rem;
+  padding: 0.6rem 1.1rem 0.6rem 0.7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--bg-elevated) 70%, transparent);
+  overflow: hidden;
+  transition: transform 240ms var(--ease-out), border-color 240ms var(--ease-out),
+              background-color 240ms var(--ease-out);
+}
+.crosslink::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 320ms var(--ease-out);
+}
+.crosslink:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border-strong));
+  background: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+}
+.crosslink:hover::before { transform: scaleY(1); }
+
+.crosslink__mark {
+  display: grid;
+  place-items: center;
+  height: 2.6rem; width: 2.6rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  transition: background-color 240ms var(--ease-out);
+}
+.crosslink:hover .crosslink__mark { background: color-mix(in srgb, var(--accent) 18%, transparent); }
+
+.crosslink__text { display: flex; min-width: 0; flex-direction: column; gap: 0.1rem; }
+.crosslink__label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text);
+  transition: color 240ms var(--ease-out);
+}
+.crosslink:hover .crosslink__label { color: var(--accent); }
+.crosslink__arrow { transition: transform 240ms var(--ease-out); }
+.crosslink:hover .crosslink__arrow { transform: translate(2px, -2px); }
+.crosslink__sub {
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: var(--text-muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media (max-width: 420px) {
+  .crosslink { max-width: 100%; width: 100%; }
+}
+
 /* Garis atas berjalan (scroll progress) */
 .progress-bar {
   position: fixed; top: 0; left: 0; height: 2px; z-index: var(--z-overlay);
@@ -425,6 +504,23 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 }
 
 /* ------------------------------------------------------------------ *
+ * brand-mark — lambang asli (raster) di Navbar/Footer/CrossLink.
+ *
+ * Aruthtale punya dua berkas: `…-ivory` (untuk latar GELAP) dan
+ * `…-indigo` (untuk latar TERANG). Keduanya ditumpuk; CSS memilih mana
+ * yang tampil mengikuti `[data-theme]`, jadi lambang selalu kontras tanpa
+ * JS. Wajib `display:inline-block` supaya ukuran width/height dari JS
+ * benar-benar dihormati (span default `inline` akan mengabaikannya).
+ * ------------------------------------------------------------------ */
+.brand-mark {
+  position: relative; display: inline-block; line-height: 0;
+  flex: 0 0 auto;
+}
+.brand-mark > img { width: 100%; height: 100%; object-fit: contain; display: block; }
+/* Lambang yang sudah berbentuk cakram penuh — cukup satu berkas. */
+.brand-mark--framed > img { border-radius: 999px; }
+
+/* ------------------------------------------------------------------ *
  * SkillOrbit — keahlian sebagai tata surya, bukan kotak grid.
  *
  * Cara kerjanya: tiap satelit adalah titik 0×0 di tengah panggung yang
@@ -442,9 +538,26 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
  * tersusun rapi di sudutnya, hanya tidak berputar.
  * ------------------------------------------------------------------ */
 .orbit-stage {
-  --stage: 13.5rem;
+  /* Jari-jari lintasan. ATURAN KERAS: selisih jari-jari antar-lintasan
+     (`step`) HARUS lebih besar dari diameter ikon (`--face`), kalau tidak
+     ikon lintasan dalam & luar akan saling menimpa saat sudutnya berdekatan
+     — inilah yang dulu terlihat sebagai "orbit bertabrakan".
+     Di sini step = 6,0 − 2,6 = 3,4rem (54,4px) > ikon 2,1rem (33,6px):
+     sisa celah ~20px, aman walau dua ikon tepat segaris. */
+  --r1: 2.6rem; --r2: 6rem;
+  --face: 2.1rem; --hub: 3.25rem;
+  --stage: 14.1rem;              /* = 2 × r2 + face */
   position: relative; width: var(--stage); height: var(--stage);
   margin-inline: auto;
+}
+/* Layar kecil: orbit & ikon dikecilkan. step = 5,0 − 2,2 = 2,8rem (44,8px)
+   tetap > ikon 1,8rem (28,8px), jadi tidak menimpa di HP. */
+@media (max-width: 767px) {
+  .orbit-stage {
+    --r1: 2.2rem; --r2: 5rem;
+    --face: 1.8rem; --hub: 2.8rem;
+    --stage: 11.8rem;
+  }
 }
 .orbit-ring {
   position: absolute; left: 50%; top: 50%;
@@ -455,7 +568,7 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 .orbit-hub {
   position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
   display: grid; place-items: center;
-  width: 3.25rem; height: 3.25rem; border-radius: 999px;
+  width: var(--hub); height: var(--hub); border-radius: 999px;
   border: 1px solid var(--border-strong);
   background: color-mix(in srgb, var(--accent) 12%, var(--bg-elevated));
   color: var(--accent);
@@ -469,7 +582,7 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 .orbit-face {
   position: absolute; left: 0; top: calc(-1 * var(--r));
   display: grid; place-items: center;
-  width: 2.1rem; height: 2.1rem; border-radius: 999px;
+  width: var(--face); height: var(--face); border-radius: 999px;
   border: 1px solid var(--border); background: var(--bg-elevated);
   transform: translate(-50%, -50%) rotate(calc(var(--dir) * -1 * var(--a)));
   animation: orbit-spin-rev var(--dur) linear infinite;
@@ -510,25 +623,27 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
   gap: 1.6rem; padding-block: 0.25rem;
 }
 .orbit-stage.globe {
-  --stage: 16rem;
+  /* Dua lintasan (bukan tiga). Karena bidangnya DIMIRINGKAN (lihat `--tilt`),
+     jarak nyata antar-cincin di layar menyusut dengan faktor cos(tilt).
+     Maka aturannya: (r2 − r1) · cos(tilt) harus lebih besar dari diameter
+     ikon + margin. Di sini 5,0 · 0,643 = 3,2rem (51px) > ikon 2,0rem (32px)
+     + margin → ikon cincin dalam & luar tidak pernah bertabrakan. */
+  --stage: 20rem;
   --globe-r1: 3.4rem;
-  --globe-r2: 5.1rem;
-  --globe-r3: 6.4rem;
+  --globe-r2: 8.8rem;
 }
 @media (min-width: 640px) {
   .orbit-stage.globe {
-    --stage: 19rem;
-    --globe-r1: 4.1rem;
-    --globe-r2: 6.1rem;
-    --globe-r3: 8rem;
+    --stage: 21.9rem;
+    --globe-r1: 4.2rem;
+    --globe-r2: 9.8rem;
   }
 }
 @media (min-width: 1024px) {
   .orbit-stage.globe {
-    --stage: 23rem;
-    --globe-r1: 5rem;
-    --globe-r2: 7.5rem;
-    --globe-r3: 9.9rem;
+    --stage: 24.8rem;
+    --globe-r1: 5.2rem;
+    --globe-r2: 11.2rem;
   }
 }
 /* Inti globe: mark Rchibnu, bukan ikon kategori */
@@ -540,8 +655,10 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 }
 /* Wajah satelit sedikit lebih besar supaya logonya terbaca, dan
    logonya tidak diredupkan (TechIcon default opacity-80) — di globe
-   latarnya sudah gelap, meredupkan lagi membuatnya tenggelam. */
-.globe .orbit-face { width: 2.7rem; height: 2.7rem; }
+   latarnya sudah gelap, meredupkan lagi membuatnya tenggelam.
+   Ukurannya dikecilkan di HP agar cincin tidak meluber keluar kartu. */
+.globe .orbit-face { width: 2.4rem; height: 2.4rem; }
+@media (min-width: 640px) { .globe .orbit-face { width: 2.7rem; height: 2.7rem; } }
 .globe .orbit-face img { opacity: 1; }
 
 /* --- Orbit 3D -------------------------------------------------------
@@ -623,9 +740,14 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 .profile-card__photo > * { height: 100%; }
 
 @container (min-width: 27rem) {
-  .profile-card__grid { grid-template-columns: clamp(11rem, 46%, 16rem) minmax(0, 1fr); }
+  .profile-card__grid { grid-template-columns: clamp(12rem, 52%, 19rem) minmax(0, 1fr); }
   .profile-card__photo {
-    aspect-ratio: auto; height: 100%; min-height: 17rem;
+    /* Foto dipaksa setinggi kolom teks (bukan nisbah tetap) supaya kedua
+       kolom SELESAI di garis yang sama — kalau tidak, foto 3:4 berhenti
+       ~120px lebih awal dan menyisakan lubang kosong di bawahnya.
+       object-position:top (di <img>) menjaga kepala tetap terlihat saat
+       foto dipangkas vertikal. */
+    aspect-ratio: auto; height: auto; align-self: stretch;
     border-bottom: 0; border-right: 1px solid var(--border);
   }
 }
@@ -645,16 +767,29 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 }
 .gh-heat__months > span { min-width: 0; overflow: hidden; white-space: nowrap; }
 
-/* Dua jendela kalender (lebar & sempit) — CSS memilih yang tampil.
-   Ambang 640px: di bawah itu sel 6 bulan jadi ~7px, tak terbaca. */
+/* Tiga jendela kalender (lebar / sedang / sempit) — CSS memilih yang tampil.
+   Ambang: 640px (sel 3 bulan ~7px di bawah ini) dan 900px (sel 6 bulan
+   ~8px di bawah ini). Tujuannya satu: sel selalu ≥ ~12px supaya terbaca. */
 .gh-heat__view-wide { display: none; }
+.gh-heat__view-mid { display: none; }
 .gh-heat__view-narrow { display: block; }
 .gh-heat__sum-wide { display: none; }
+.gh-heat__sum-mid { display: none; }
 .gh-heat__sum-narrow { display: inline; }
 @media (min-width: 640px) {
+  .gh-heat__view-wide { display: none; }
+  .gh-heat__view-mid { display: block; }
+  .gh-heat__view-narrow { display: none; }
+  .gh-heat__sum-wide { display: none; }
+  .gh-heat__sum-mid { display: inline; }
+  .gh-heat__sum-narrow { display: none; }
+}
+@media (min-width: 900px) {
   .gh-heat__view-wide { display: block; }
+  .gh-heat__view-mid { display: none; }
   .gh-heat__view-narrow { display: none; }
   .gh-heat__sum-wide { display: inline; }
+  .gh-heat__sum-mid { display: none; }
   .gh-heat__sum-narrow { display: none; }
 }
 

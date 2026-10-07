@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Rchibnu — R with fox eye">
+  <title>Rchibnu — R · eye</title>
+  <g fill="none" stroke="currentColor" stroke-width="19" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M84 54v148"/>
+    <path d="M84 70h28a34 34 0 0 1 0 68H84"/>
+    <path d="M140 138l46 64"/>
+  </g>
+  <circle cx="140" cy="104" r="9" fill="currentColor"/>
+</svg>

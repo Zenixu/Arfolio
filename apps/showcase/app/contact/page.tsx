@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { aruthtale } from "@arufolio/data";
 import {
   SectionHeading, Button, Reveal, SpotlightCard, SocialLinks,
-  GitHub, Instagram, Mail, ArrowUpRight, Globe,
+  GitHub, Instagram, Mail, WhatsApp, ArrowUpRight, Globe, waLink, waDisplay,
 } from "@arufolio/ui";
 
 export const metadata: Metadata = {
@@ -33,11 +33,23 @@ export default function ContactPage() {
       note: "Proses, cuplikan, dan hal-hal kecil di antaranya.",
       icon: <Instagram size={18} />,
     },
+    ...(aruthtale.contact.whatsapp
+      ? [{
+          label: "WhatsApp",
+          value: waDisplay(aruthtale.contact.whatsapp),
+          href: waLink(aruthtale.contact.whatsapp),
+          note: "Untuk obrolan cepat — biasanya saya balas di hari yang sama.",
+          icon: <WhatsApp size={18} />,
+        }]
+      : []),
   ].filter((l) => l.href);
 
   const socials = [
     { label: "GitHub", href: aruthtale.contact.github ?? "#", icon: <GitHub size={16} /> },
     { label: "Instagram", href: aruthtale.contact.instagram ?? "#", icon: <Instagram size={16} /> },
+    ...(aruthtale.contact.whatsapp
+      ? [{ label: "WhatsApp", href: waLink(aruthtale.contact.whatsapp), icon: <WhatsApp size={16} /> }]
+      : []),
     { label: "Email", href: `mailto:${aruthtale.contact.email}`, icon: <Mail size={16} /> },
   ];
 
@@ -50,7 +62,7 @@ export default function ContactPage() {
         description="Terbuka untuk proyek freelance, kolaborasi, atau peluang kerja. Pilih jalur yang paling nyaman untukmu."
       />
 
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {links.map((l, i) => (
           <Reveal key={l.label} delay={i * 70} className="h-full">
             <SpotlightCard as="a" href={l.href!} target="_blank" rel="noreferrer" className="card group flex h-full flex-col p-6 hover:-translate-y-1 hover:border-[var(--border-strong)]">

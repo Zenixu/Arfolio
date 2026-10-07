@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 256" role="img" aria-label="Rchibnu logo lockup">
+  <title>Rchibnu — lockup</title>
+  <g transform="translate(0 44.0) scale(0.65625)"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
+    d="M68 34 58 106 80 138 128 208 176 138 198 106 188 34 152 76 128 62 104 76Z
+       M104 112a9 9 0 1 0 0.02 0Z
+       M152 112a9 9 0 1 0 0.02 0Z
+       M128 168l-11 18h22Z"/></g>
+  <text x="196" y="168" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="92" font-weight="700" letter-spacing="-0.5" fill="currentColor">Rchibnu</text>
+</svg>

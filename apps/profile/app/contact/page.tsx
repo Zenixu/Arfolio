@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { rchibnu } from "@arufolio/data";
 import {
   SectionHeading, Button, Reveal, SpotlightCard, SocialLinks,
-  GitHub, Instagram, Mail, ArrowUpRight, Globe,
+  GitHub, Instagram, Mail, WhatsApp, ArrowUpRight, Globe, waLink, waDisplay,
 } from "@arufolio/ui";
 
 export const metadata: Metadata = {
@@ -35,11 +35,23 @@ export default function ContactPage() {
       note: "Keseharian, proses, dan hal-hal kecil di antaranya.",
       icon: <Instagram size={18} />,
     },
+    ...(c.whatsapp
+      ? [{
+          label: "WhatsApp",
+          value: waDisplay(c.whatsapp),
+          href: waLink(c.whatsapp),
+          note: "Untuk obrolan cepat — biasanya saya balas di hari yang sama.",
+          icon: <WhatsApp size={18} />,
+        }]
+      : []),
   ].filter((l) => l.href);
 
   const socials = [
     { label: "GitHub", href: c.github ?? "#", icon: <GitHub size={16} /> },
     { label: "Instagram", href: c.instagram ?? "#", icon: <Instagram size={16} /> },
+    ...(c.whatsapp
+      ? [{ label: "WhatsApp", href: waLink(c.whatsapp), icon: <WhatsApp size={16} /> }]
+      : []),
     { label: "Email", href: `mailto:${c.email}`, icon: <Mail size={16} /> },
   ];
 
@@ -52,7 +64,7 @@ export default function ContactPage() {
         description="Terbuka untuk kolaborasi, proyek, atau sekadar berdiskusi soal teknologi. Pilih jalur yang paling nyaman."
       />
 
-      <div className="grid gap-4 lg:grid-cols-3">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {links.map((l, i) => (
           <Reveal key={l.label} delay={i * 70} className="h-full">
             <SpotlightCard

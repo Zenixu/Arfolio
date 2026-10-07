@@ -30,10 +30,10 @@ const PREFERRED = [
 /** Batas jumlah logo di globe. Lebih dari ini cincin jadi kabut tak terbaca. */
 const MAX = 10;
 
-/** Jari-jari tiap lintasan memakai variabel CSS supaya bisa mengecil di HP
+/** Jari-jari lintasan memakai variabel CSS supaya bisa mengecil di HP
  *  tanpa mengubah JS. (Satuan WAJIB panjang — persen diresolusi terhadap
  *  induk berukuran 0 dan membuat semua ikon menumpuk di tengah.) */
-const DURATIONS = [54, 44, 34];
+const DURATIONS = [58, 42];
 
 export function SkillGlobe({
   groups,
@@ -54,10 +54,17 @@ export function SkillGlobe({
     if (!featured.includes(n) && hasTechIcon(n)) featured.push(n);
   }
 
-  // Sebar bergiliran ke tiga lintasan supaya jaraknya rata.
-  const ringCount = featured.length <= 4 ? 1 : featured.length <= 7 ? 2 : 3;
-  const buckets: number[][] = Array.from({ length: ringCount }, () => []);
-  featured.forEach((_, i) => buckets[i % ringCount].push(i));
+  // Dua lintasan (bukan tiga): jarak antar-cincin jadi cukup lebar sehingga
+  // ikon tidak pernah saling menimpa. Tiga lintasan pada diameter sekecil ini
+  // membuat cincin berdempetan — itulah "orbit bertabrakan" yang dikeluhkan.
+  const ringCount = featured.length <= 4 ? 1 : 2;
+  const per = Math.ceil(featured.length / ringCount);
+  const buckets: number[][] = [];
+  for (let r = 0; r < ringCount; r++) {
+    const idx: number[] = [];
+    for (let i = r * per; i < Math.min((r + 1) * per, featured.length); i++) idx.push(i);
+    if (idx.length) buckets.push(idx);
+  }
 
   const total = all.length;
 
@@ -86,8 +93,11 @@ export function SkillGlobe({
         {buckets.map((bucket, ri) =>
           bucket.map((itemIndex, j) => {
             const name = featured[itemIndex];
-            const angle = (360 / bucket.length) * j + ri * 24;
+            // +45° pada cincin luar agar tidak pernah segaris lurus dengan
+            // cincin dalam — jarak terjaga walau jumlah itemnya sama.
+            const angle = (360 / bucket.length) * j + ri * 45;
             const dir = ri % 2 === 0 ? 1 : -1;
+            const dur = DURATIONS[ri] ?? DURATIONS[DURATIONS.length - 1];
             return (
               <span
                 key={name}
@@ -95,12 +105,12 @@ export function SkillGlobe({
                 style={{
                   ["--a" as string]: `${angle}deg`,
                   ["--r" as string]: `var(--globe-r${ri + 1})`,
-                  ["--dur" as string]: `${DURATIONS[ri]}s`,
+                  ["--dur" as string]: `${dur}s`,
                   ["--dir" as string]: String(dir),
                 }}
               >
                 <span className="orbit-face" title={name} aria-label={name} role="img">
-                  <TechIcon name={name} size={21} />
+                  <TechIcon name={name} size={19} />
                 </span>
               </span>
             );

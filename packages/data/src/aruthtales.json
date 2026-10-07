@@ -2,11 +2,11 @@
   "brand": {
     "name": "aruthtale",
     "handle": "aruthtale",
-    "tagline": "Proof, not promises.",
+    "tagline": "Karya, bukan kata.",
     "domain": "aruthtales.my.id",
     "description": "Studio pengembangan web yang mengubah ide menjadi aplikasi fungsional, interaktif, dan berpusat pada pengguna.",
     "logo": null,
-    "logoNote": "Logo aruthtale & Rchibnu menyusul."
+    "logoNote": "Lambang aruthtale: daun + mata pena (Ars · Tale)."
   },
   "philosophy": {
     "summary": "aruthtale adalah kisah yang ditulis dengan kecerdikan, kerendahan hati, dan ketulusan — setiap karya adalah satu bab dari perjalanan yang terus tumbuh.",
@@ -78,6 +78,7 @@
   ],
   "contact": {
     "email": "aruthtale@gmail.com",
+    "whatsapp": "6285283089860",
     "github": "https://www.github.com/aruthtale",
     "instagram": "https://www.instagram.com/aruthtale",
     "linkedin": null,

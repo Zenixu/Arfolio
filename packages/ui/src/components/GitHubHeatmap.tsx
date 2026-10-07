@@ -23,7 +23,6 @@ const MONTHS = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "
 const DAY_LABELS = ["", "Sen", "", "Rab", "", "Jum", ""];
 
 type Day = { date: string; count: number; level: number };
-
 /** Susun hari menjadi kolom-kolom mingguan (Minggu→Sabtu). */
 function toWeeks(days: Day[]): (Day | null)[][] {
   if (days.length === 0) return [];
@@ -104,6 +103,7 @@ function Calendar({ days }: { days: Day[] }) {
 export function GitHubHeatmap({
   stats,
   months = 6,
+  monthsMid = 6,
   monthsNarrow = 3,
   className,
 }: {
@@ -119,15 +119,19 @@ export function GitHubHeatmap({
     issues: number;
     days: Day[];
   };
-  /** Berapa bulan ke belakang pada layar lebar. */
+  /** Berapa bulan ke belakang pada layar lebar (≥900px). */
   months?: number;
+  /** Berapa bulan ke belakang pada layar sedang (≥640px, mis. tablet). */
+  monthsMid?: number;
   /** Berapa bulan ke belakang pada layar sempit (HP). */
   monthsNarrow?: number;
   className?: string;
 }) {
   const wide = stats.days.slice(-Math.round(months * 30.5));
+  const mid = stats.days.slice(-Math.round(monthsMid * 30.5));
   const narrow = stats.days.slice(-Math.round(monthsNarrow * 30.5));
   const totalWide = wide.reduce((n, d) => n + d.count, 0);
+  const totalMid = mid.reduce((n, d) => n + d.count, 0);
   const totalNarrow = narrow.reduce((n, d) => n + d.count, 0);
 
   const angka = [
@@ -153,14 +157,20 @@ export function GitHubHeatmap({
         </a>
         <p className="mono-label">
           <span className="gh-heat__sum-wide">{totalWide} kontribusi · {months} bulan terakhir</span>
+          <span className="gh-heat__sum-mid">{totalMid} kontribusi · {monthsMid} bulan terakhir</span>
           <span className="gh-heat__sum-narrow">{totalNarrow} kontribusi · {monthsNarrow} bulan terakhir</span>
         </p>
       </header>
 
-      {/* Kalender kontribusi — dua jendela, CSS memilih yang tampil. */}
+      {/* Kalender kontribusi — tiga jendela, CSS memilih yang tampil:
+          12 bulan (layar lebar, strip panjang & pendek), 6 bulan (tablet),
+          3 bulan (HP, supaya sel tidak jadi ~7px yang tak terbaca). */}
       <div className="mt-6">
         <div className="gh-heat__view-wide">
           <Calendar days={wide} />
+        </div>
+        <div className="gh-heat__view-mid">
+          <Calendar days={mid} />
         </div>
         <div className="gh-heat__view-narrow">
           <Calendar days={narrow} />
@@ -171,6 +181,9 @@ export function GitHubHeatmap({
         <p className="mono-label">
           <span className="gh-heat__sum-wide">
             {wide.filter((d) => d.count > 0).length} hari aktif · aktif sejak {stats.since.slice(0, 4)}
+          </span>
+          <span className="gh-heat__sum-mid">
+            {mid.filter((d) => d.count > 0).length} hari aktif · aktif sejak {stats.since.slice(0, 4)}
           </span>
           <span className="gh-heat__sum-narrow">
             {narrow.filter((d) => d.count > 0).length} hari aktif · sejak {stats.since.slice(0, 4)}

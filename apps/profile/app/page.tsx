@@ -1,8 +1,9 @@
 import { rchibnu, featuredCertificates, aruthtale, certificates, courses, awards, github } from "@arufolio/data";
+import { waLink } from "@arufolio/ui";
 import {
   SectionHeading, Reveal, Button, Tag, ProfileCard, SocialLinks,
-  SpotlightCard, Marquee, TechStack, CountUp, CertificateDeck,
-  GitHub, Instagram, Mail, Trophy, Briefcase, MapPin, Quote,
+  SpotlightCard, Marquee, TechStack, CountUp, CertificateDeck, CrossLink,
+  GitHub, Instagram, Mail, WhatsApp, Trophy, Briefcase, MapPin, Quote,
   Parallax, TextReveal, RchibnuMark, VideoBanner, SkillGlobe, GitHubHeatmap,
 } from "@arufolio/ui";
 
@@ -24,6 +25,9 @@ export default function ProfileHome() {
     { label: "GitHub", href: rchibnu.contact.github ?? "#", icon: <GitHub size={16} /> },
     { label: "Instagram", href: rchibnu.contact.instagram ?? "#", icon: <Instagram size={16} /> },
     { label: "Email", href: `mailto:${rchibnu.contact.email}`, icon: <Mail size={16} /> },
+    ...(rchibnu.contact.whatsapp
+      ? [{ label: "WhatsApp", href: waLink(rchibnu.contact.whatsapp), icon: <WhatsApp size={16} /> }]
+      : []),
   ];
 
   const topSkills = skills.groups.flatMap((g) => g.items).slice(0, 18);
@@ -52,7 +56,8 @@ export default function ProfileHome() {
           />
         </Parallax>
 
-        <div className="container relative grid-12 items-center">
+        <div className="container relative">
+        <div className="grid-12 items-start">
           {/* Kiri: sapaan */}
           <div className="col-span-12 lg:col-span-5">
             <Reveal>
@@ -65,9 +70,9 @@ export default function ProfileHome() {
               </p>
             </Reveal>
 
-            <h1 className="display max-w-[16ch] text-balance">
+            <h1 className="display display--sm max-w-[16ch] text-balance">
               <TextReveal text="Hai, saya" delay={80} />{" "}
-              <TextReveal text={identity.displayName + "."} delay={260} className="afterglow-gradient" />
+              <TextReveal text={identity.displayName + ""} delay={260} className="afterglow-gradient" />
             </h1>
 
             {/* Nama lengkap + brand — sebelumnya keduanya tidak muncul di UI */}
@@ -88,16 +93,23 @@ export default function ProfileHome() {
             <Reveal delay={480}>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Button href="/certificates" size="lg" withArrow>Lihat Sertifikat</Button>
-                <Button href="https://aruthtales.my.id" variant="ghost" size="lg">Lihat Karya</Button>
               </div>
             </Reveal>
 
-            <Reveal delay={540}>
-              <SocialLinks items={socials} className="mt-8" />
+            {/* "Lihat Karya" — kartu lintas-situs menuju portofolio utama. */}
+            <Reveal delay={510}>
+              <CrossLink
+                href="https://aruthtales.my.id"
+                site="showcase"
+                label="Lihat Karya"
+                sub="Proyek nyata & eksperimen di aruthtales.my.id."
+                className="mt-5"
+              />
             </Reveal>
           </div>
 
-          {/* Kanan: KARTU PROFIL — tempat foto kamu nanti */}
+          {/* Kanan: KARTU PROFIL — mengikuti tinggi alaminya (foto 3:4), tidak
+              lagi dipaksa setinggi kolom teks. Kedua kolom kini rata atas. */}
           <div className="col-span-12 mt-12 lg:col-span-7 lg:mt-0">
             <Reveal variant="scale" delay={160}>
               <ProfileCard
@@ -117,12 +129,18 @@ export default function ProfileHome() {
               />
             </Reveal>
 
-            {/* Kalender kontribusi GitHub — data ASLI dari snapshot
-                packages/data/src/github.json (Zenixu), jendela 6 bulan. */}
-            <Reveal delay={260} className="mt-5">
-              <GitHubHeatmap stats={github} months={6} />
-            </Reveal>
           </div>
+        </div>
+
+        {/* Kalender kontribusi GitHub — selebar halaman, di bawah kedua kolom.
+            Dulu ia menumpuk di kolom kanan sehingga kolom itu 825 px sementara
+            kolom kiri 658 px — mata membacanya sebagai "tidak rapi". Kini jadi
+            strip lebar yang mengikat kedua kolom. Data ASLI dari snapshot
+            packages/data/src/github.json (Zenixu); jendela 12 bulan supaya
+            lebih panjang, tetapi tingginya justru lebih pendek dari dulu. */}
+        <Reveal delay={260} className="mt-10 lg:mt-14">
+          <GitHubHeatmap stats={github} months={12} monthsMid={6} monthsNarrow={3} />
+        </Reveal>
         </div>
       </section>
 
@@ -148,14 +166,24 @@ export default function ProfileHome() {
           title="Siapa saya"
           description={bio.short}
           action={<Button href="/contact" variant="link">Kontak</Button>}
+          divider
         />
         <div className="grid-12">
           <div className="col-span-12 lg:col-span-7">
-            <div className="space-y-5 leading-relaxed text-[var(--text-muted)]">
-              {bio.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
-            </div>
-            <div className="mt-8 flex flex-wrap gap-2">
-              {interests.map((t) => <Tag key={t}>{t}</Tag>)}
+            {/* Panel bergaris: memberi bobot "eksklusif" pada bagian personal,
+                bukan sekadar paragraf telanjang di atas latar. */}
+            <div className="relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-[color-mix(in_srgb,var(--bg-elevated)_45%,transparent)] p-6 sm:p-8">
+              <span
+                aria-hidden="true"
+                className="absolute inset-y-6 left-0 w-px"
+                style={{ background: "linear-gradient(180deg, transparent, var(--accent), transparent)" }}
+              />
+              <div className="space-y-5 leading-relaxed text-[var(--text-muted)]">
+                {bio.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+              </div>
+              <div className="mt-8 flex flex-wrap gap-2">
+                {interests.map((t) => <Tag key={t}>{t}</Tag>)}
+              </div>
             </div>
           </div>
 
@@ -213,11 +241,6 @@ export default function ProfileHome() {
               <RchibnuMark size={52} />
               <Quote size={26} className="mt-6 text-[var(--accent)] opacity-60" />
               <p className="pull-quote mt-5">{theme.tagline}</p>
-              <p className="mt-6 text-sm leading-relaxed text-[var(--text-muted)]">
-                {theme.core.length > 0 && (
-                  <>Inti dari delapan metafora ini: <strong className="font-medium text-[var(--text)]">{theme.core.join(" + ")}</strong>.</>
-                )}
-              </p>
             </div>
           </Reveal>
 

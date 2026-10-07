@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 256" role="img" aria-label="aruthtale logo lockup">
+  <title>aruthtale — lockup</title>
+  <g transform="translate(0 44.0) scale(0.65625)"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
+    d="M112 96a54 54 0 1 0 0.02 0Z
+       M112 110c8 18 22 32 40 40-18 8-32 22-40 40-8-18-22-32-40-40 18-8 32-22 40-40Z"/>
+  <rect x="158" y="92" width="32" height="120" rx="13" fill="currentColor"/></g>
+  <text x="196" y="168" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="92" font-weight="700" letter-spacing="-1.5" fill="currentColor">aruthtale</text>
+</svg>

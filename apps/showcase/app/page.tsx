@@ -6,6 +6,7 @@ import {
   Marquee, CountUp, SpotlightCard, TechStack, ArrowRight, ArrowDown, Quote, Star,
   Parallax, TextReveal, ScrollTicker, AruthtaleMark, VideoBanner,
   Code, Layers, Shield, Globe, Sparkle, MapPin, ArrowUpRight, LearningVault,
+  CrossLink,
 } from "@arufolio/ui";
 
 /** Teknologi untuk marquee — diambil dari tag proyek + daftar inti. */
@@ -70,9 +71,9 @@ export default function HomePage() {
 
           {/* Judul utama — muncul kata demi kata */}
           <h1 className="display max-w-[15ch] text-balance">
-            <TextReveal text="Proof," delay={80} />
+            <TextReveal text="Karya," delay={80} />
             <br />
-            <TextReveal text="not promises." delay={240} className="grad-text" />
+            <TextReveal text="bukan kata." delay={240} className="grad-text" />
           </h1>
 
           {/* Identitas pemilik — sebelumnya nama ini tidak terlihat sama sekali */}
@@ -102,9 +103,6 @@ export default function HomePage() {
           <Reveal delay={480}>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <Button href="/work" size="lg" withArrow>Lihat Karya</Button>
-              <Button href="https://rchibnu.aruthtales.my.id" variant="ghost" size="lg">
-                Kenal Saya
-              </Button>
               <a
                 href="/contact"
                 className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]"
@@ -113,6 +111,19 @@ export default function HomePage() {
                 <ArrowUpRight size={13} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
+          </Reveal>
+
+          {/* "Kenal Saya" — sengaja dibuat lebih spesial daripada tombol ghost:
+              kartu lintas-situs dengan lambang, keterangan, dan garis aksen yang
+              menyala saat hover. Ini jalur utama menuju profil personal. */}
+          <Reveal delay={520}>
+            <CrossLink
+              href="https://rchibnu.aruthtales.my.id"
+              site="profile"
+              label="Kenal Saya"
+              sub="Siapa orang di balik aruthtale — perjalanan, keahlian, dan sertifikat."
+              className="mt-6"
+            />
           </Reveal>
 
           {/* Statistik — angka berhitung naik saat masuk viewport */}
@@ -162,9 +173,9 @@ export default function HomePage() {
 
         <div className="container">
           <Reveal delay={640}>
-            <a href="#filosofi" className="mt-10 inline-flex items-center gap-2 font-mono text-[11px] text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]">
-              <ArrowDown size={14} /> Gulir untuk menjelajah
-            </a>
+            <span className="mt-10 inline-flex items-center gap-2 font-mono text-[11px] text-[var(--text-muted)]">
+              <ArrowDown size={14} /> Karya, lab, dan kisahnya
+            </span>
           </Reveal>
         </div>
       </section>
@@ -188,7 +199,7 @@ export default function HomePage() {
                     WebkitTextStroke: "1px var(--border-strong)",
                   }}
                 >
-                  Proof, not promises
+                  Karya, bukan kata
                 </span>
                 <AruthtaleMark size={40} className="shrink-0" />
                 <span
@@ -356,12 +367,18 @@ export default function HomePage() {
                 Saya terbuka untuk proyek freelance, kolaborasi, maupun peluang kerja.
                 Ceritakan idemu — kita bahas bagaimana mewujudkannya.
               </p>
-              <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <Button href="/contact" size="lg" withArrow>Hubungi Saya</Button>
-                <Button href="https://rchibnu.aruthtales.my.id" variant="ghost" size="lg">
-                  Lihat Profil
-                </Button>
               </div>
+              <Reveal delay={120}>
+                <CrossLink
+                  href="https://rchibnu.aruthtales.my.id"
+                  site="profile"
+                  label="Lihat Profil"
+                  sub="Perjalanan, keahlian, dan sertifikat saya."
+                  className="mt-5"
+                />
+              </Reveal>
             </div>
           </div>
         </Reveal>

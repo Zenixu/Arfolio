@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <title>aruthtale</title>
+  <rect width="48" height="48" rx="11" fill="#08080A"/>
+  <!-- Potongan ukuran kecil: urat (slit) saja, tanpa lubang mata pena —
+       lubang r4 px hilang saat 16 px, celah lurus tetap tajam. -->
+  <path
+    fill="#6366F1"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M24 3.6C31.6 11.4 36.9 19.6 36.9 27.7c0 8.8-5.1 15.6-12.9 17.1-7.8-1.5-12.9-8.3-12.9-17.1C11.1 19.6 16.4 11.4 24 3.6Z
+       M21.6 14.4h4.8v25.8h-4.8Z"
+  />
+</svg>

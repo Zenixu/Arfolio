@@ -1,4 +1,5 @@
 export { cn } from "./lib/cn";
+export { waLink, waDisplay } from "./lib/wa";
 
 /* Ikon (SVG inline, bukan emoji/font ikon) */
 export * from "./components/Icon";
@@ -24,6 +25,7 @@ export { LabCard } from "./components/LabCard";
 export { CertificateCard } from "./components/CertificateCard";
 export { CertificateDeck } from "./components/CertificateDeck";
 export { ProfileCard } from "./components/ProfileCard";
+export { CrossLink } from "./components/CrossLink";
 export { SkillOrbit } from "./components/SkillOrbit";
 export { SkillGlobe } from "./components/SkillGlobe";
 export { LearningVault } from "./components/LearningVault";

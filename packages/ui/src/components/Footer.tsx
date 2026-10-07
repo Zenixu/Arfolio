@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { cn } from "../lib/cn";
-import { Mail, ArrowUpRight } from "./Icon";
+import { Mail, ArrowUpRight, WhatsApp } from "./Icon";
 import { Mark } from "./Logo";
+import { waLink } from "../lib/wa";
 
 export type SocialLink = { label: string; href: string; icon?: ReactNode };
 
@@ -20,7 +21,7 @@ export type SocialLink = { label: string; href: string; icon?: ReactNode };
  * layar supaya mudah disentuh.
  */
 export function Footer({
-  brand, tagline, columns, socials, crossLink, note, site = "showcase", email,
+  brand, tagline, columns, socials, crossLink, note, site = "showcase", email, whatsapp,
 }: {
   brand: string;
   tagline?: string;
@@ -30,6 +31,7 @@ export function Footer({
   note?: string;
   site?: "showcase" | "profile";
   email?: string;
+  whatsapp?: string;
 }) {
   const year = new Date().getFullYear();
 
@@ -63,14 +65,29 @@ export function Footer({
             </div>
           </div>
 
-          {email && (
-            <a
-              href={`mailto:${email}`}
-              className="group inline-flex w-full items-center justify-center gap-3 rounded-full border border-[var(--border-strong)] px-5 py-3 text-sm transition-all duration-200 [transition-timing-function:var(--ease-out)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:text-[var(--accent)] sm:w-auto"
-            >
-              Mulai percakapan
-              <ArrowUpRight size={15} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
+          {(email || whatsapp) && (
+            <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
+              {whatsapp && (
+                <a
+                  href={waLink(whatsapp, `Halo, saya menemukan ${brand} dan ingin bertanya.`)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-medium text-white transition-all duration-200 [transition-timing-function:var(--ease-out)] hover:-translate-y-0.5 hover:brightness-110 sm:w-auto"
+                >
+                  <WhatsApp size={16} />
+                  Chat WhatsApp
+                </a>
+              )}
+              {email && (
+                <a
+                  href={`mailto:${email}`}
+                  className="group inline-flex w-full items-center justify-center gap-3 rounded-full border border-[var(--border-strong)] px-5 py-3 text-sm transition-all duration-200 [transition-timing-function:var(--ease-out)] hover:-translate-y-0.5 hover:border-[var(--accent)] hover:text-[var(--accent)] sm:w-auto"
+                >
+                  Mulai percakapan
+                  <ArrowUpRight size={15} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
+              )}
+            </div>
           )}
         </div>
 
@@ -98,7 +115,9 @@ export function Footer({
             </nav>
           ))}
 
-          <div className="col-span-2 lg:col-span-1">
+          {/* Blok Jejaring diberi border tipis supaya terasa sebagai satu panel
+              (dulu deretan pil telanjang, tenggelam di antara kolom tautan). */}
+          <div className="col-span-2 rounded-[var(--radius-lg)] border border-[var(--border)] bg-[color-mix(in_srgb,var(--bg-elevated)_55%,transparent)] p-5 sm:p-6 lg:col-span-1">
             <p className="mono-label mb-4 sm:mb-5">Jejaring</p>
             {/* Deretan pil mendatar — lebih enak disentuh daripada daftar tegak */}
             <ul className="flex flex-wrap gap-2">
@@ -145,8 +164,6 @@ export function Footer({
       <div className="container relative flex flex-col gap-4 border-t border-[var(--border)] py-6 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
           <p className="font-mono text-[11px] text-[var(--text-muted)]">© {year} {brand}</p>
-          <span className="hidden h-3 w-px bg-[var(--border-strong)] sm:block" aria-hidden="true" />
-          <p className="font-mono text-[11px] text-[var(--text-muted)]">Dibangun dengan Next.js & Tailwind</p>
         </div>
         <a
           href="#main"

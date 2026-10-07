@@ -70,6 +70,11 @@
   letter-spacing: -.022em;
 }
 [data-site="profile"] .display { font-size: clamp(2.6rem, 6.6vw, 5.2rem); line-height: 1.0; }
+/* Hero nama orang: lebih kecil supaya blok teks tidak lebih tinggi dari
+   kartu profil di sebelahnya. Ditulis [data-site] .display.display--sm
+   (spesifisitas 0,3,0) agar menang atas aturan .display di atas (0,2,0) —
+   dua kelas saja kalah karena urutan berkas. */
+[data-site="profile"] .display.display--sm { font-size: clamp(2.4rem, 5.1vw, 4.125rem); }
 
 /* Teks bergradien senja.
    Sama seperti .grad-text: gradien harus dipasang pada tiap .word-inner

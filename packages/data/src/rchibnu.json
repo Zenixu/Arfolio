@@ -1,8 +1,8 @@
 {
   "identity": {
     "fullName": "Ibnu Hambal Al Bantani Rch",
-    "displayName": "Ibnu Hambal",
-    "handle": "rchibnu",
+    "displayName": "",
+    "handle": "RchIbnu",
     "brand": "aruthtale",
     "role": "Fullstack Developer",
     "headline": "Building functional, interactive, and user-centric web applications.",
@@ -11,7 +11,7 @@
     "status": "Sedang PKL di PT ASQI Digital Innovation",
     "photo": "/rchprofile.webp",
     "logo": null,
-    "logoNote": "Logo personal Rchibnu menyusul."
+    "logoNote": "Lambang Rchibnu: monogram R · I (batang R merangkap huruf I)."
   },
   "bio": {
     "short": "Fullstack Developer berusia 17 tahun yang membangun aplikasi web fungsional, interaktif, dan berpusat pada pengguna.",
@@ -38,7 +38,7 @@
       "type": "internship",
       "role": "Praktik Kerja Lapangan (PKL)",
       "organization": "PT ASQI Digital Innovation",
-      "period": "2026 — sekarang",
+      "period": "2026",
       "current": true,
       "description": "Menjalani PKL dengan fokus pada pengembangan aplikasi web."
     },
@@ -54,7 +54,7 @@
       "type": "education",
       "role": "Pelajar RPL",
       "organization": "SMK Negeri 1 Cianjur",
-      "period": "2023 — sekarang",
+      "period": "2023",
       "current": true,
       "description": "Menempuh pendidikan jurusan Rekayasa Perangkat Lunak."
     }
@@ -150,6 +150,7 @@
   },
   "contact": {
     "email": "maybe4zen@gmail.com",
+    "whatsapp": "6282114073679",
     "github": "https://www.github.com/Zenixu",
     "instagram": "https://www.instagram.com/zennrch",
     "linkedin": null,

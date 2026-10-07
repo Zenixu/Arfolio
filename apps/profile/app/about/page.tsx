@@ -21,10 +21,20 @@ export default function AboutPage() {
           eyebrow="Tentang"
           title={<>Perjalanan <span className="afterglow-gradient">saya</span></>}
           description={bio.short}
+          divider
         />
         <div className="grid-12">
-          <div className="col-span-12 space-y-5 leading-relaxed text-[var(--text-muted)] lg:col-span-7">
-            {bio.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+          <div className="col-span-12 lg:col-span-7">
+            <div className="relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-[color-mix(in_srgb,var(--bg-elevated)_45%,transparent)] p-6 sm:p-8">
+              <span
+                aria-hidden="true"
+                className="absolute inset-y-6 left-0 w-px"
+                style={{ background: "linear-gradient(180deg, transparent, var(--accent), transparent)" }}
+              />
+              <div className="space-y-5 leading-relaxed text-[var(--text-muted)]">
+                {bio.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+              </div>
+            </div>
           </div>
           <aside className="col-span-12 mt-10 space-y-4 lg:col-span-5 lg:mt-0 lg:pl-8">
             <SpotlightCard className="card p-6">

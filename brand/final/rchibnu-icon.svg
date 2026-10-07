@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <title>Rchibnu</title>
+  <rect width="48" height="48" rx="11" fill="#121016"/>
+  <!-- Potongan ukuran kecil: kepala rubah + R, tanpa kuntum/gerimis — detail
+       halus menyatu jadi gumpalan saat 16 px. Warna rata (bukan gradien)
+       supaya kontras tetap tinggi di ukuran terkecil. -->
+  <path fill="#E3A57C" fill-rule="evenodd" clip-rule="evenodd"
+    d="M14.5 8 13 17 19 27 24.5 31.5 30 27 36 17 34.5 8 28 14 24.5 12 21 14Z
+       M20.7 18.4a1.7 1.7 0 1 0 3.4 0 1.7 1.7 0 1 0-3.4 0Z
+       M24.9 18.4a1.7 1.7 0 1 0 3.4 0 1.7 1.7 0 1 0-3.4 0Z"/>
+  <g fill="none" stroke="#E3A57C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14.5 12.5v29.5"/>
+    <path d="M22.5 25.5 35 42.5"/>
+  </g>
+  <ellipse cx="9" cy="7.5" rx="3" ry="2.6" fill="#E3A57C"/>
+</svg>

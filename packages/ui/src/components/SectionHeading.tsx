@@ -7,10 +7,11 @@ import { cn } from "../lib/cn";
  * Nomor indeks inilah yang memberi kesan "halaman cetak", bukan template SaaS.
  */
 export function SectionHeading({
-  eyebrow, title, description, action, index, align = "left", className,
+  eyebrow, title, description, action, index, align = "left", className, divider = false,
 }: {
   eyebrow?: string; title: ReactNode; description?: ReactNode;
   action?: ReactNode; index?: string; align?: "left" | "center"; className?: string;
+  divider?: boolean;
 }) {
   return (
     <div className={cn("mb-12", className)}>
@@ -33,6 +34,14 @@ export function SectionHeading({
         </div>
         {action && <div className="shrink-0">{action}</div>}
       </div>
+      {/* Garis pemisah halus: menutup blok judul sebelum isi bagian dimulai. */}
+      {divider && (
+        <div
+          aria-hidden="true"
+          className="mt-9 h-px w-full"
+          style={{ background: "linear-gradient(90deg, var(--border-strong), var(--border) 40%, transparent)" }}
+        />
+      )}
     </div>
   );
 }
