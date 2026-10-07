@@ -25,6 +25,7 @@ export { CertificateCard } from "./components/CertificateCard";
 export { CertificateDeck } from "./components/CertificateDeck";
 export { ProfileCard } from "./components/ProfileCard";
 export { SkillOrbit } from "./components/SkillOrbit";
+export { SkillGlobe } from "./components/SkillGlobe";
 export { LearningVault } from "./components/LearningVault";
 export { SocialLinks, TechList, type Social } from "./components/SocialLinks";
 

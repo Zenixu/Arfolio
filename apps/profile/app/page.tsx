@@ -3,7 +3,7 @@ import {
   SectionHeading, Reveal, Button, Tag, ProfileCard, SocialLinks,
   SpotlightCard, Marquee, TechStack, CountUp, CertificateDeck,
   GitHub, Instagram, Mail, Trophy, Briefcase, MapPin, Quote,
-  Parallax, TextReveal, RchibnuMark, VideoBanner, SkillOrbit,
+  Parallax, TextReveal, RchibnuMark, VideoBanner, SkillGlobe,
 } from "@arufolio/ui";
 
 /** Warna tiap tahap tema — urutan senja dari gelap ke terang. */
@@ -270,7 +270,7 @@ export default function ProfileHome() {
           description="Yang saya pakai sehari-hari untuk membangun aplikasi."
           action={<Button href="/skills" variant="link">Selengkapnya</Button>}
         />
-        <SkillOrbit groups={skills.groups} />
+        <SkillGlobe groups={skills.groups} />
       </section>
 
       {/* ═══════════════════════ KREDENSIAL ═══════════════════════

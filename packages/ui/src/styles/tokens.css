@@ -493,6 +493,122 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 }
 
 /* ------------------------------------------------------------------ *
+ * SkillGlobe — satu tata surya untuk keahlian (halaman depan profil)
+ *
+ * Enam kartu orbit yang sebentuk (semuanya 378px) terbaca sebagai
+ * pengulangan, dan halaman depan jadi kembar dengan /skills sehingga
+ * tautan "Selengkapnya" tidak memberi apa pun yang baru. Di sini satu
+ * globe memuat logo yang paling mewakili, lalu pil kategori jadi jalan
+ * ke rinciannya.
+ *
+ * Jari-jari lintasan adalah variabel supaya bisa mengecil di HP tanpa
+ * menyentuh JS. Satuannya WAJIB panjang (rem) — persen diresolusi
+ * terhadap induk berukuran 0 dan membuat ikon menumpuk di tengah.
+ * ------------------------------------------------------------------ */
+.globe-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 1.6rem; padding-block: 0.25rem;
+}
+.orbit-stage.globe {
+  --stage: 16rem;
+  --globe-r1: 3.4rem;
+  --globe-r2: 5.1rem;
+  --globe-r3: 6.4rem;
+}
+@media (min-width: 640px) {
+  .orbit-stage.globe {
+    --stage: 19rem;
+    --globe-r1: 4.1rem;
+    --globe-r2: 6.1rem;
+    --globe-r3: 8rem;
+  }
+}
+@media (min-width: 1024px) {
+  .orbit-stage.globe {
+    --stage: 23rem;
+    --globe-r1: 5rem;
+    --globe-r2: 7.5rem;
+    --globe-r3: 9.9rem;
+  }
+}
+/* Inti globe: mark Rchibnu, bukan ikon kategori */
+.globe-hub {
+  width: 4.5rem; height: 4.5rem;
+  background: color-mix(in srgb, var(--accent) 10%, var(--bg-elevated));
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 5%, transparent),
+              0 0 42px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+/* Wajah satelit sedikit lebih besar supaya logonya terbaca, dan
+   logonya tidak diredupkan (TechIcon default opacity-80) — di globe
+   latarnya sudah gelap, meredupkan lagi membuatnya tenggelam. */
+.globe .orbit-face { width: 2.7rem; height: 2.7rem; }
+.globe .orbit-face img { opacity: 1; }
+
+/* --- Orbit 3D -------------------------------------------------------
+   Orbit datar (sekadar memutar) terasa rata. Di sini bidang orbitnya
+   DIMIRINGKAN (`rotateX`) sehingga lintasan jadi elips dan ikon benar-
+   benar lewat di depan lalu di belakang inti — bukan cuma berputar di
+   satu bidang layar.
+
+   Tiga hal yang membuatnya bekerja:
+   1. `.globe-3d` memberi `perspective`, jadi sisi jauh tampak mengecil.
+   2. Bidang miring butuh `transform-style: preserve-3d` supaya kedalaman
+      anak-anaknya tidak diratakan (kalau tidak, efek 3D hilang).
+   3. Tiap ikon dan inti diberi `rotateX` berlawanan arah (`--tilt` negatif)
+      agar tetap tegak menghadap layar — kalau tidak, ikonnya ikut tergepeng.
+
+   Sudut `--tilt` gampang disetel: makin besar, makin "mendongak". */
+.globe-3d { perspective: 1200px; perspective-origin: 50% 50%; }
+.orbit-stage.globe {
+  --tilt: 55deg;
+  height: calc(var(--stage) * 0.74);
+  transform: rotateX(var(--tilt));
+  transform-style: preserve-3d;
+}
+/* Pembungkus satelit JUGA harus preserve-3d. Tanpa ini, kedalaman anaknya
+   diratakan ke bidang satelit yang sedang miring — akibatnya ikon ikut
+   tergepeng (terukur 42x13px) walau sudah diberi rotateX penyeimbang. */
+.globe .orbit-sat { transform-style: preserve-3d; }
+.globe .orbit-face {
+  transform: translate(-50%, -50%) rotate(calc(var(--dir) * -1 * var(--a)))
+             rotateX(calc(-1 * var(--tilt)));
+  animation-name: globe-spin-rev;
+}
+.globe .orbit-hub {
+  transform: translate(-50%, -50%) rotateX(calc(-1 * var(--tilt)));
+}
+@keyframes globe-spin-rev {
+  from { transform: translate(-50%, -50%) rotate(calc(var(--dir) * -1 * (var(--a) + 0deg))) rotateX(calc(-1 * var(--tilt))); }
+  to   { transform: translate(-50%, -50%) rotate(calc(var(--dir) * -1 * (var(--a) + 360deg))) rotateX(calc(-1 * var(--tilt))); }
+}
+/* Gerak dimatikan: ikon tetap tersusun rapi di bidang miringnya.
+   (Perlu ditulis ulang di sini karena selektor `.globe .orbit-face` lebih
+   spesifik daripada aturan reduced-motion umum di atas.) */
+@media (prefers-reduced-motion: reduce) {
+  .globe .orbit-sat, .globe .orbit-face { animation: none; }
+}
+
+/* Pil kategori — "isi" yang menaut ke rincian per kategori */
+.globe-pills {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 0.5rem; list-style: none; margin: 0; padding: 0; max-width: 46rem;
+}
+.globe-pill {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  padding: 0.5rem 0.85rem; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg-elevated);
+  font-size: 0.8125rem; color: var(--text);
+  transition: border-color 220ms var(--ease-out), transform 220ms var(--ease-out);
+}
+.globe-pill:hover { border-color: var(--border-strong); transform: translateY(-2px); }
+.globe-pill__count {
+  font-family: var(--font-mono); font-size: 0.6875rem;
+  color: var(--accent); opacity: 0.9;
+}
+.globe-note { margin: 0; text-align: center; font-size: 0.8125rem; color: var(--text-muted); }
+.globe-note a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+/* ------------------------------------------------------------------ *
  * Kartu profil — menyesuaikan diri pada LEBAR KARTU, bukan lebar layar.
  *
  * Kenapa: kartu ini duduk di kolom sempit (sekitar 430px) di halaman
