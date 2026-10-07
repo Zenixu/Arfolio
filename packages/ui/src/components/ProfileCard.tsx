@@ -6,10 +6,18 @@ import { SocialLinks, type Social } from "./SocialLinks";
 /**
  * Kartu profil — "kartu nama" personal di halaman Profile.
  *
+ * Perbaikan tata letak (versi sebelumnya terasa tidak rapi):
+ * — foto & keterangan sama-sama punya proporsi tetap, jadi tidak ada sisi
+ *   yang kosong menganga saat kolomnya melebar;
+ * — nama lengkap + jabatan + lokasi + status disusun berjenjang dengan
+ *   garis pemisah, bukan blok teks yang mengambang;
+ * — meta (usia/sekolah/jurusan/kelas) jadi kisi 2×2 dengan label kecil;
+ * — jejaring sosial dipisah di barisnya sendiri, rata bawah.
+ *
  * Foto bersifat OPSIONAL: kalau `photo` masih null, ditampilkan bingkai
- * kosong yang sudah didesain (inisial + catatan), bukan kotak rusak.
- * Begitu file foto ditambahkan ke /public dan path-nya diisi di data,
- * kartu langsung menampilkannya tanpa perubahan kode.
+ * yang sudah didesain (lambang + catatan), bukan kotak rusak. Begitu file
+ * foto ditambahkan ke /public dan path-nya diisi di data, kartu langsung
+ * menampilkannya tanpa perubahan kode.
  */
 export function ProfileCard({
   name, initials, role, location, status, photo, socials, meta, className,
@@ -25,11 +33,11 @@ export function ProfileCard({
   className?: string;
 }) {
   return (
-    <article className={cn("card spotlight overflow-hidden", className)}>
-      <div className="grid gap-0 sm:grid-cols-[minmax(0,240px)_1fr]">
+    <article className={cn("card spotlight profile-card overflow-hidden", className)}>
+      <div className="profile-card__grid">
         {/* --- Foto --- */}
-        <div className="relative border-b border-[var(--border)] bg-[var(--bg-sunken)] sm:border-b-0 sm:border-r">
-          <div className="portrait-frame relative aspect-[4/5] w-full overflow-hidden sm:h-full sm:aspect-auto">
+        <div className="profile-card__photo relative overflow-hidden border-b border-[var(--border)] bg-[var(--bg-sunken)]">
+          <div className="portrait-frame relative h-full w-full overflow-hidden">
             {photo ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -50,7 +58,7 @@ export function ProfileCard({
                 }}
               >
                 <div className="flex flex-col items-center gap-3 px-6 text-center">
-                  <RchibnuMark size={64} />
+                  <RchibnuMark size={56} />
                   <span className="mono-label opacity-70">foto menyusul</span>
                 </div>
               </div>
@@ -65,49 +73,54 @@ export function ProfileCard({
         </div>
 
         {/* --- Keterangan --- */}
-        <div className="flex flex-col p-6 sm:p-7">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <h3 className="h3">{name}</h3>
-              {role && (
-                <p className="mt-1.5 inline-flex items-center gap-2 text-sm text-[var(--accent)]">
-                  <Sparkle size={13} /> {role}
-                </p>
+        <div className="flex min-w-0 flex-col p-6 sm:p-7">
+          <header className="min-w-0">
+            <h3 className="h3 text-balance">{name}</h3>
+          </header>
+
+          {role && (
+            <p className="mt-2 inline-flex items-center gap-2 text-sm text-[var(--accent)]">
+              <Sparkle size={13} className="shrink-0" /> {role}
+            </p>
+          )}
+
+          {/* Lokasi & status — berjenjang, ada garis pemisah */}
+          {(location || status) && (
+            <dl className="mt-5 space-y-3 border-t border-[var(--border)] pt-5 text-sm">
+              {location && (
+                <div className="flex items-start gap-2.5">
+                  <MapPin size={15} className="mt-0.5 shrink-0 text-[var(--text-muted)]" />
+                  <dt className="sr-only">Lokasi</dt>
+                  <dd className="text-[var(--text-muted)]">{location}</dd>
+                </div>
               )}
-            </div>
-          </div>
+              {status && (
+                <div className="flex items-start gap-2.5">
+                  <Briefcase size={15} className="mt-0.5 shrink-0 text-[var(--text-muted)]" />
+                  <dt className="sr-only">Status</dt>
+                  <dd className="text-[var(--text-muted)]">{status}</dd>
+                </div>
+              )}
+            </dl>
+          )}
 
-          <dl className="mt-6 space-y-3 text-sm">
-            {location && (
-              <div className="flex items-center gap-2.5 text-[var(--text-muted)]">
-                <MapPin size={15} className="shrink-0 text-[var(--text-muted)]" />
-                <dt className="sr-only">Lokasi</dt>
-                <dd>{location}</dd>
-              </div>
-            )}
-            {status && (
-              <div className="flex items-center gap-2.5 text-[var(--text-muted)]">
-                <Briefcase size={15} className="shrink-0" />
-                <dt className="sr-only">Status</dt>
-                <dd>{status}</dd>
-              </div>
-            )}
-          </dl>
-
+          {/* Meta 2×2 */}
           {meta && meta.length > 0 && (
-            <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-[var(--border)] pt-5">
+            <dl className="mt-5 grid grid-cols-2 gap-x-5 gap-y-4 border-t border-[var(--border)] pt-5">
               {meta.map((m) => (
-                <div key={m.label}>
+                <div key={m.label} className="min-w-0">
                   <dt className="mono-label">{m.label}</dt>
-                  <dd className="mt-1 text-sm">{m.value}</dd>
+                  <dd className="mt-1 text-sm leading-snug break-words">{m.value}</dd>
                 </div>
               ))}
             </dl>
           )}
 
+          {/* Jejaring sosial — barisnya sendiri, rata bawah */}
           {socials && socials.length > 0 && (
-            <div className="mt-auto pt-7">
-              <SocialLinks items={socials} />
+            <div className="mt-auto flex items-center justify-between gap-4 border-t border-[var(--border)] pt-5">
+              <span className="mono-label">Jejaring</span>
+              <SocialLinks items={socials} size="sm" />
             </div>
           )}
         </div>

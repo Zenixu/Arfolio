@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { rchibnu } from "@arufolio/data";
 import {
-  SectionHeading, Reveal, SpotlightCard, TechList, Marquee, TechStack, CountUp,
+  SectionHeading, Reveal, SkillOrbit, Marquee, TechStack, CountUp,
 } from "@arufolio/ui";
 
 export const metadata: Metadata = {
@@ -59,19 +59,7 @@ export default function SkillsPage() {
           </div>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {skills.groups.map((g, i) => (
-            <Reveal key={g.name} delay={i * 50} className="h-full">
-              <SpotlightCard className="card h-full p-6">
-                <div className="flex items-center justify-between gap-3">
-                  <h2 className="mono-label">{g.name}</h2>
-                  <span className="index-num">{String(i + 1).padStart(2, "0")}</span>
-                </div>
-                <TechList items={g.items} className="mt-6 grid-cols-1 sm:grid-cols-1" />
-              </SpotlightCard>
-            </Reveal>
-          ))}
-        </div>
+        <SkillOrbit groups={skills.groups} />
       </section>
     </>
   );

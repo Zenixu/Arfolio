@@ -29,6 +29,12 @@ export const ArrowUpRight = ({ size = 14, ...p }: P) => (
 export const ArrowDown = ({ size = 16, ...p }: P) => (
   <svg {...base(size)} {...stroke} {...p}><path d="M12 5v14" /><path d="m6 13 6 6 6-6" /></svg>
 );
+export const ChevronLeft = ({ size = 18, ...p }: P) => (
+  <svg {...base(size)} {...stroke} {...p}><path d="m15 5-7 7 7 7" /></svg>
+);
+export const ChevronRight = ({ size = 18, ...p }: P) => (
+  <svg {...base(size)} {...stroke} {...p}><path d="m9 5 7 7-7 7" /></svg>
+);
 export const Sun = ({ size = 16, ...p }: P) => (
   <svg {...base(size)} {...stroke} {...p}>
     <circle cx="12" cy="12" r="4" />
@@ -81,6 +87,54 @@ export const Quote = ({ size = 20, ...p }: P) => (
   <svg {...base(size)} fill="currentColor" {...p}><path d="M9.5 5C6.5 6.5 5 9 5 12v7h6v-7H8.2c0-1.8.8-3.2 2.4-4.2zM19 5c-3 1.5-4.5 4-4.5 7v7h6v-7h-2.8c0-1.8.8-3.2 2.4-4.2z" /></svg>
 );
 
+/* --------------------------- Ikon konsep -------------------------------
+   Dipakai untuk keahlian yang TIDAK punya logo resmi (OOP, SOLID, RBAC,
+   Automation, …). Sebelumnya item seperti ini tampil sebagai kotak berisi
+   dua huruf pertama ("oo", "pr", "rb") — terlihat seperti teks rusak.
+   Sekarang masing-masing punya ikon yang benar-benar menggambarkan maksudnya.
+   ---------------------------------------------------------------------- */
+export const Cube = ({ size = 16, ...p }: P) => (
+  <svg {...base(size)} {...stroke} {...p}>
+    <path d="M12 2.6 20.5 7v10L12 21.4 3.5 17V7z" />
+    <path d="M3.5 7 12 11.6 20.5 7M12 11.6v9.8" />
+  </svg>
+);
+export const Kanban = ({ size = 16, ...p }: P) => (
+  <svg {...base(size)} {...stroke} {...p}>
+    <rect x="3" y="3" width="18" height="18" rx="2.5" />
+    <path d="M8 7v8M12 7v5M16 7v10" />
+  </svg>
+);
+export const Key = ({ size = 16, ...p }: P) => (
+  <svg {...base(size)} {...stroke} {...p}>
+    <circle cx="8" cy="15.5" r="4" />
+    <path d="m11 12.5 7.5-7.5M17 6l2 2M14.5 8.5l2 2" />
+  </svg>
+);
+export const Network = ({ size = 16, ...p }: P) => (
+  <svg {...base(size)} {...stroke} {...p}>
+    <circle cx="12" cy="4.6" r="2.4" />
+    <circle cx="4.8" cy="18.4" r="2.4" />
+    <circle cx="19.2" cy="18.4" r="2.4" />
+    <path d="M12 7v3.4M10.9 9.8 6 16.3M13.1 9.8 18 16.3M7.2 18.4h9.6" />
+  </svg>
+);
+export const Cpu = ({ size = 16, ...p }: P) => (
+  <svg {...base(size)} {...stroke} {...p}>
+    <rect x="6" y="6" width="12" height="12" rx="2.5" />
+    <rect x="9.6" y="9.6" width="4.8" height="4.8" rx="1" />
+    <path d="M9.5 3v3M14.5 3v3M9.5 18v3M14.5 18v3M3 9.5h3M3 14.5h3M18 9.5h3M18 14.5h3" />
+  </svg>
+);
+export const Workflow = ({ size = 16, ...p }: P) => (
+  <svg {...base(size)} {...stroke} {...p}>
+    <rect x="3" y="3" width="7" height="7" rx="2" />
+    <rect x="14" y="14" width="7" height="7" rx="2" />
+    <path d="M6.5 10v3.5a3 3 0 0 0 3 3H14" />
+    <path d="m11.8 14.4 2.4 2.1-2.4 2.1" />
+  </svg>
+);
+
 /* ------------------------------ Brand icons ------------------------------ */
 
 export const GitHub = ({ size = 18, ...p }: P) => (
@@ -113,4 +167,31 @@ export const WhatsApp = ({ size = 18, ...p }: P) => (
 
 export const Globe = ({ size = 16, ...p }: P) => (
   <svg {...base(size)} {...stroke} {...p}><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3c-2.5 2.6-2.5 15.4 0 18" /></svg>
+);
+
+/* --------------------------- Ikon kategori ----------------------------- */
+export const Server = ({ size = 16, ...p }: P) => (
+  <svg {...base(size)} {...stroke} {...p}>
+    <rect x="3" y="4" width="18" height="7" rx="2" />
+    <rect x="3" y="13" width="18" height="7" rx="2" />
+    <path d="M7 7.5h.01M7 16.5h.01" />
+  </svg>
+);
+export const Database = ({ size = 16, ...p }: P) => (
+  <svg {...base(size)} {...stroke} {...p}>
+    <ellipse cx="12" cy="6" rx="8" ry="3.2" />
+    <path d="M4 6v12c0 1.8 3.6 3.2 8 3.2s8-1.4 8-3.2V6" />
+    <path d="M4 12c0 1.8 3.6 3.2 8 3.2s8-1.4 8-3.2" />
+  </svg>
+);
+export const Smartphone = ({ size = 16, ...p }: P) => (
+  <svg {...base(size)} {...stroke} {...p}>
+    <rect x="6" y="2.5" width="12" height="19" rx="3" />
+    <path d="M10.5 18.5h3" />
+  </svg>
+);
+export const Wrench = ({ size = 16, ...p }: P) => (
+  <svg {...base(size)} {...stroke} {...p}>
+    <path d="M15.5 3.5a5 5 0 0 0-6.2 6.2L3.6 15.4a2 2 0 0 0 0 2.8l2.2 2.2a2 2 0 0 0 2.8 0l5.7-5.7a5 5 0 0 0 6.2-6.2l-3 3-2.8-2.8z" />
+  </svg>
 );

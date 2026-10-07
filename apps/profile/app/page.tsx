@@ -1,9 +1,9 @@
-import { rchibnu, featuredCertificates, aruthtale } from "@arufolio/data";
+import { rchibnu, featuredCertificates, aruthtale, certificates, courses, awards } from "@arufolio/data";
 import {
   SectionHeading, Reveal, Button, Tag, ProfileCard, SocialLinks,
-  SpotlightCard, TechList, Marquee, TechStack, CountUp,
-  GitHub, Instagram, Mail, ArrowUpRight, Trophy, Briefcase, MapPin, Quote,
-  Parallax, TextReveal, RchibnuMark, VideoBanner,
+  SpotlightCard, Marquee, TechStack, CountUp, CertificateDeck,
+  GitHub, Instagram, Mail, Trophy, Briefcase, MapPin, Quote,
+  Parallax, TextReveal, RchibnuMark, VideoBanner, SkillOrbit,
 } from "@arufolio/ui";
 
 /** Warna tiap tahap tema — urutan senja dari gelap ke terang. */
@@ -28,7 +28,7 @@ export default function ProfileHome() {
 
   const topSkills = skills.groups.flatMap((g) => g.items).slice(0, 18);
   const current = experience.find((e) => e.current);
-  const awards = featuredCertificates.filter((c) => c.type === "award").length;
+  const awardCount = featuredCertificates.filter((c) => c.type === "award").length;
 
   return (
     <>
@@ -54,7 +54,7 @@ export default function ProfileHome() {
 
         <div className="container relative grid-12 items-center">
           {/* Kiri: sapaan */}
-          <div className="col-span-12 lg:col-span-7">
+          <div className="col-span-12 lg:col-span-6">
             <Reveal>
               <p className="mono-label mb-6 inline-flex items-center gap-2">
                 <span className="relative flex h-1.5 w-1.5">
@@ -98,7 +98,7 @@ export default function ProfileHome() {
           </div>
 
           {/* Kanan: KARTU PROFIL — tempat foto kamu nanti */}
-          <div className="col-span-12 mt-12 lg:col-span-5 lg:mt-0">
+          <div className="col-span-12 mt-12 lg:col-span-6 lg:mt-0">
             <Reveal variant="scale" delay={160}>
               <ProfileCard
                 name={identity.fullName}
@@ -174,13 +174,13 @@ export default function ProfileHome() {
               <p className="mt-2 text-sm text-[var(--text-muted)]">{education.school} · {education.major}</p>
             </SpotlightCard>
 
-            {awards > 0 && (
+            {awardCount > 0 && (
               <SpotlightCard className="card p-6">
                 <p className="mono-label inline-flex items-center gap-2">
                   <Trophy size={12} /> Penghargaan
                 </p>
                 <p className="font-mono text-[clamp(1.6rem,3vw,2rem)] font-medium leading-none tracking-tight mt-3">
-                  <CountUp to={awards} />
+                  <CountUp to={awardCount} />
                 </p>
                 <p className="mt-2 text-sm text-[var(--text-muted)]">
                   Termasuk Juara II STEAM Fair UNS 2024 (tingkat internasional).
@@ -270,56 +270,24 @@ export default function ProfileHome() {
           description="Yang saya pakai sehari-hari untuk membangun aplikasi."
           action={<Button href="/skills" variant="link">Selengkapnya</Button>}
         />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {skills.groups.map((g, i) => (
-            <Reveal key={g.name} delay={i * 50} className="h-full">
-              <SpotlightCard className="card h-full p-6">
-                <div className="flex items-center justify-between gap-3">
-                  <h3 className="mono-label">{g.name}</h3>
-                  <span className="index-num">{String(i + 1).padStart(2, "0")}</span>
-                </div>
-                <TechList items={g.items} className="mt-5 grid-cols-1" />
-              </SpotlightCard>
-            </Reveal>
-          ))}
-        </div>
+        <SkillOrbit groups={skills.groups} />
       </section>
 
-      {/* ═══════════════════════ KREDENSIAL ═══════════════════════ */}
+      {/* ═══════════════════════ KREDENSIAL ═══════════════════════
+          Sertifikat ditampilkan sebagai KIPAS KARTU (CertificateDeck),
+          bukan daftar baris: satu kartu berdiri tegak di tengah supaya isi
+          sertifikat benar-benar terlihat, kartu tetangga miring di tepi
+          sebagai penanda masih ada yang lain. Panah kiri/kanan, titik
+          posisi, dan tombol ← → di keyboard untuk berpindah. */}
       <section className="section container">
         <SectionHeading
           index="04"
           eyebrow="Kredensial"
-          title="Sertifikat & penghargaan"
-          description={`${featuredCertificates.length} kredensial unggulan, dipilih dari seluruh sertifikat & penghargaan.`}
+          title={<>Sertifikat & <span className="afterglow-gradient">penghargaan</span></>}
+          description={`${certificates.length} kredensial — ${courses.length} sertifikasi kursus dan ${awards.length} penghargaan. Geser kipasnya untuk melihat semuanya.`}
           action={<Button href="/certificates" variant="link">Semua sertifikat</Button>}
         />
-        <ul className="divide-y divide-[var(--border)] border-y border-[var(--border)]">
-          {featuredCertificates.slice(0, 5).map((c, i) => (
-            <Reveal key={c.id} delay={i * 45} as="li">
-              <a
-                href={c.verifyUrl ?? c.image ?? c.file}
-                target="_blank"
-                rel="noreferrer"
-                className="group flex flex-wrap items-center justify-between gap-3 py-5 transition-colors hover:text-[var(--accent)]"
-              >
-                <div className="flex items-center gap-4">
-                  <span className="index-num">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="text-sm">{c.title}</span>
-                  {c.type === "award" && (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-[var(--accent-soft)] px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-[var(--accent)]">
-                      <Trophy size={10} /> Juara
-                    </span>
-                  )}
-                </div>
-                <span className="mono-label inline-flex items-center gap-2">
-                  {c.issuer} · {c.date.slice(0, 4)}
-                  <ArrowUpRight size={12} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                </span>
-              </a>
-            </Reveal>
-          ))}
-        </ul>
+        <CertificateDeck items={certificates} />
       </section>
 
       {/* ═══════════════════════ CTA ═══════════════════════ */}

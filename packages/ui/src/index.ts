@@ -22,7 +22,9 @@ export { Footer, type SocialLink } from "./components/Footer";
 export { ProjectCard } from "./components/ProjectCard";
 export { LabCard } from "./components/LabCard";
 export { CertificateCard } from "./components/CertificateCard";
+export { CertificateDeck } from "./components/CertificateDeck";
 export { ProfileCard } from "./components/ProfileCard";
+export { SkillOrbit } from "./components/SkillOrbit";
 export { SocialLinks, TechList, type Social } from "./components/SocialLinks";
 
 /* Gerak & interaksi */

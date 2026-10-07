@@ -1,5 +1,7 @@
+import type { ComponentType } from "react";
 import { cn } from "../lib/cn";
 import { TechIcon, hasTechIcon } from "./TechIcon";
+import { Cube, Kanban, Key, Network, Cpu, Workflow } from "./Icon";
 
 export type Social = { label: string; href: string; icon: React.ReactNode };
 
@@ -36,28 +38,55 @@ export function SocialLinks({
   );
 }
 
+/* ------------------------------------------------------------------ *
+ * Ikon untuk keahlian yang TIDAK punya logo resmi.
+ *
+ * PENTING: sebelumnya item seperti "OOP" atau "RBAC & Auth" dirender
+ * sebagai kotak berisi dua huruf pertama — hasilnya "oo", "rb", "pr",
+ * "ma" yang terbaca seperti teks rusak. Sekarang tiap konsep punya
+ * ikon yang benar-benar mewakilinya.
+ * ------------------------------------------------------------------ */
+const CONCEPT_ICONS: Record<string, ComponentType<{ size?: number; className?: string }>> = {
+  "oop": Cube,
+  "prinsip solid": Cube,
+  "manajemen proyek": Kanban,
+  "rbac & auth": Key,
+  "rbac": Key,
+  "computational thinking": Network,
+  "ai": Cpu,
+  "automation": Workflow,
+};
+
+const conceptIcon = (name: string) => CONCEPT_ICONS[name.trim().toLowerCase()] ?? null;
+
 /**
  * Daftar teknologi dengan logo + nama — dipakai untuk grid "stack".
+ *
+ * Urutan pencarian ikon: logo resmi (Simple Icons) → ikon konsep → tidak
+ * ada ikon sama sekali (teks saja, TIDAK ada kotak inisial).
  */
 export function TechList({
   items, className,
 }: { items: string[]; className?: string }) {
   return (
     <ul className={cn("grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-3", className)}>
-      {items.map((t) => (
-        <li key={t} className="flex items-center gap-2.5">
-          {hasTechIcon(t) ? (
-            <TechIcon name={t} size={20} />
-          ) : (
-            <span className="grid h-5 w-5 place-items-center rounded-[5px] border border-[var(--border)] font-mono text-[9px] text-[var(--text-muted)]">
-              {t.slice(0, 2).toLowerCase()}
+      {items.map((t) => {
+        const Concept = conceptIcon(t);
+        return (
+          <li key={t} className="group flex items-center gap-2.5">
+            {hasTechIcon(t) ? (
+              <TechIcon name={t} size={20} />
+            ) : Concept ? (
+              <span className="grid h-5 w-5 shrink-0 place-items-center text-[var(--text-muted)] transition-colors duration-200 group-hover:text-[var(--accent)]">
+                <Concept size={18} />
+              </span>
+            ) : null}
+            <span className="text-sm text-[var(--text-muted)] transition-colors group-hover:text-[var(--text)]">
+              {t}
             </span>
-          )}
-          <span className="text-sm text-[var(--text-muted)] transition-colors hover:text-[var(--text)]">
-            {t}
-          </span>
-        </li>
-      ))}
+          </li>
+        );
+      })}
     </ul>
   );
 }

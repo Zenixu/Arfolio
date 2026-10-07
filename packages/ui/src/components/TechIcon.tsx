@@ -40,7 +40,7 @@ const SLUG: Record<string, string> = {
   "composer": "composer", "postman": "postman", "eslint": "eslint",
   "prettier": "prettier", "kaggle": "kaggle", "deno": "deno",
   // AI
-  "ai": "googlegemini", "gemini": "googlegemini", "openai": "googlegemini",
+  "gemini": "googlegemini", "openai": "googlegemini",
   "anthropic": "anthropic",
 };
 
