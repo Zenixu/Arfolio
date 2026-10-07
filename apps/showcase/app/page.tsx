@@ -2,11 +2,11 @@ import {
   featuredProjects, projects, lab, aruthtale, certificates, github,
 } from "@arufolio/data";
 import {
-  ProjectCard, SectionHeading, Reveal, Button,
+  SectionHeading, Reveal, Button,
   CountUp, SpotlightCard, TechStack, ArrowRight, Quote, Star,
-  Parallax, TextReveal, ScrollTicker, AruthtaleMark, VideoBanner,
+  Parallax, TextReveal, ScrollSweep, AruthtaleMark, VideoBanner,
   Code, Layers, Shield, Globe, Sparkle, ArrowUpRight, LearningVault,
-  CrossLink, Ouroboros,
+  CrossLink, Ouroboros, WorkArchive,
 } from "@arufolio/ui";
 
 /** Teknologi untuk legenda — diambil dari tag proyek + daftar inti. */
@@ -208,35 +208,38 @@ export default function HomePage() {
           <span className="mono-label">Manifesto — aruthtale</span>
         </div>
 
-        <ScrollTicker baseSpeed={0.32}>
+        <ScrollSweep>
           <div className="flex items-center gap-10 whitespace-nowrap sm:gap-14">
-            {[0, 1].map((k) => (
-              <span key={k} className="inline-flex items-center gap-10 sm:gap-14">
-                <span className="manifesto__word">Work, not words</span>
+            {/* SATU salinan (≈3371px) sudah lebih lebar dari layar: saat
+                berada di tengah sapuan, layar tertutup penuh. Fase "masuk
+                dari kiri" & "keluar ke kanan" memang memperlihatkan sisi
+                yang belum/tidak lagi terisi — itulah efek sapuannya. Satu
+                salinan juga membuat geraknya tidak melesat. */}
+            <span className="inline-flex items-center gap-10 sm:gap-14">
+              <span className="manifesto__word">Work, not words</span>
 
-                <span className="manifesto__proof">
-                  <b>{projects.length}</b> real projects <span className="manifesto__sep">◆</span>
-                </span>
-
-                <span className="manifesto__word manifesto__word--accent">aruthtale</span>
-
-                <span className="manifesto__proof">
-                  <b>{lab.length}</b> experiments <span className="manifesto__sep">◆</span>
-                </span>
-
-                <span className="manifesto__word">Portfolio · SaaS · POS · Web</span>
-
-                <span className="manifesto__proof">
-                  <b>{github.commits}</b> commits <span className="manifesto__sep">◆</span>
-                </span>
-
-                <span className="manifesto__word manifesto__word--accent">Since 2024</span>
-
-                <AruthtaleMark size={36} className="shrink-0" />
+              <span className="manifesto__proof">
+                <b>{projects.length}</b> real projects <span className="manifesto__sep">◆</span>
               </span>
-            ))}
+
+              <span className="manifesto__word manifesto__word--accent">aruthtale</span>
+
+              <span className="manifesto__proof">
+                <b>{lab.length}</b> experiments <span className="manifesto__sep">◆</span>
+              </span>
+
+              <span className="manifesto__word">Portfolio · SaaS · POS · Web</span>
+
+              <span className="manifesto__proof">
+                <b>{github.commits}</b> commits <span className="manifesto__sep">◆</span>
+              </span>
+
+              <span className="manifesto__word manifesto__word--accent">Since 2024</span>
+
+              <AruthtaleMark size={36} className="shrink-0" />
+            </span>
           </div>
-        </ScrollTicker>
+        </ScrollSweep>
       </section>
 
       {/* ═══════════════════════ FILOSOFI ═══════════════════════ */}
@@ -293,20 +296,10 @@ export default function HomePage() {
           action={<Button href="/work" variant="link">Semua karya</Button>}
         />
 
-        {/* Di HP kartu ini jadi rel yang digeser ke samping (snap per kartu);
-            di layar lebar kembali menjadi grid 2–3 kolom. */}
-        <div className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.16em] text-[var(--text-muted)] md:hidden">
-          <ArrowRight size={12} /> Geser ke samping
-        </div>
-        <div className="rail-hint">
-          <div className="snap-rail">
-            {featuredProjects.slice(0, 6).map((p, i) => (
-              <Reveal key={p.slug} delay={i * 70} className="h-full">
-                <ProjectCard project={p} index={i} />
-              </Reveal>
-            ))}
-          </div>
-        </div>
+        {/* Daftar arsip ber-bukti: tiap baris menampilkan peran + angka nyata
+            (yang sebelumnya ada di data tapi tidak dipakai), jadi bagian ini
+            menepati janjinya sendiri — bukan cuma pajangan kartu. */}
+        <WorkArchive projects={featuredProjects.slice(0, 6)} />
       </section>
 
       {/* ═══════════════════════ LAYANAN ═══════════════════════ */}

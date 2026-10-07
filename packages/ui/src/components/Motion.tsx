@@ -364,4 +364,78 @@ export function ScrollTicker({
   );
 }
 
+/* ------------------------------------------------------------------ *
+ * ScrollSweep — pita yang MENYAPU: masuk dari kiri saat bagiannya
+ * muncul, lalu melaju ke kanan seiring gulir (bukan loop, bukan ikut
+ * gulir linier). Progres gulir dipetakan ke satu kali lintasan penuh.
+ *
+ * Dua hal yang membuatnya enak dilihat:
+ *  1. Isi digandakan beberapa kali (di pemanggil) sehingga LEBIH lebar
+ *     dari layar. Dengan begitu, selama pita terlihat, layar selalu
+ *     tertutup isi — tidak pernah ada celah kosong di tengah.
+ *  2. Ada MARGIN ekstra (`--sweep-margin`, kelipatan tinggi layar) di
+ *     luar pandangan. Progres baru mulai/habis di luar margin itu, jadi
+ *     fase "pita masih di luar layar" terjadi saat bagiannya memang
+ *     belum/kembali tak terlihat. Tanpa margin ini, pita melintas
+ *     terlalu cepat dan sisi kosongnya terlihat lama.
+ * ------------------------------------------------------------------ */
+export function ScrollSweep({
+  children, className, margin = 0,
+}: { children: ReactNode; className?: string; margin?: number }) {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    const inner = innerRef.current;
+    if (!wrap || !inner) return;
+
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    let raf = 0;
+
+    const update = () => {
+      raf = 0;
+      const row = inner.firstElementChild as HTMLElement | null;
+      const W = row ? row.scrollWidth : inner.scrollWidth;
+      const vw = window.innerWidth;
+
+      if (reduce) {
+        // Tanpa gerak: tahan di posisi yang menutup layar penuh.
+        inner.style.transform = "translate3d(0,0,0)";
+        return;
+      }
+
+      const r = wrap.getBoundingClientRect();
+      const vh = window.innerHeight;
+      const E = vh * margin;
+      const total = vh + r.height + 2 * E;
+      // p=0 saat pita masih E di bawah layar, p=1 saat sudah E di atasnya.
+      const p = total > 0 ? Math.max(0, Math.min(1, (vh + E - r.top) / total)) : 0;
+
+      // Tepi kanan tepat di tepi kiri layar (masuk) → tepi kiri tepat di
+      // tepi kanan layar (keluar).
+      const from = -W;
+      const to = vw;
+      const x = from + (to - from) * p;
+      inner.style.transform = `translate3d(${x.toFixed(1)}px, 0, 0)`;
+    };
+
+    update();
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [margin]);
+
+  return (
+    <div ref={wrapRef} className={cn("overflow-hidden", className)} aria-hidden="true">
+      <div ref={innerRef} className="will-change-transform">{children}</div>
+    </div>
+  );
+}
+
 export { useInView };

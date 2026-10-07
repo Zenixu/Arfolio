@@ -1474,3 +1474,96 @@ a.vault-item:hover .vault-item__title { color: var(--accent); }
 @media (prefers-reduced-motion: reduce) {
   .ouroboros__orbit, .ouroboros__face { animation: none; }
 }
+
+/* ========================= Work archive ==========================
+   "Karya terpilih" sebagai daftar arsip, bukan grid kartu. Tiap baris
+   menampilkan peran + angka nyata (bukti), dan thumbnail muncul mengikuti
+   kursor saat baris disorot — jadi mata mendapat gambar tanpa harus
+   menatap lima kartu seragam. */
+.work-archive { position: relative; border-top: 1px solid var(--border); }
+
+.work-archive__row {
+  position: relative; z-index: 1;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center; gap: 1.25rem;
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--border);
+  transition: padding-inline var(--ease-out) .35s, border-color .35s;
+}
+.work-archive__row:hover { border-color: var(--border-strong); }
+/* Geser sedikit ke kanan saat disorot — memberi kesan "terbuka". */
+@media (hover: hover) {
+  .work-archive__row:hover { padding-inline: 1rem; }
+}
+
+.work-archive__idx {
+  font-family: var(--font-mono); font-size: .75rem; letter-spacing: .1em;
+  color: var(--text-muted); font-variant-numeric: tabular-nums;
+}
+.work-archive__body { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
+.work-archive__title {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.35rem, 2.6vw, 2.1rem); letter-spacing: -.02em;
+  color: var(--text); transition: color .3s var(--ease-out);
+}
+.work-archive__row:hover .work-archive__title { color: var(--accent); }
+
+.work-archive__meta {
+  display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .75rem;
+  font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.work-archive__role { color: var(--text-muted); }
+/* Angka nyata: diberi kotak halus supaya terbaca sebagai "bukti", bukan label. */
+.work-archive__metric {
+  display: inline-flex; align-items: center; gap: .35rem;
+  padding: .18rem .5rem; border-radius: 999px;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  color: var(--text);
+}
+.work-archive__year {
+  font-family: var(--font-mono); font-size: .8125rem; color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.work-archive__arrow {
+  color: var(--text-muted); transition: transform .3s var(--ease-out), color .3s var(--ease-out);
+}
+.work-archive__row:hover .work-archive__arrow {
+  color: var(--accent); transform: translate(3px, -3px);
+}
+
+/* Thumbnail mengambang: semua gambar ditumpuk di titik kursor, hanya satu
+   yang menyala. Di HP tidak ada hover → disembunyikan, diganti thumb inline. */
+.work-archive__preview {
+  position: absolute; left: 0; top: 0; z-index: 2;
+  pointer-events: none; opacity: 0;
+  transition: opacity .25s var(--ease-out);
+  transform: translate3d(-9999px, -9999px, 0);
+}
+.work-archive:hover .work-archive__preview { opacity: 1; }
+.work-archive__shot {
+  position: absolute; left: 0; top: 0;
+  width: 15rem; height: 9.5rem; border-radius: var(--radius-lg, 12px);
+  overflow: hidden; border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-lift);
+  transform: translate(-50%, -50%) scale(.92);
+  opacity: 0; transition: opacity .28s var(--ease-out), transform .28s var(--ease-out);
+}
+.work-archive__shot.is-active { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+.work-archive__inline-thumb { display: none; }
+
+/* HP: tidak ada hover → pratinjau mengambang dimatikan, thumbnail tampil
+   inline di tiap baris supaya gambarnya tetap terlihat. */
+@media (max-width: 767px) {
+  .work-archive__preview { display: none; }
+  .work-archive__row { grid-template-columns: auto 1fr auto; gap: .9rem; }
+  .work-archive__inline-thumb {
+    display: block; grid-row: span 2;
+    width: 4.5rem; height: 4.5rem; border-radius: 10px;
+    overflow: hidden; border: 1px solid var(--border);
+  }
+  .work-archive__arrow { display: none; }
+}

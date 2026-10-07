@@ -29,6 +29,7 @@ export { CrossLink } from "./components/CrossLink";
 export { SkillOrbit } from "./components/SkillOrbit";
 export { SkillGlobe } from "./components/SkillGlobe";
 export { Ouroboros } from "./components/Ouroboros";
+export { WorkArchive } from "./components/WorkArchive";
 export { LearningVault } from "./components/LearningVault";
 export { GitHubHeatmap } from "./components/GitHubHeatmap";
 export { SocialLinks, TechList, type Social } from "./components/SocialLinks";
@@ -37,5 +38,5 @@ export { SocialLinks, TechList, type Social } from "./components/SocialLinks";
 export {
   SpotlightCard, ScrollProgress, CursorDot, Marquee,
   CountUp, TiltCard, SkillBar, useInView, useScrollY,
-  Parallax, TextReveal, StickyStack, ScrollTicker,
+  Parallax, TextReveal, StickyStack, ScrollTicker, ScrollSweep,
 } from "./components/Motion";
