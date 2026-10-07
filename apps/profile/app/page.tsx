@@ -54,7 +54,7 @@ export default function ProfileHome() {
 
         <div className="container relative grid-12 items-center">
           {/* Kiri: sapaan */}
-          <div className="col-span-12 lg:col-span-6">
+          <div className="col-span-12 lg:col-span-5">
             <Reveal>
               <p className="mono-label mb-6 inline-flex items-center gap-2">
                 <span className="relative flex h-1.5 w-1.5">
@@ -98,7 +98,7 @@ export default function ProfileHome() {
           </div>
 
           {/* Kanan: KARTU PROFIL — tempat foto kamu nanti */}
-          <div className="col-span-12 mt-12 lg:col-span-6 lg:mt-0">
+          <div className="col-span-12 mt-12 lg:col-span-7 lg:mt-0">
             <Reveal variant="scale" delay={160}>
               <ProfileCard
                 name={identity.fullName}

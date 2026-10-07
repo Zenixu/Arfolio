@@ -623,7 +623,7 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 .profile-card__photo > * { height: 100%; }
 
 @container (min-width: 27rem) {
-  .profile-card__grid { grid-template-columns: clamp(10rem, 42%, 13.75rem) minmax(0, 1fr); }
+  .profile-card__grid { grid-template-columns: clamp(11rem, 46%, 16rem) minmax(0, 1fr); }
   .profile-card__photo {
     aspect-ratio: auto; height: 100%; min-height: 17rem;
     border-bottom: 0; border-right: 1px solid var(--border);
