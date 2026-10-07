@@ -6,14 +6,22 @@ import {
   CountUp, SpotlightCard, TechStack, ArrowRight, Quote, Star,
   Parallax, TextReveal, ScrollTicker, AruthtaleMark, VideoBanner,
   Code, Layers, Shield, Globe, Sparkle, ArrowUpRight, LearningVault,
-  CrossLink,
+  CrossLink, Ouroboros,
 } from "@arufolio/ui";
 
-/** Teknologi untuk marquee — diambil dari tag proyek + daftar inti. */
+/** Teknologi untuk legenda — diambil dari tag proyek + daftar inti. */
 const MARQUEE = [
   "TypeScript", "React 19", "Next.js", "Laravel", "Node.js", "PostgreSQL",
   "Tailwind CSS v4", "Supabase", "Capacitor", "Vite", "Flutter", "PHP",
   "MySQL", "Firebase", "Docker", "Git", "Figma", "Python",
+];
+
+/** 10 logo terkuat untuk cincin ouroboros (sisanya tetap ada di legenda).
+ *  Dipilih supaya mewakili tiap lapis: bahasa, frontend, backend, data,
+ *  mobile, dan tools. Cincin dengan 18 ikon akan terlalu besar & padat. */
+const OUROBOROS_CORE = [
+  "TypeScript", "React 19", "Next.js", "Laravel", "Node.js",
+  "PostgreSQL", "Flutter", "Docker", "Figma", "Python",
 ];
 
 /** Ikon per layanan — supaya sel tidak terasa kosong. */
@@ -144,31 +152,45 @@ export default function HomePage() {
           </Reveal>
         </div>
 
-        {/* ── Baris stack statis (bukan scroller kedua) ──
-            Dulu ini marquee logo yang bergerak — satu-satunya alasan ia ada
-            adalah "kelihatan hidup". Tapi dua pita bergerak berdampingan
-            (logo + teks raksasa) membuat mata berebut fokus. Sekarang stack
-            jadi baris statis ber-indeks: tenang, terbaca, dan menyisakan
-            SATU pita bergerak saja di seluruh halaman. */}
-        <Reveal delay={600}>
-          <div className="mt-12 border-t border-[var(--border)] pt-6">
-            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
-              <span className="mono-label">Stack — {MARQUEE.length} tools</span>
-              <span className="mono-label hidden sm:inline">Daily drivers</span>
-            </div>
-            <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-3 sm:gap-x-8">
-              {MARQUEE.map((t, i) => (
-                <li key={t} className="inline-flex items-center gap-2.5">
-                  <span className="font-mono text-[10px] tabular-nums text-[var(--text-muted)] opacity-60">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <TechStack items={[t]} size={18} />
-                  <span className="whitespace-nowrap text-sm text-[var(--text-muted)]">{t}</span>
-                </li>
-              ))}
-            </ul>
+        {/* ── Ouroboros + legenda ──
+            Tech stack sebagai SATU cincin berputar tanpa ujung (10 logo
+            terkuat), dengan inti lambang aruthtale. Nama teknologi muncul
+            saat wajahnya disorot. Karena nama tidak ikut berputar, ke-18
+            nama tetap tersedia di legenda statis di sebelahnya — jadi tidak
+            ada informasi yang hilang. Ini juga menyisakan SATU pita bergerak
+            di halaman (cincin ini), sesuai keputusan sebelumnya. */}
+        <div className="container relative mt-14 border-t border-[var(--border)] pt-10">
+          <div className="grid items-center gap-10 lg:grid-cols-[auto_1fr] lg:gap-16">
+            <Reveal>
+              <div className="flex justify-center lg:justify-start">
+                <Ouroboros items={OUROBOROS_CORE} size={22} />
+              </div>
+            </Reveal>
+
+            <Reveal delay={120}>
+              <div>
+                <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
+                  <span className="mono-label">Stack — {MARQUEE.length} tools</span>
+                  {/* Layar sentuh tidak punya hover — jadi petunjuknya dibedakan
+                      per breakpoint, bukan menyuruh sesuatu yang tak bisa. */}
+                  <span className="mono-label hidden sm:inline">Hover the ring to read names</span>
+                  <span className="mono-label sm:hidden">Tap a logo to read its name</span>
+                </div>
+                <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3">
+                  {MARQUEE.map((t, i) => (
+                    <li key={t} className="inline-flex items-center gap-2.5">
+                      <span className="font-mono text-[10px] tabular-nums text-[var(--text-muted)] opacity-60">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <TechStack items={[t]} size={16} />
+                      <span className="truncate text-sm text-[var(--text-muted)]">{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
+        </div>
       </section>
 
       {/* ═══════════════════════ PITA MANIFESTO ═══════════════════════

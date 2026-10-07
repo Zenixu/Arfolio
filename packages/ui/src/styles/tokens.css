@@ -1387,3 +1387,90 @@ a.vault-item:hover .vault-item__title { color: var(--accent); }
   font-variant-numeric: tabular-nums;
 }
 .manifesto__sep { color: var(--accent); font-size: 1rem; opacity: .75; }
+
+/* ============================ Ouroboros ============================
+   Tech stack sebagai SATU cincin yang berputar tanpa ujung. Memakai mesin
+   orbit yang sudah ada (putar pembungkus + rotasi-balik isi) supaya logo
+   tidak ikut miring.
+
+   GEOMETRI: jarak antar-ikon = 2·r·sin(180/N). Untuk N=10 ikon, itu
+   0,618·r. Dengan r=7rem (112px) → 69px, dan wajah 3,2rem (51px):
+   sisa celah ~18px, jadi 18 ikon pun bisa masuk tanpa bertumpuk. Di HP
+   r mengecil (0,618·83px=51px > wajah 42px) — tetap aman.
+   ATURAN SAMA seperti orbit: `--o-r` WAJIB panjang (rem), bukan persen. */
+.ouroboros {
+  --o-r: 7rem; --o-face: 3.2rem; --o-hub: 4.5rem; --o-dur: 64s;
+  position: relative; margin-inline: auto;
+  width: calc(var(--o-r) * 2 + var(--o-face));
+  height: calc(var(--o-r) * 2 + var(--o-face));
+}
+@media (max-width: 767px) {
+  .ouroboros { --o-r: 5.2rem; --o-face: 2.6rem; --o-hub: 3.6rem; }
+}
+/* Lintasan: cincin penuh (bukan putus-putus) — ouroboros itu lingkaran
+   yang menyambung, jadi garisnya harus utuh, bukan terputus. */
+.ouroboros__ring {
+  position: absolute; left: 50%; top: 50%;
+  width: calc(var(--o-r) * 2); height: calc(var(--o-r) * 2);
+  margin-left: calc(var(--o-r) * -1); margin-top: calc(var(--o-r) * -1);
+  border: 1px solid var(--border); border-radius: 999px;
+}
+.ouroboros__hub {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: grid; place-items: center;
+  width: var(--o-hub); height: var(--o-hub); border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg-elevated));
+  box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 6%, transparent),
+              0 0 40px color-mix(in srgb, var(--accent) 14%, transparent);
+  z-index: 2;
+}
+.ouroboros__orbit {
+  position: absolute; left: 50%; top: 50%; width: 0; height: 0;
+  transform: rotate(var(--a));
+  animation: ouro-spin var(--o-dur) linear infinite;
+}
+.ouroboros__face {
+  position: absolute; left: 0; top: calc(-1 * var(--o-r));
+  display: grid; place-items: center;
+  width: var(--o-face); height: var(--o-face); border-radius: 999px;
+  border: 1px solid var(--border); background: var(--bg-elevated);
+  transform: translate(-50%, -50%) rotate(calc(-1 * var(--a)));
+  animation: ouro-spin-rev var(--o-dur) linear infinite;
+  transition: border-color .3s var(--ease-out), box-shadow .3s var(--ease-out);
+  z-index: 1;
+}
+.ouroboros__face img { opacity: 1; }
+.ouroboros__face:hover, .ouroboros__face:focus-within {
+  border-color: var(--accent); z-index: 3;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 16%, transparent);
+}
+/* Nama teknologi: hanya muncul saat wajahnya disorot — jadi tidak ada info
+   yang hilang walau label tidak ikut berputar (teks berputar akan terbalik). */
+.ouroboros__tag {
+  position: absolute; top: calc(100% + .5rem); left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text); white-space: nowrap;
+  background: var(--bg-elevated); border: 1px solid var(--border-strong);
+  padding: .28rem .55rem; border-radius: 999px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s var(--ease-out), transform .2s var(--ease-out);
+}
+.ouroboros__face:hover .ouroboros__tag,
+.ouroboros__face:focus-within .ouroboros__tag { opacity: 1; transform: translateX(-50%) translateY(0); }
+/* Berhenti saat disorot supaya bisa dibaca */
+.ouroboros:hover .ouroboros__orbit,
+.ouroboros:hover .ouroboros__face { animation-play-state: paused; }
+
+@keyframes ouro-spin {
+  from { transform: rotate(var(--a)); }
+  to   { transform: rotate(calc(var(--a) + 360deg)); }
+}
+@keyframes ouro-spin-rev {
+  from { transform: translate(-50%, -50%) rotate(calc(-1 * var(--a))); }
+  to   { transform: translate(-50%, -50%) rotate(calc(-1 * (var(--a) + 360deg))); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ouroboros__orbit, .ouroboros__face { animation: none; }
+}
