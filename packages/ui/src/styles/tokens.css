@@ -1475,95 +1475,186 @@ a.vault-item:hover .vault-item__title { color: var(--accent); }
   .ouroboros__orbit, .ouroboros__face { animation: none; }
 }
 
-/* ========================= Work archive ==========================
-   "Karya terpilih" sebagai daftar arsip, bukan grid kartu. Tiap baris
-   menampilkan peran + angka nyata (bukti), dan thumbnail muncul mengikuti
-   kursor saat baris disorot — jadi mata mendapat gambar tanpa harus
-   menatap lima kartu seragam. */
-.work-archive { position: relative; border-top: 1px solid var(--border); }
 
-.work-archive__row {
-  position: relative; z-index: 1;
+/* ═══════════════════════ PANGGUNG LENGKET (WorkStage) ═══════════════════════
+   Kolom kiri MENEMPEL sambil kolom kanan digulir; layar besar berganti gambar
+   mengikuti baris yang sedang dibaca. Penting: kolom kiri harus meregang
+   setinggi kolom kanan (grid default `stretch`) supaya elemen sticky punya
+   ruang menempel — jangan memberi `align-items: start` pada grid-nya. */
+.work-stage__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: stretch;
+}
+
+.work-stage__screen-col { position: relative; min-width: 0; }
+
+/* Pembungkus sticky. Tingginya = tinggi isi (layar + progres). */
+.work-stage__screen {
+  position: sticky;
+  top: clamp(5rem, 12vh, 7.5rem);
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow-lift);
+}
+
+.work-stage__frame {
+  position: absolute; inset: 0;
+  opacity: 0;
+  transform: scale(1.03);
+  transition: opacity .55s var(--ease-out), transform .8s var(--ease-out);
+  will-change: opacity, transform;
+}
+.work-stage__frame.is-active { opacity: 1; transform: scale(1); }
+
+/* Nomor raksasa samar — bobot editorial, tidak menutupi gambar. */
+.work-stage__big-index {
+  position: absolute; left: clamp(.75rem, 2vw, 1.25rem); top: clamp(.5rem, 1.5vw, 1rem);
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(3.5rem, 8vw, 6rem); line-height: 1;
+  letter-spacing: -.04em;
+  color: #fff; opacity: .16; mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.work-stage__big-total {
+  position: absolute; right: clamp(.75rem, 2vw, 1.25rem); top: clamp(1.1rem, 2.4vw, 1.6rem);
+  font-family: var(--font-mono); font-size: .75rem; letter-spacing: .12em;
+  color: #fff; opacity: .5; mix-blend-mode: overlay; pointer-events: none;
+}
+
+/* Keterangan bawah: judul + kategori proyek aktif. */
+.work-stage__caption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  display: flex; flex-direction: column; gap: .15rem;
+  padding: clamp(1.5rem, 4vw, 2.25rem) clamp(1rem, 3vw, 1.5rem) clamp(.9rem, 2.5vw, 1.25rem);
+  background: linear-gradient(to top, rgba(0,0,0,.82) 0%, rgba(0,0,0,.45) 45%, transparent 100%);
+  pointer-events: none;
+}
+.work-stage__caption-title {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.1rem, 2vw, 1.5rem); letter-spacing: -.02em; color: #fff;
+}
+.work-stage__caption-meta {
+  font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .08em;
+  text-transform: uppercase; color: rgba(255,255,255,.72);
+}
+
+/* Garis progres di bawah layar. */
+.work-stage__progress {
+  margin-top: .85rem; height: 2px; width: 100%;
+  background: var(--border); border-radius: 999px; overflow: hidden;
+}
+.work-stage__progress > span {
+  display: block; height: 100%; width: 100%;
+  transform-origin: left;
+  background: var(--accent);
+  transition: transform .5s var(--ease-out);
+}
+
+/* ── Daftar baris ── */
+.work-stage__list {
+  display: flex; flex-direction: column;
+  justify-content: center; min-width: 0;
+}
+
+.work-stage__row {
+  position: relative;
   display: grid;
   grid-template-columns: auto 1fr auto auto;
-  align-items: center; gap: 1.25rem;
-  padding-block: 1.5rem;
+  align-items: center; gap: 1.15rem;
+  padding-block: clamp(1.35rem, 3vw, 2.1rem);
   border-bottom: 1px solid var(--border);
-  transition: padding-inline var(--ease-out) .35s, border-color .35s;
+  transition: opacity .5s var(--ease-out), transform .5s var(--ease-out),
+              padding-inline .35s var(--ease-out), border-color .35s;
 }
-.work-archive__row:hover { border-color: var(--border-strong); }
-/* Geser sedikit ke kanan saat disorot — memberi kesan "terbuka". */
+/* Reveal bertahap saat bagian masuk — hanya aktif kalau JS hidup. */
+.work-stage__row.is-in { opacity: 1; transform: none; }
+.js .work-stage__row:not(.is-in) { opacity: 0; transform: translateY(16px); }
+
+.work-stage__row:first-child { border-top: 1px solid var(--border); }
+
+/* Baris tak aktif diredupkan; yang aktif menyala. */
 @media (hover: hover) {
-  .work-archive__row:hover { padding-inline: 1rem; }
+  .work-stage__row { opacity: .55; }
+  .work-stage__row.is-active,
+  .work-stage__row:hover { opacity: 1; }
+  .work-stage__row.is-active { padding-inline: 1rem; border-color: var(--border-strong); }
+  .work-stage__row:hover { padding-inline: 1rem; }
 }
 
-.work-archive__idx {
+.work-stage__idx {
   font-family: var(--font-mono); font-size: .75rem; letter-spacing: .1em;
   color: var(--text-muted); font-variant-numeric: tabular-nums;
+  transition: color .3s var(--ease-out);
 }
-.work-archive__body { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
-.work-archive__title {
-  font-family: var(--font-display); font-weight: 600;
-  font-size: clamp(1.35rem, 2.6vw, 2.1rem); letter-spacing: -.02em;
-  color: var(--text); transition: color .3s var(--ease-out);
-}
-.work-archive__row:hover .work-archive__title { color: var(--accent); }
+.work-stage__row.is-active .work-stage__idx { color: var(--accent); }
 
-.work-archive__meta {
+.work-stage__main { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
+.work-stage__title {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.3rem, 2.4vw, 2rem); letter-spacing: -.02em;
+  color: var(--text-muted); transition: color .3s var(--ease-out);
+}
+.work-stage__row.is-active .work-stage__title,
+.work-stage__row:hover .work-stage__title { color: var(--text); }
+.work-stage__row.is-active .work-stage__title { color: var(--accent); }
+
+.work-stage__meta {
   display: flex; flex-wrap: wrap; align-items: center; gap: .4rem .75rem;
   font-family: var(--font-mono); font-size: .6875rem; letter-spacing: .06em;
   text-transform: uppercase; color: var(--text-muted);
 }
-.work-archive__role { color: var(--text-muted); }
-/* Angka nyata: diberi kotak halus supaya terbaca sebagai "bukti", bukan label. */
-.work-archive__metric {
+.work-stage__role { color: var(--text-muted); }
+.work-stage__metric {
   display: inline-flex; align-items: center; gap: .35rem;
   padding: .18rem .5rem; border-radius: 999px;
   border: 1px solid var(--border);
   background: color-mix(in srgb, var(--accent) 6%, transparent);
   color: var(--text);
 }
-.work-archive__year {
+.work-stage__year {
   font-family: var(--font-mono); font-size: .8125rem; color: var(--text-muted);
   font-variant-numeric: tabular-nums;
 }
-.work-archive__arrow {
+.work-stage__arrow {
   color: var(--text-muted); transition: transform .3s var(--ease-out), color .3s var(--ease-out);
 }
-.work-archive__row:hover .work-archive__arrow {
-  color: var(--accent); transform: translate(3px, -3px);
-}
+.work-stage__row.is-active .work-stage__arrow,
+.work-stage__row:hover .work-stage__arrow { color: var(--accent); transform: translate(3px, -3px); }
 
-/* Thumbnail mengambang: semua gambar ditumpuk di titik kursor, hanya satu
-   yang menyala. Di HP tidak ada hover → disembunyikan, diganti thumb inline. */
-.work-archive__preview {
-  position: absolute; left: 0; top: 0; z-index: 2;
-  pointer-events: none; opacity: 0;
-  transition: opacity .25s var(--ease-out);
-  transform: translate3d(-9999px, -9999px, 0);
-}
-.work-archive:hover .work-archive__preview { opacity: 1; }
-.work-archive__shot {
-  position: absolute; left: 0; top: 0;
-  width: 15rem; height: 9.5rem; border-radius: var(--radius-lg, 12px);
-  overflow: hidden; border: 1px solid var(--border-strong);
-  box-shadow: var(--shadow-lift);
-  transform: translate(-50%, -50%) scale(.92);
-  opacity: 0; transition: opacity .28s var(--ease-out), transform .28s var(--ease-out);
-}
-.work-archive__shot.is-active { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.work-stage__inline-thumb { display: none; }
 
-.work-archive__inline-thumb { display: none; }
-
-/* HP: tidak ada hover → pratinjau mengambang dimatikan, thumbnail tampil
-   inline di tiap baris supaya gambarnya tetap terlihat. */
-@media (max-width: 767px) {
-  .work-archive__preview { display: none; }
-  .work-archive__row { grid-template-columns: auto 1fr auto; gap: .9rem; }
-  .work-archive__inline-thumb {
-    display: block; grid-row: span 2;
+/* ── HP / layar sempit: panggung dimatikan, thumbnail tampil inline ──
+   Grid-area eksplisit supaya kolom teks SELALU rata: baris pertama
+   nomor + tahun, baris kedua thumbnail + isi. Kalau dibiarkan
+   auto-placement, kolom ketiga (auto) melebar mengikuti panjang judul
+   dan teks jadi bergeser-geser dari baris ke baris. */
+@media (max-width: 900px) {
+  .work-stage__grid { grid-template-columns: minmax(0, 1fr); }
+  .work-stage__screen-col { display: none; }
+  .work-stage__row {
+    opacity: 1;
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "idx   year"
+      "thumb main";
+    column-gap: .9rem; row-gap: .7rem;
+    align-items: start;
+  }
+  .work-stage__idx { grid-area: idx; }
+  .work-stage__year { grid-area: year; justify-self: end; }
+  .work-stage__main { grid-area: main; }
+  .work-stage__inline-thumb {
+    grid-area: thumb;
+    display: block;
     width: 4.5rem; height: 4.5rem; border-radius: 10px;
     overflow: hidden; border: 1px solid var(--border);
   }
-  .work-archive__arrow { display: none; }
+  .work-stage__arrow { display: none; }
 }

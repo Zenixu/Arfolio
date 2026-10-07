@@ -29,7 +29,7 @@ export { CrossLink } from "./components/CrossLink";
 export { SkillOrbit } from "./components/SkillOrbit";
 export { SkillGlobe } from "./components/SkillGlobe";
 export { Ouroboros } from "./components/Ouroboros";
-export { WorkArchive } from "./components/WorkArchive";
+export { WorkStage } from "./components/WorkStage";
 export { LearningVault } from "./components/LearningVault";
 export { GitHubHeatmap } from "./components/GitHubHeatmap";
 export { SocialLinks, TechList, type Social } from "./components/SocialLinks";

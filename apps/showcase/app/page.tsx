@@ -6,7 +6,7 @@ import {
   CountUp, SpotlightCard, TechStack, ArrowRight, Quote, Star,
   Parallax, TextReveal, ScrollSweep, AruthtaleMark, VideoBanner,
   Code, Layers, Shield, Globe, Sparkle, ArrowUpRight, LearningVault,
-  CrossLink, Ouroboros, WorkArchive,
+  CrossLink, Ouroboros, WorkStage,
 } from "@arufolio/ui";
 
 /** Teknologi untuk legenda — diambil dari tag proyek + daftar inti. */
@@ -296,10 +296,10 @@ export default function HomePage() {
           action={<Button href="/work" variant="link">Semua karya</Button>}
         />
 
-        {/* Daftar arsip ber-bukti: tiap baris menampilkan peran + angka nyata
-            (yang sebelumnya ada di data tapi tidak dipakai), jadi bagian ini
-            menepati janjinya sendiri — bukan cuma pajangan kartu. */}
-        <WorkArchive projects={featuredProjects.slice(0, 6)} />
+        {/* Panggung lengket: kolom kiri menempel & menampilkan tangkapan layar
+            besar yang berganti mengikuti baris yang sedang dibaca. Jadi gambar
+            yang sudah ada benar-benar hadir, bukan hanya saat hover. */}
+        <WorkStage projects={featuredProjects.slice(0, 5)} />
       </section>
 
       {/* ═══════════════════════ LAYANAN ═══════════════════════ */}
