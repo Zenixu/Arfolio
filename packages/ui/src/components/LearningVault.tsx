@@ -35,16 +35,39 @@ export function LearningVault({
     if (!el) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setOpen(true); return; }
 
+    let done = false;
+    const reveal = () => { if (!done) { done = true; setOpen(true); } };
+
+    // 1) Terbuka saat puncak brankas melewati garis 70% tinggi layar.
+    //
+    //    Jangan pakai ambang persentase (`threshold`) di sini: kisi asimetris
+    //    membuat brankas lebih tinggi daripada layar, sehingga rasio maksimum
+    //    yang mungkin tercapai bisa di bawah ambang — pintu tidak akan pernah
+    //    terbuka (bug nyata: elemen 1331px vs layar 633px → maksimum 0,295
+    //    padahal ambangnya 0,3). `threshold: 0` + `rootMargin` bawah negatif
+    //    memberi pemicu yang sama di semua ukuran layar dan tinggi konten.
     const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { setOpen(true); io.disconnect(); } },
-      { threshold: 0.15, rootMargin: "0px 0px -6% 0px" }
+      ([e]) => { if (e.isIntersecting) { reveal(); io.disconnect(); proximity.disconnect(); } },
+      { threshold: 0, rootMargin: "0px 0px -30% 0px" }
     );
+
+    // 2) Pengaman: hitungan mundur BARU mulai setelah brankas mendekat layar.
+    //
+    //    Kesalahan sebelumnya: pengaman dijalankan sejak mount, jadi brankas
+    //    sudah terbuka sendiri (~2,4 dtk) jauh sebelum pengguna menggulir ke
+    //    sana — akibatnya yang terlihat hanya "tiba-tiba sudah jadi kisi".
+    //    Sekarang pengaman hanya berlaku sebagai jaring terakhir kalau
+    //    observer utama gagal menyala saat brankas sudah dekat.
+    let safety = 0;
+    const proximity = new IntersectionObserver(
+      ([e]) => { if (e.isIntersecting && !safety) safety = window.setTimeout(reveal, 2500); },
+      { threshold: 0, rootMargin: "200px 0px 200px 0px" }
+    );
+
     io.observe(el);
+    proximity.observe(el);
 
-    // Pengaman: apa pun yang terjadi, brankas terbuka <= 2,4 dtk.
-    const safety = window.setTimeout(() => setOpen(true), 2400);
-
-    return () => { io.disconnect(); window.clearTimeout(safety); };
+    return () => { io.disconnect(); proximity.disconnect(); window.clearTimeout(safety); };
   }, []);
 
   return (

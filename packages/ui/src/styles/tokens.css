@@ -729,19 +729,58 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 @media (min-width: 640px) {
-  .vault__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; }
+  .vault__grid { gap: 0.85rem; }
 }
+
+/* Layar kecil/menengah: kartu pertama dibiarkan selebar penuh sebagai
+   "pembuka" — supaya tidak terbaca sebagai kisi 2 kolom yang seragam. */
+@media (max-width: 1023px) {
+  .vault__cell:first-child { grid-column: 1 / -1; }
+}
+
+/* Layar lebar: ritme editorial asimetris — lebar 4/6 dan 2/6 bergantian,
+   jadi tidak terbaca sebagai kisi seragam. Kartu lebar memakai tata letak
+   mendatar (gambar kiri, teks kanan); gambarnya mengisi penuh tinggi baris
+   sehingga tepi kartu lebar dan sempit tetap sejajar tanpa celah kosong. */
 @media (min-width: 1024px) {
-  .vault__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .vault__grid { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1rem; }
+
+  .vault__cell:nth-child(4n + 1),
+  .vault__cell:nth-child(4n + 4) { grid-column: span 4; }
+  .vault__cell:nth-child(4n + 2),
+  .vault__cell:nth-child(4n + 3) { grid-column: span 2; }
+
+  .vault__cell:nth-child(4n + 1) .vault-item,
+  .vault__cell:nth-child(4n + 4) .vault-item { flex-direction: row; }
+
+  .vault__cell:nth-child(4n + 1) .vault-item__media,
+  .vault__cell:nth-child(4n + 4) .vault-item__media {
+    flex: 0 0 40%; aspect-ratio: auto; min-height: 9.5rem;
+  }
+  .vault__cell:nth-child(4n + 1) .vault-item__media img,
+  .vault__cell:nth-child(4n + 4) .vault-item__media img {
+    position: absolute; inset: 0; height: 100%; width: 100%;
+  }
+  .vault__cell:nth-child(4n + 1) .vault-item__body,
+  .vault__cell:nth-child(4n + 4) .vault-item__body {
+    flex: 1; justify-content: center; padding: 0.95rem 1.05rem;
+  }
+  .vault__cell:nth-child(4n + 1) .vault-item__title,
+  .vault__cell:nth-child(4n + 4) .vault-item__title { font-size: 1rem; }
+  .vault__cell:nth-child(4n + 1) .vault-item__desc,
+  .vault__cell:nth-child(4n + 4) .vault-item__desc { -webkit-line-clamp: 3; }
 }
 
 /* Entri: tersembunyi hanya ketika JS hidup, lalu bermunculan berurutan
-   setelah pintu terbuka. Ada pengaman waktu di sisi JS (<= 2,4 dtk). */
+   setelah pintu terbuka. Semua gerak di compositor (translate3d + opacity),
+   durasinya panjang dan easing-nya lembut supaya tidak terasa menyentak. */
 .vault__cell { min-width: 0; }
 .js .vault__cell {
-  opacity: 0; transform: translateY(22px) scale(0.985);
-  transition: opacity 620ms var(--ease-out), transform 620ms var(--ease-out);
-  transition-delay: calc(320ms + var(--i, 0) * 55ms);
+  opacity: 0;
+  transform: translate3d(0, 26px, 0) scale(0.972);
+  will-change: opacity, transform;
+  transition: opacity 760ms var(--ease-out), transform 900ms var(--ease-out);
+  transition-delay: calc(560ms + var(--i, 0) * 65ms);
 }
 .js .vault.is-open .vault__cell { opacity: 1; transform: none; }
 
@@ -813,7 +852,8 @@ a.vault-item:hover .vault-item__title { color: var(--accent); }
   position: absolute; left: 0; right: 0; height: 50.5%;
   background: linear-gradient(180deg, #17171d 0%, #0d0d11 100%);
   box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.6);
-  transition: transform 880ms var(--ease-in-out);
+  will-change: transform;
+  transition: transform 1250ms cubic-bezier(.45, .02, .22, 1);
 }
 .vault__door::after {
   content: ""; position: absolute; inset: 0;
@@ -822,8 +862,8 @@ a.vault-item:hover .vault-item__title { color: var(--accent); }
 }
 .vault__door--top { top: 0; border-bottom: 1px solid var(--border-strong); }
 .vault__door--bottom { bottom: 0; border-top: 1px solid var(--border-strong); }
-.vault.is-open .vault__door--top { transform: translateY(-101%); }
-.vault.is-open .vault__door--bottom { transform: translateY(101%); }
+.vault.is-open .vault__door--top { transform: translate3d(0, -101%, 0); transition-delay: 160ms; }
+.vault.is-open .vault__door--bottom { transform: translate3d(0, 101%, 0); transition-delay: 160ms; }
 
 .vault__dial {
   position: absolute; left: 50%; top: 50%; translate: -50% -50%;
@@ -832,14 +872,14 @@ a.vault-item:hover .vault-item__title { color: var(--accent); }
   background: radial-gradient(circle at 50% 38%, #1d1d25, #0a0a0d 72%);
   border: 1px solid var(--border-strong);
   box-shadow: 0 0 0 7px rgba(0, 0, 0, 0.35), inset 0 2px 12px rgba(255, 255, 255, 0.07);
-  transition: opacity 400ms ease, scale 880ms var(--ease-out);
+  transition: opacity 900ms var(--ease-out), scale 1250ms var(--ease-out);
 }
-.vault.is-open .vault__dial { opacity: 0; scale: 1.45; }
+.vault.is-open .vault__dial { opacity: 0; scale: 1.18; transition-delay: 160ms; }
 
 .vault__dial-ring {
   position: absolute; inset: 8px; border-radius: 50%;
   border: 2px dashed rgba(255, 255, 255, 0.16);
-  animation: vault-spin 16s linear infinite;
+  animation: vault-spin 26s linear infinite;
 }
 .vault__dial-mark {
   position: absolute; top: 3px; left: 50%; translate: -50% 0;
