@@ -26,16 +26,44 @@ export function Navbar({
   const [path, setPath] = useState("");
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  // Sembunyi saat menggulir ke bawah, muncul lagi begitu menggulir ke atas.
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => setPath(window.location.pathname), []);
   useEffect(() => { setOpen(false); }, [path]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
+    let last = window.scrollY;
+    let raf = 0;
+
+    const update = () => {
+      raf = 0;
+      const y = window.scrollY;
+      setScrolled(y > 12);
+
+      // Selisih kecil diabaikan supaya getaran gulir (rubber-band di HP,
+      // trackpad) tidak membuat navbar berkedip.
+      const delta = y - last;
+      if (Math.abs(delta) < 6) return;
+
+      if (y < 80) setHidden(false);        // dekat puncak: selalu tampil
+      else if (delta > 0) setHidden(true); // ke bawah: sembunyi
+      else setHidden(false);               // ke atas: muncul
+
+      last = y;
+    };
+
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, []);
+
+  // Menu yang sedang terbuka tidak boleh ikut tersembunyi.
+  const tucked = hidden && !open;
 
   // Kunci gulir saat menu mobile terbuka
   useEffect(() => {
@@ -50,12 +78,15 @@ export function Navbar({
     <header
       className={cn(
         "sticky top-0 z-50 border-b transition-all duration-300 [transition-timing-function:var(--ease-out)]",
+        tucked ? "-translate-y-full" : "translate-y-0",
         scrolled
           ? "border-[var(--border)] bg-[color-mix(in_srgb,var(--bg)_86%,transparent)] backdrop-blur-xl"
           : "border-transparent bg-transparent"
       )}
     >
-      <div className="container grid h-[68px] grid-cols-[1fr_auto_1fr] items-center gap-6">
+      {/* Di HP: satu baris flex (brand kiri, aksi kanan).
+          Di layar >=sm: grid 3 kolom supaya nav benar-benar terpusat. */}
+      <div className="container flex h-[68px] items-center justify-between gap-4 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-6">
         {/* Brand */}
         <a href={homeHref} className="group/brand flex items-center gap-2.5 justify-self-start" aria-label={`${brand} — beranda`}>
           <span className="transition-transform duration-300 [transition-timing-function:var(--ease-spring)] group-hover/brand:scale-110 group-hover/brand:rotate-[-6deg]">
@@ -88,7 +119,8 @@ export function Navbar({
           ))}
         </nav>
 
-        {/* Aksi */}
+        {/* Aksi — di HP hanya satu grup di kanan; di layar lebar nav ada di
+            kolom tengah sehingga grup ini kembali ke tepi kanan. */}
         <div className="flex items-center gap-2 justify-self-end">
           {right}
           <button

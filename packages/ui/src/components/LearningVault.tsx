@@ -36,38 +36,57 @@ export function LearningVault({
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setOpen(true); return; }
 
     let done = false;
-    const reveal = () => { if (!done) { done = true; setOpen(true); } };
+    let raf = 0;
 
-    // 1) Terbuka saat puncak brankas melewati garis 70% tinggi layar.
+    const stop = () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+
+    const reveal = () => {
+      if (done) return;
+      done = true;
+      setOpen(true);
+      stop();
+    };
+
+    // Pemicu: titik tengah brankas mencapai titik tengah layar.
     //
-    //    Jangan pakai ambang persentase (`threshold`) di sini: kisi asimetris
-    //    membuat brankas lebih tinggi daripada layar, sehingga rasio maksimum
-    //    yang mungkin tercapai bisa di bawah ambang — pintu tidak akan pernah
-    //    terbuka (bug nyata: elemen 1331px vs layar 633px → maksimum 0,295
-    //    padahal ambangnya 0,3). `threshold: 0` + `rootMargin` bawah negatif
-    //    memberi pemicu yang sama di semua ukuran layar dan tinggi konten.
-    const io = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting) { reveal(); io.disconnect(); proximity.disconnect(); } },
-      { threshold: 0, rootMargin: "0px 0px -30% 0px" }
-    );
-
-    // 2) Pengaman: hitungan mundur BARU mulai setelah brankas mendekat layar.
+    // Inilah yang membuat pintu terlihat membuka DARI TENGAH: saat puncak
+    // animasi mulai, bagian tengah brankas (tempat kedua daun pintu bertemu
+    // dan roda dial berada) tepat berada di tengah layar — sama perilakunya
+    // di HP maupun di PC, karena keduanya memakai tinggi viewport.
     //
-    //    Kesalahan sebelumnya: pengaman dijalankan sejak mount, jadi brankas
-    //    sudah terbuka sendiri (~2,4 dtk) jauh sebelum pengguna menggulir ke
-    //    sana — akibatnya yang terlihat hanya "tiba-tiba sudah jadi kisi".
-    //    Sekarang pengaman hanya berlaku sebagai jaring terakhir kalau
-    //    observer utama gagal menyala saat brankas sudah dekat.
-    let safety = 0;
-    const proximity = new IntersectionObserver(
-      ([e]) => { if (e.isIntersecting && !safety) safety = window.setTimeout(reveal, 2500); },
-      { threshold: 0, rootMargin: "200px 0px 200px 0px" }
-    );
+    // Perhitungan ini juga tahan terhadap elemen yang lebih tinggi daripada
+    // layar (kisi asimetris bisa 1331px di layar 633px) — hal yang membuat
+    // ambang persentase IntersectionObserver gagal sebelumnya.
+    const check = () => {
+      raf = 0;
+      const r = el.getBoundingClientRect();
+      const center = r.top + r.height / 2;
+      const viewportCenter = window.innerHeight / 2;
 
-    io.observe(el);
-    proximity.observe(el);
+      // Sedikit toleransi supaya tepat di titik tengah pun sudah tersulut
+      // (tanpa ini, pembulatan sub-piksel bisa membuatnya meleset 0,5px dan
+      // pintu tidak pernah terbuka saat pengguna berhenti tepat di tengah).
+      if (center <= viewportCenter + 2) { reveal(); return; }
 
-    return () => { io.disconnect(); proximity.disconnect(); window.clearTimeout(safety); };
+      // Jaring terakhir: kalau halaman sudah di dasar tetapi tengah brankas
+      // belum sempat mencapai tengah layar (mis. brankas di ujung halaman).
+      const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+      if (atBottom && r.top < window.innerHeight) reveal();
+    };
+
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(check); };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    check();
+
+    return stop;
   }, []);
 
   return (
@@ -89,7 +108,7 @@ export function LearningVault({
           </span>
         </div>
 
-        <ul className="vault__grid">
+        <ul className={cn("vault__grid", items.length % 2 === 1 && "vault__grid--odd")}>
           {items.map((it, i) => {
             const repo = it.links?.repo ?? undefined;
             const clickable = Boolean(repo) && !it.archived;

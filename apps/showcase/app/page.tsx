@@ -329,7 +329,7 @@ export default function HomePage() {
           description={`${lab.length} eksperimen kecil sepanjang perjalanan belajar. Sebelum ada proyek besar, ada repo-repo kecil yang membuat saya paham cara kerjanya.`}
           action={<Button href="/lab" variant="link">Masuk vault</Button>}
         />
-        <LearningVault items={lab.filter((l) => l.thumb).slice(0, 8)} total={lab.length} />
+        <LearningVault items={lab.filter((l) => l.thumb).slice(0, 5)} total={lab.length} />
       </section>
 
       {/* ═══════════════════════ CTA ═══════════════════════ */}
