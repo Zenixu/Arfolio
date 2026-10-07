@@ -7,14 +7,15 @@
    kalau tidak semua utility class di komponen bersama diabaikan. */
 @source "../../../packages/ui/src";
 
-/* Peta variabel next/font -> token desain */
+/* Peta variabel next/font -> token desain (Afterglow) */
 :root {
-  --font-display: var(--font-geist), system-ui, sans-serif;
-  --font-body: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-fraunces), "Fraunces", Georgia, serif;
+  --font-body: var(--font-instrument), "Instrument Sans", system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
 }
 
 @theme {
   --font-sans: var(--font-body);
   --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
 }

@@ -1,77 +1,338 @@
-import { featuredProjects, projects, lab, aruthtale } from "@arufolio/data";
-import { ProjectCard, SectionHeading, Reveal, Button, Tag } from "@arufolio/ui";
+import {
+  featuredProjects, projects, lab, aruthtale,
+} from "@arufolio/data";
+import {
+  ProjectCard, SectionHeading, Reveal, Button, Tag,
+  Marquee, CountUp, SpotlightCard, TechStack, ArrowRight, ArrowDown, Quote, Star,
+  Parallax, TextReveal, ScrollTicker, AruthtaleMark,
+  Code, Layers, Shield, Globe, Sparkle, MapPin,
+} from "@arufolio/ui";
+
+/** Teknologi untuk marquee — diambil dari tag proyek + daftar inti. */
+const MARQUEE = [
+  "TypeScript", "React 19", "Next.js", "Laravel", "Node.js", "PostgreSQL",
+  "Tailwind CSS v4", "Supabase", "Capacitor", "Vite", "Flutter", "PHP",
+  "MySQL", "Firebase", "Docker", "Git", "Figma", "Python",
+];
+
+/** Ikon per layanan — supaya sel tidak terasa kosong. */
+const SERVICE_ICONS = [Globe, Sparkle, Layers, Code, Shield, Star];
 
 export default function HomePage() {
-  const skills = ["TypeScript", "React 19", "Next.js", "Laravel", "Node.js", "PostgreSQL", "Supabase", "Tailwind CSS", "Capacitor"];
+  const services = aruthtale.services as { slug: string; name: string; description: string }[];
+  const philosophy = aruthtale.philosophy as {
+    summary: string; statement: string;
+    nameOrigin: { explanation: string };
+    elements: { element: string; symbol: string; meaning: string }[];
+  };
 
   return (
     <>
-      {/* HERO */}
-      <section className="section container">
-        <Reveal>
-          <p className="mono-label mb-5">{aruthtale.brand.handle} · Fullstack Developer</p>
-          <h1 className="display max-w-4xl">
-            Proof, not promises.
+      {/* ═══════════════════════ HERO ═══════════════════════ */}
+      <section className="relative overflow-hidden pt-[clamp(64px,12vh,132px)] pb-[clamp(48px,8vh,96px)]">
+        {/* Bercak gradien yang mengapung pelan + bergerak mengikuti gulir */}
+        <Parallax speed={0.16} className="pointer-events-none absolute inset-0">
+          <div
+            aria-hidden="true"
+            className="aurora -left-24 -top-24 h-[420px] w-[420px] rounded-full"
+            style={{ background: "radial-gradient(circle, color-mix(in srgb, var(--accent) 42%, transparent), transparent 68%)" }}
+          />
+        </Parallax>
+        <Parallax speed={-0.1} className="pointer-events-none absolute inset-0">
+          <div
+            aria-hidden="true"
+            className="aurora right-0 top-40 h-[320px] w-[320px] rounded-full"
+            style={{ background: "radial-gradient(circle, color-mix(in srgb, var(--accent-2) 26%, transparent), transparent 68%)", animationDelay: "-8s" }}
+          />
+        </Parallax>
+
+        <div className="container relative">
+          {/* Baris meta atas ala editorial */}
+          <Reveal>
+            <div className="mb-8 flex flex-wrap items-center gap-x-5 gap-y-2">
+              <span className="mono-label inline-flex items-center gap-2">
+                <span className="relative flex h-1.5 w-1.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent-2)] opacity-70" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--accent-2)]" />
+                </span>
+                Tersedia untuk proyek
+              </span>
+              <span className="h-3 w-px bg-[var(--border-strong)]" aria-hidden="true" />
+              <span className="mono-label inline-flex items-center gap-1.5"><MapPin size={11} /> Cianjur, Indonesia</span>
+              <span className="h-3 w-px bg-[var(--border-strong)]" aria-hidden="true" />
+              <span className="mono-label">Est. 2026</span>
+            </div>
+          </Reveal>
+
+          {/* Judul utama — muncul kata demi kata */}
+          <h1 className="display max-w-[15ch] text-balance">
+            <TextReveal text="Proof," delay={80} />
+            <br />
+            <TextReveal text="not promises." delay={240} className="grad-text" />
           </h1>
-          <p className="mt-6 max-w-2xl text-lg text-[var(--text-muted)] leading-relaxed">
-            {aruthtale.brand.description}
-          </p>
-          <div className="mt-9 flex flex-wrap gap-3">
-            <Button href="/work">Lihat Karya →</Button>
-            <Button href="https://rchibnu.aruthtales.my.id" variant="ghost">Kenal Saya</Button>
+
+          <Reveal delay={420}>
+            <p className="lede mt-7">
+              {aruthtale.brand.description} Setiap karya di sini adalah satu bab — bukan
+              pajangan, tapi bukti bahwa sesuatu benar-benar dibangun.
+            </p>
+          </Reveal>
+
+          <Reveal delay={480}>
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <Button href="/work" size="lg" withArrow>Lihat Karya</Button>
+              <Button href="https://rchibnu.aruthtales.my.id" variant="ghost" size="lg">
+                Kenal Saya
+              </Button>
+            </div>
+          </Reveal>
+
+          {/* Statistik — angka berhitung naik saat masuk viewport */}
+          <Reveal delay={540}>
+            <dl className="mt-16 grid grid-cols-2 gap-x-8 gap-y-8 border-t border-[var(--border)] pt-9 sm:grid-cols-4">
+              <div>
+                <dd className="font-mono text-[clamp(1.75rem,3.4vw,2.5rem)] font-medium leading-none tracking-tight">
+                  <CountUp to={projects.length} />
+                </dd>
+                <dt className="mono-label mt-2.5">Proyek nyata</dt>
+              </div>
+              <div>
+                <dd className="font-mono text-[clamp(1.75rem,3.4vw,2.5rem)] font-medium leading-none tracking-tight">
+                  <CountUp to={lab.length} />
+                </dd>
+                <dt className="mono-label mt-2.5">Eksperimen</dt>
+              </div>
+              <div>
+                <dd className="font-mono text-[clamp(1.75rem,3.4vw,2.5rem)] font-medium leading-none tracking-tight">
+                  <CountUp to={services.length} />
+                </dd>
+                <dt className="mono-label mt-2.5">Layanan</dt>
+              </div>
+              <div>
+                <dd className="font-mono text-[clamp(1.75rem,3.4vw,2.5rem)] font-medium leading-none tracking-tight">
+                  2026
+                </dd>
+                <dt className="mono-label mt-2.5">Berdiri sejak</dt>
+              </div>
+            </dl>
+          </Reveal>
+        </div>
+
+        {/* Marquee logo teknologi */}
+        <Reveal delay={600}>
+          <div className="mt-14 border-y border-[var(--border)] py-7">
+            <Marquee duration={44}>
+              {MARQUEE.map((t) => (
+                <span key={t} className="mx-6 inline-flex items-center gap-3">
+                  <TechStack items={[t]} size={22} />
+                  <span className="whitespace-nowrap font-mono text-xs text-[var(--text-muted)]">{t}</span>
+                </span>
+              ))}
+            </Marquee>
           </div>
         </Reveal>
 
-        {/* Skills marquee-ish */}
-        <Reveal delay={120}>
-          <div className="mt-16 flex flex-wrap gap-2 border-t border-[var(--border)] pt-8">
-            {skills.map((s) => <Tag key={s}>{s}</Tag>)}
-          </div>
-        </Reveal>
+        <div className="container">
+          <Reveal delay={640}>
+            <a href="#filosofi" className="mt-10 inline-flex items-center gap-2 font-mono text-[11px] text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]">
+              <ArrowDown size={14} /> Gulir untuk menjelajah
+            </a>
+          </Reveal>
+        </div>
       </section>
 
-      {/* FEATURED */}
-      <section className="section container">
+      {/* ═══════════════════════ PITA PERNYATAAN ═══════════════════════
+          Teks raksasa bergaris yang bergerak mengikuti gulir — memberi
+          "napas" pada halaman, bukan bagian yang diam & kaku. */}
+      <section className="relative overflow-hidden border-y border-[var(--border)] py-16 sm:py-20" aria-label={philosophy.statement}>
+        <ScrollTicker baseSpeed={0.32}>
+          <div className="flex items-center gap-10 whitespace-nowrap">
+            {[0, 1].map((k) => (
+              <span key={k} className="inline-flex items-center gap-10">
+                <span
+                  className="font-bold leading-none tracking-[-0.04em]"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(2.4rem, 7vw, 6rem)",
+                    color: "transparent",
+                    WebkitTextStroke: "1px var(--border-strong)",
+                  }}
+                >
+                  Proof, not promises
+                </span>
+                <AruthtaleMark size={40} className="shrink-0" />
+                <span
+                  className="font-bold leading-none tracking-[-0.04em]"
+                  style={{
+                    fontFamily: "var(--font-display)",
+                    fontSize: "clamp(2.4rem, 7vw, 6rem)",
+                    color: "transparent",
+                    WebkitTextStroke: "1px color-mix(in srgb, var(--accent) 55%, transparent)",
+                  }}
+                >
+                  aruthtale
+                </span>
+                <AruthtaleMark size={40} className="shrink-0" />
+              </span>
+            ))}
+          </div>
+        </ScrollTicker>
+      </section>
+
+      {/* ═══════════════════════ FILOSOFI ═══════════════════════ */}
+      <section id="filosofi" className="section container scroll-mt-24">
         <SectionHeading
+          index="01"
+          eyebrow="Filosofi"
+          title={<>Kenapa namanya <span className="text-[var(--accent)]">aruthtale</span>?</>}
+          description={philosophy.nameOrigin.explanation}
+        />
+
+        <div className="grid-12">
+          {/* Kutipan besar */}
+          <Reveal className="col-span-12 lg:col-span-5">
+            <div className="lg:sticky lg:top-28">
+              <AruthtaleMark size={52} />
+              <Quote size={26} className="mt-6 text-[var(--accent)] opacity-60" />
+              <p className="pull-quote mt-5">{philosophy.statement}</p>
+              <p className="mt-6 text-sm leading-relaxed text-[var(--text-muted)]">
+                {philosophy.summary}
+              </p>
+            </div>
+          </Reveal>
+
+          {/* Empat unsur pembentuk nama */}
+          <div className="col-span-12 grid gap-4 sm:grid-cols-2 lg:col-span-7">
+            {philosophy.elements.map((el, i) => (
+              <Reveal key={el.element} delay={i * 80} className="h-full">
+                <SpotlightCard className="card h-full p-6">
+                  <div className="flex items-start justify-between gap-4">
+                    <h3 className="h3">{el.element}</h3>
+                    <span className="index-num">{String(i + 1).padStart(2, "0")}</span>
+                  </div>
+                  <p className="mt-3 text-xs italic leading-relaxed text-[var(--accent)] opacity-90">
+                    {el.symbol}
+                  </p>
+                  <p className="mt-3.5 text-sm leading-relaxed text-[var(--text-muted)]">
+                    {el.meaning}
+                  </p>
+                </SpotlightCard>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════ KARYA ═══════════════════════ */}
+      <section id="karya" className="section container scroll-mt-24">
+        <SectionHeading
+          index="02"
           eyebrow="The Work"
           title="Karya terpilih"
-          description={`${projects.length} proyek nyata — dari aplikasi Android sampai platform SaaS.`}
-          action={<Button href="/work" variant="link">Semua karya →</Button>}
+          description={`${projects.length} proyek nyata — dari aplikasi Android sampai platform SaaS. Tiap proyek punya peran, stack, dan hasil yang bisa diperiksa.`}
+          action={<Button href="/work" variant="link">Semua karya</Button>}
         />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.slice(0, 6).map((p, i) => (
-            <Reveal key={p.slug} delay={i * 60} className="h-full">
-              <ProjectCard project={p} />
+            <Reveal key={p.slug} delay={i * 70} className="h-full">
+              <ProjectCard project={p} index={i} />
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* LEARNING VAULT TEASER */}
+      {/* ═══════════════════════ LAYANAN ═══════════════════════ */}
       <section className="section container">
         <SectionHeading
-          eyebrow="Learning Vault"
-          title="Yang saya bangun untuk belajar"
-          description={`${lab.length} eksperimen kecil — arsip proses, bukan pajangan.`}
-          action={<Button href="/lab" variant="link">Masuk vault →</Button>}
+          index="03"
+          eyebrow="Layanan"
+          title="Yang bisa saya bangun"
+          description="Dari situs portofolio sederhana sampai aplikasi bersistem. Semua dikerjakan dengan pendekatan yang sama: rapi, cepat, dan benar."
         />
-        <div className="flex flex-wrap gap-2">
-          {lab.slice(0, 12).map((l) => <Tag key={l.slug}>{l.title}</Tag>)}
+        <div className="grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((s, i) => {
+            const Icon = SERVICE_ICONS[i % SERVICE_ICONS.length];
+            return (
+              <Reveal key={s.slug} delay={i * 55} className="h-full">
+                <div className="group relative flex h-full flex-col overflow-hidden bg-[var(--bg-elevated)] p-6 transition-colors duration-300 hover:bg-[var(--bg-sunken)]">
+                  {/* Garis aksen yang tumbuh dari kiri saat hover */}
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-[var(--accent)] transition-transform duration-500 [transition-timing-function:var(--ease-out)] group-hover:scale-x-100"
+                  />
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="grid h-10 w-10 place-items-center rounded-[10px] border border-[var(--border)] text-[var(--text-muted)] transition-colors duration-300 group-hover:border-[var(--accent)] group-hover:text-[var(--accent)]">
+                      <Icon size={17} />
+                    </span>
+                    <span className="index-num">{String(i + 1).padStart(2, "0")}</span>
+                  </div>
+                  <h3 className="h3 mt-5">{s.name}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-[var(--text-muted)]">
+                    {s.description}
+                  </p>
+                  <span className="mt-auto inline-flex items-center gap-2 pt-5 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)] transition-colors group-hover:text-[var(--accent)]">
+                    Diskusikan
+                    <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ═══════════════════════ LEARNING VAULT ═══════════════════════ */}
       <section className="section container">
-        <div className="rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--bg-elevated)] p-10 text-center">
-          <h2 className="h2">Punya proyek atau ingin merekrut?</h2>
-          <p className="mx-auto mt-3 max-w-xl text-[var(--text-muted)]">
-            Saya terbuka untuk proyek freelance, kolaborasi, maupun peluang kerja.
-          </p>
-          <div className="mt-7 flex flex-wrap justify-center gap-3">
-            <Button href="/contact">Hubungi Saya</Button>
-            <Button href="https://rchibnu.aruthtales.my.id" variant="ghost">Lihat Profil</Button>
-          </div>
+        <SectionHeading
+          index="04"
+          eyebrow="Learning Vault"
+          title="Things I built to learn — not to impress."
+          description={`${lab.length} eksperimen kecil sepanjang perjalanan belajar. Sebelum ada proyek besar, ada repo-repo kecil yang membuat saya paham cara kerjanya.`}
+          action={<Button href="/lab" variant="link">Masuk vault</Button>}
+        />
+        <div className="flex flex-wrap gap-2">
+          {lab.slice(0, 14).map((l) => <Tag key={l.slug} tech>{l.title}</Tag>)}
+          {lab.length > 14 && (
+            <a href="/lab" className="inline-flex items-center rounded-full border border-dashed border-[var(--border-strong)] px-3 py-1 font-mono text-[11px] text-[var(--text-muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]">
+              +{lab.length - 14} lainnya
+            </a>
+          )}
         </div>
+      </section>
+
+      {/* ═══════════════════════ CTA ═══════════════════════ */}
+      <section className="section container">
+        <Reveal variant="scale">
+          <div className="relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--bg-elevated)] px-8 py-14 text-center sm:px-14">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 opacity-70"
+              style={{ background: "var(--glow)" }}
+            />
+            {/* Logo raksasa samar di latar — memberi kedalaman, bukan polos */}
+            <div aria-hidden="true" className="pointer-events-none absolute -right-10 -top-10 opacity-[0.06]">
+              <AruthtaleMark size={260} />
+            </div>
+            <div className="relative">
+              <span className="mono-label inline-flex items-center gap-2">
+                <Star size={12} /> Kolaborasi
+              </span>
+              <h2 className="h1 mx-auto mt-5 max-w-2xl text-balance">
+                Punya proyek atau ingin merekrut?
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl text-[var(--text-muted)] leading-relaxed">
+                Saya terbuka untuk proyek freelance, kolaborasi, maupun peluang kerja.
+                Ceritakan idemu — kita bahas bagaimana mewujudkannya.
+              </p>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <Button href="/contact" size="lg" withArrow>Hubungi Saya</Button>
+                <Button href="https://rchibnu.aruthtales.my.id" variant="ghost" size="lg">
+                  Lihat Profil
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Reveal>
       </section>
     </>
   );

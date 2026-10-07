@@ -1,31 +1,125 @@
-/* Afterglow — tema personal Rchibnu (profil). Override di atas token dasar. */
+/* ============================================================================
+   Afterglow — tema personal Rchibnu (Profile)
+   Arah estetika: "Quiet Afterglow"
+   — hangat, reflektif, tenang; kertas senja, bukan neon.
+   — Tipografi lebih lembut (serif aksen) untuk nuansa introspektif.
+   Override di atas token dasar (tokens.css).
+   ========================================================================== */
 
+:root[data-site="profile"] {
+  --font-display: "Fraunces", "Instrument Serif", Georgia, serif;
+  --font-body: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* ---------- Senja gelap (default) ---------- */
 :root[data-theme="dark"][data-site="profile"] {
-  --bg: #14121A;
-  --bg-elevated: #1D1A26;
-  --border: #2E2939;
-  --text: #EAE6F0;
-  --text-muted: #9A93A8;
-  --accent: #E3A57C;      /* senja hangat / Afterglow */
+  --bg: #121016;
+  --bg-elevated: #1B1821;
+  --bg-sunken: #0C0A10;
+  --border: #2C2735;
+  --border-strong: #3D3648;
+  --text: #EFEAF3;
+  --text-muted: #A096AE;
+  --accent: #E3A57C;        /* senja hangat / Afterglow */
   --accent-hover: #EFBE9C;
+  --accent-soft: color-mix(in srgb, var(--accent) 15%, transparent);
+  --accent-2: #B79CE0;      /* wisteria */
   --wisteria: #B79CE0;
   --mirror: #9AA6B2;
   --ramen: #F3E7D6;
-  --gradient: linear-gradient(135deg, #E3A57C, #B79CE0);
+  --gradient: linear-gradient(135deg, #E3A57C 0%, #B79CE0 100%);
+  --shadow: 0 18px 44px -20px rgba(0, 0, 0, .8);
+  --shadow-lift: 0 30px 66px -24px rgba(0, 0, 0, .88);
+  --grain-opacity: .04;
+  --glow: radial-gradient(60% 60% at 50% 0%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 72%);
 }
 
+/* ---------- Kertas senja (terang) ---------- */
 :root[data-theme="light"][data-site="profile"] {
-  --bg: #FBF7F2;
+  --bg: #FAF6F1;
   --bg-elevated: #FFFFFF;
-  --border: #EADFD2;
+  --bg-sunken: #F2EBE3;
+  --border: #E8DCCD;
+  --border-strong: #D3C3AF;
   --text: #241F2B;
-  --text-muted: #6B6274;
+  --text-muted: #6E6478;
   --accent: #C97F4E;
   --accent-hover: #B36C3D;
+  --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+  --accent-2: #8E6FC0;
   --wisteria: #8E6FC0;
+  --mirror: #6E7A88;
+  --ramen: #7A5A38;
+  --gradient: linear-gradient(135deg, #C97F4E 0%, #8E6FC0 100%);
+  --shadow: 0 14px 34px -18px rgba(60, 44, 30, .26);
+  --shadow-lift: 0 24px 52px -22px rgba(60, 44, 30, .34);
+  --grain-opacity: .026;
+  --glow: radial-gradient(60% 60% at 50% 0%, color-mix(in srgb, var(--accent) 14%, transparent), transparent 72%);
 }
 
-[data-site="profile"] .afterglow-gradient {
+/* Judul besar memakai serif lembut — bukan sans tebal */
+[data-site="profile"] .display,
+[data-site="profile"] h1,
+[data-site="profile"] .h1 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 40, "WONK" 1;
+  letter-spacing: -.022em;
+}
+[data-site="profile"] .display { font-size: clamp(2.6rem, 6.6vw, 5.2rem); line-height: 1.0; }
+
+/* Teks bergradien senja */
+.afterglow-gradient {
   background: var(--gradient, linear-gradient(135deg, #E3A57C, #B79CE0));
   -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* Garis pemisah bernuansa hangat */
+[data-site="profile"] .rule::after { background: linear-gradient(90deg, var(--border), transparent); }
+
+/* Sorot kartu memakai senja, bukan indigo */
+[data-site="profile"] .spotlight::before {
+  background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 0%),
+              color-mix(in srgb, var(--accent) 70%, transparent), transparent 62%);
+}
+[data-site="profile"] .spotlight::after {
+  background: radial-gradient(340px circle at var(--mx, 50%) var(--my, 0%),
+              color-mix(in srgb, var(--accent) 10%, transparent), transparent 60%);
+}
+[data-site="profile"] .skill-bar > i,
+[data-site="profile"] .progress-bar {
+  background: linear-gradient(90deg, var(--accent), var(--wisteria));
+}
+[data-site="profile"] .grad-text {
+  background: linear-gradient(100deg, var(--text) 0%, var(--text) 40%, var(--accent) 76%, var(--wisteria) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+[data-site="profile"] .index-num { color: var(--accent); }
+
+/* Bingkai foto profil: cincin senja + ruang kosong hangat */
+.portrait-frame {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(120% 100% at 50% 0%, color-mix(in srgb, var(--accent) 16%, transparent), transparent 62%),
+    var(--bg-elevated);
+  border: 1px solid var(--border);
+}
+.portrait-frame::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+/* Kutipan berbahasa lembut */
+.pull-quote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.15rem, 2.2vw, 1.6rem);
+  line-height: 1.5;
+  color: var(--text);
+  border-left: 2px solid var(--accent);
+  padding-left: 1.25rem;
 }
