@@ -10,7 +10,8 @@
   },
   "scripts": {
     "validate": "tsx src/validate.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "refresh:github": "node scripts/fetch-github.mjs"
   },
   "dependencies": {
     "zod": "^3.24.1"

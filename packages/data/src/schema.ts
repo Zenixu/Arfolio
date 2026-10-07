@@ -126,3 +126,28 @@ export type Project = z.infer<typeof ProjectSchema>;
 export type Lab = z.infer<typeof LabSchema>;
 export type WorkItem = z.infer<typeof WorkItemSchema>;
 export type Certificate = z.infer<typeof CertificateSchema>;
+
+/* ------------------------------ Statistik GitHub ---------------------------- */
+
+/** Snapshot data GitHub publik (dibuat scripts/fetch-github.mjs). */
+export const GithubStatsSchema = z.object({
+  login: z.string(),
+  name: z.string(),
+  url: z.string().url(),
+  since: z.string(),
+  repositories: z.number().int(),
+  followers: z.number().int(),
+  totalContributions: z.number().int(),
+  commits: z.number().int(),
+  pullRequests: z.number().int(),
+  issues: z.number().int(),
+  days: z.array(
+    z.object({
+      date: z.string(),
+      count: z.number().int(),
+      level: z.number().int().min(0).max(4),
+    })
+  ),
+}).passthrough();
+
+export type GithubStats = z.infer<typeof GithubStatsSchema>;

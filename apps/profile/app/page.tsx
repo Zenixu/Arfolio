@@ -1,9 +1,9 @@
-import { rchibnu, featuredCertificates, aruthtale, certificates, courses, awards } from "@arufolio/data";
+import { rchibnu, featuredCertificates, aruthtale, certificates, courses, awards, github } from "@arufolio/data";
 import {
   SectionHeading, Reveal, Button, Tag, ProfileCard, SocialLinks,
   SpotlightCard, Marquee, TechStack, CountUp, CertificateDeck,
   GitHub, Instagram, Mail, Trophy, Briefcase, MapPin, Quote,
-  Parallax, TextReveal, RchibnuMark, VideoBanner, SkillGlobe,
+  Parallax, TextReveal, RchibnuMark, VideoBanner, SkillGlobe, GitHubHeatmap,
 } from "@arufolio/ui";
 
 /** Warna tiap tahap tema — urutan senja dari gelap ke terang. */
@@ -115,6 +115,12 @@ export default function ProfileHome() {
                   { label: "Kelas", value: education.grade.replace("Kelas ", "") },
                 ]}
               />
+            </Reveal>
+
+            {/* Kalender kontribusi GitHub — data ASLI dari snapshot
+                packages/data/src/github.json (Zenixu), jendela 6 bulan. */}
+            <Reveal delay={260} className="mt-5">
+              <GitHubHeatmap stats={github} months={6} />
             </Reveal>
           </div>
         </div>

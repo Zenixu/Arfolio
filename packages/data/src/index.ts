@@ -1,19 +1,21 @@
 import { z } from "zod";
-import { WorkItemSchema, CertificateSchema, BrandSchema, ProfileSchema } from "./schema";
+import { WorkItemSchema, CertificateSchema, BrandSchema, ProfileSchema, GithubStatsSchema } from "./schema";
 
 import brandRaw from "./aruthtales.json" with { type: "json" };
 import profileRaw from "./rchibnu.json" with { type: "json" };
 import accountRaw from "./account.json" with { type: "json" };
 import projectsRaw from "./projects.json" with { type: "json" };
 import certificatesRaw from "./certificates.json" with { type: "json" };
+import githubRaw from "./github.json" with { type: "json" };
 
 /* --------------------------- Validasi saat impor --------------------------- */
 const work = z.array(WorkItemSchema).parse(projectsRaw);
 const certificates = z.array(CertificateSchema).parse(certificatesRaw);
 const brand = BrandSchema.parse(brandRaw);
 const profile = ProfileSchema.parse(profileRaw);
+const github = GithubStatsSchema.parse(githubRaw);
 
-export { certificates };
+export { certificates, github };
 
 /* --------------------------------- Karya ---------------------------------- */
 

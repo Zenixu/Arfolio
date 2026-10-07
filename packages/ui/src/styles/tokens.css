@@ -631,6 +631,87 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 }
 
 /* ------------------------------------------------------------------ *
+ * GitHubHeatmap — kalender kontribusi ala GitHub, dibuat sendiri.
+ *
+ * Kisi memakai aspect-ratio (kolom/7) supaya selnya SELALU kotak di
+ * lebar apa pun: jumlah kolom = jumlah minggu, jumlah baris = 7.
+ * Warna sel memakai aksen tema lewat color-mix, jadi otomatis ikut
+ * indigo (showcase) maupun senja (profile) tanpa aturan terpisah.
+ * ------------------------------------------------------------------ */
+.gh-heat__months {
+  display: flex; gap: 3px; margin-bottom: 5px; padding-left: 26px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.gh-heat__months > span { min-width: 0; overflow: hidden; white-space: nowrap; }
+
+/* Dua jendela kalender (lebar & sempit) — CSS memilih yang tampil.
+   Ambang 640px: di bawah itu sel 6 bulan jadi ~7px, tak terbaca. */
+.gh-heat__view-wide { display: none; }
+.gh-heat__view-narrow { display: block; }
+.gh-heat__sum-wide { display: none; }
+.gh-heat__sum-narrow { display: inline; }
+@media (min-width: 640px) {
+  .gh-heat__view-wide { display: block; }
+  .gh-heat__view-narrow { display: none; }
+  .gh-heat__sum-wide { display: inline; }
+  .gh-heat__sum-narrow { display: none; }
+}
+
+.gh-heat__body { display: flex; gap: 6px; }
+
+.gh-heat__days {
+  display: grid; grid-template-rows: repeat(7, 1fr); gap: 3px;
+  width: 20px; flex: none;
+  font-family: var(--font-mono); font-size: 9px; line-height: 1;
+  color: var(--text-muted); align-items: center;
+}
+
+.gh-heat__grid {
+  display: grid; gap: 3px; width: 100%; min-width: 0;
+  /* Aliran KOLOM + baris eksplisit 7: tiap kolom = 1 minggu (7 hari),
+     jumlah kolom eksplisit = jumlah minggu. Tanpa `grid-template-rows`,
+     aliran kolom membuat 1 kolom implisit per sel → lebar 0px. */
+  grid-auto-flow: column;
+}
+
+.gh-heat__cell {
+  border-radius: 2px;
+  background: var(--bg-sunken);
+  outline: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+  outline-offset: -1px;
+}
+.gh-heat__cell--void { background: transparent; outline-color: transparent; }
+
+/* Tingkat kontribusi: makin banyak makin pekat & makin hangat. */
+.gh-heat__cell[data-level="0"] { background: color-mix(in srgb, var(--text-muted) 12%, transparent); outline-color: transparent; }
+.gh-heat__cell[data-level="1"] { background: color-mix(in srgb, var(--accent) 28%, transparent); outline-color: transparent; }
+.gh-heat__cell[data-level="2"] { background: color-mix(in srgb, var(--accent) 52%, transparent); outline-color: transparent; }
+.gh-heat__cell[data-level="3"] { background: color-mix(in srgb, var(--accent) 74%, transparent); outline-color: transparent; }
+.gh-heat__cell[data-level="4"] { background: var(--accent); outline-color: transparent; }
+
+.gh-heat__cell--key { width: 11px; height: 11px; flex: none; }
+
+.gh-heat__stat {
+  border: 1px solid var(--border); border-radius: var(--radius-md);
+  padding: 10px 12px; background: var(--bg-sunken);
+}
+.gh-heat__num {
+  margin-top: 3px; font-family: var(--font-mono); font-weight: 600;
+  font-size: clamp(1.15rem, 3vw, 1.5rem); line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Selalu kotak: biarkan kisi mengisi lebar, tapi jangan lebih tinggi
+   dari ~150px supaya tidak jadi blok raksasa di layar sangat lebar. */
+.gh-heat__grid { max-height: 150px; }
+
+@media (max-width: 480px) {
+  .gh-heat__months { font-size: 8px; }
+  .gh-heat__days { width: 16px; }
+}
+
+/* ------------------------------------------------------------------ *
  * CertificateDeck — tumpukan kartu sertifikat.
  *
  * Cara kerja: setiap kartu diletakkan ABSOLUT di tengah panggung, lalu

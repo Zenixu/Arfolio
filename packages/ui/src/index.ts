@@ -27,6 +27,7 @@ export { ProfileCard } from "./components/ProfileCard";
 export { SkillOrbit } from "./components/SkillOrbit";
 export { SkillGlobe } from "./components/SkillGlobe";
 export { LearningVault } from "./components/LearningVault";
+export { GitHubHeatmap } from "./components/GitHubHeatmap";
 export { SocialLinks, TechList, type Social } from "./components/SocialLinks";
 
 /* Gerak & interaksi */
