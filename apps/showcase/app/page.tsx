@@ -2,8 +2,8 @@ import {
   featuredProjects, projects, lab, aruthtale, certificates, github,
 } from "@arufolio/data";
 import {
-  ProjectCard, SectionHeading, Reveal, Button, Tag,
-  Marquee, CountUp, SpotlightCard, TechStack, ArrowRight, ArrowDown, Quote, Star,
+  ProjectCard, SectionHeading, Reveal, Button,
+  CountUp, SpotlightCard, TechStack, ArrowRight, Quote, Star,
   Parallax, TextReveal, ScrollTicker, AruthtaleMark, VideoBanner,
   Code, Layers, Shield, Globe, Sparkle, ArrowUpRight, LearningVault,
   CrossLink,
@@ -144,64 +144,73 @@ export default function HomePage() {
           </Reveal>
         </div>
 
-        {/* Marquee logo teknologi */}
+        {/* ── Baris stack statis (bukan scroller kedua) ──
+            Dulu ini marquee logo yang bergerak — satu-satunya alasan ia ada
+            adalah "kelihatan hidup". Tapi dua pita bergerak berdampingan
+            (logo + teks raksasa) membuat mata berebut fokus. Sekarang stack
+            jadi baris statis ber-indeks: tenang, terbaca, dan menyisakan
+            SATU pita bergerak saja di seluruh halaman. */}
         <Reveal delay={600}>
-          <div className="mt-14 border-y border-[var(--border)] py-7">
-            <Marquee duration={44}>
-              {MARQUEE.map((t) => (
-                <span key={t} className="mx-6 inline-flex items-center gap-3">
-                  <TechStack items={[t]} size={22} />
-                  <span className="whitespace-nowrap font-mono text-xs text-[var(--text-muted)]">{t}</span>
-                </span>
+          <div className="mt-12 border-t border-[var(--border)] pt-6">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
+              <span className="mono-label">Stack — {MARQUEE.length} tools</span>
+              <span className="mono-label hidden sm:inline">Daily drivers</span>
+            </div>
+            <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-3 sm:gap-x-8">
+              {MARQUEE.map((t, i) => (
+                <li key={t} className="inline-flex items-center gap-2.5">
+                  <span className="font-mono text-[10px] tabular-nums text-[var(--text-muted)] opacity-60">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <TechStack items={[t]} size={18} />
+                  <span className="whitespace-nowrap text-sm text-[var(--text-muted)]">{t}</span>
+                </li>
               ))}
-            </Marquee>
+            </ul>
           </div>
         </Reveal>
-
-        <div className="container">
-          <Reveal delay={640}>
-            <span className="mt-10 inline-flex items-center gap-2 font-mono text-[11px] text-[var(--text-muted)]">
-              <ArrowDown size={14} /> Work, lab, and the story behind them
-            </span>
-          </Reveal>
-        </div>
       </section>
 
-      {/* ═══════════════════════ PITA PERNYATAAN ═══════════════════════
-          Teks raksasa bergaris yang bergerak mengikuti gulir — memberi
-          "napas" pada halaman, bukan bagian yang diam & kaku.
-          Ruang bawah ekstra supaya ekor huruf (p, y, g) tidak terpangkas. */}
-      <section className="relative overflow-hidden border-y border-[var(--border)] py-14 sm:py-20" aria-label={philosophy.statement}>
+      {/* ═══════════════════════ PITA MANIFESTO ═══════════════════════
+          SATU pita bergerak — dan ia BERISI. Versi lama hanya mengulang
+          slogan kosong; sekarang pita bergantian antara PERNYATAAN dan
+          BUKTI (angka nyata dari repo). Yang bergulir adalah substansi. */}
+      <section
+        className="relative overflow-hidden border-y border-[var(--border)] py-14 sm:py-20"
+        aria-label={philosophy.statement}
+      >
+        {/* Label running-head yang menempel di tepi kiri — supaya tidak ada
+            teks yang terasing tanpa konteks (dulu baris hint melayang). */}
+        <div className="container mb-8 flex items-center gap-3">
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+          <span className="mono-label">Manifesto — aruthtale</span>
+        </div>
+
         <ScrollTicker baseSpeed={0.32}>
-          <div className="flex items-center gap-8 whitespace-nowrap sm:gap-10">
+          <div className="flex items-center gap-10 whitespace-nowrap sm:gap-14">
             {[0, 1].map((k) => (
-              <span key={k} className="inline-flex items-center gap-8 sm:gap-10">
-                <span
-                  className="pb-[0.14em] font-bold tracking-[-0.04em]"
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "clamp(1.9rem, 7vw, 6rem)",
-                    lineHeight: 1.06,
-                    color: "transparent",
-                    WebkitTextStroke: "1px var(--border-strong)",
-                  }}
-                >
-                  Work, not words
+              <span key={k} className="inline-flex items-center gap-10 sm:gap-14">
+                <span className="manifesto__word">Work, not words</span>
+
+                <span className="manifesto__proof">
+                  <b>{projects.length}</b> real projects <span className="manifesto__sep">◆</span>
                 </span>
-                <AruthtaleMark size={40} className="shrink-0" />
-                <span
-                  className="pb-[0.14em] font-bold tracking-[-0.04em]"
-                  style={{
-                    fontFamily: "var(--font-display)",
-                    fontSize: "clamp(1.9rem, 7vw, 6rem)",
-                    lineHeight: 1.06,
-                    color: "transparent",
-                    WebkitTextStroke: "1px color-mix(in srgb, var(--accent) 55%, transparent)",
-                  }}
-                >
-                  aruthtale
+
+                <span className="manifesto__word manifesto__word--accent">aruthtale</span>
+
+                <span className="manifesto__proof">
+                  <b>{lab.length}</b> experiments <span className="manifesto__sep">◆</span>
                 </span>
-                <AruthtaleMark size={40} className="shrink-0" />
+
+                <span className="manifesto__word">Portfolio · SaaS · POS · Web</span>
+
+                <span className="manifesto__proof">
+                  <b>{github.commits}</b> commits <span className="manifesto__sep">◆</span>
+                </span>
+
+                <span className="manifesto__word manifesto__word--accent">Since 2024</span>
+
+                <AruthtaleMark size={36} className="shrink-0" />
               </span>
             ))}
           </div>

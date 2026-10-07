@@ -1346,3 +1346,44 @@ a.vault-item:hover .vault-item__title { color: var(--accent); }
 @media (prefers-reduced-motion: reduce) {
   .ledger__row, .ledger__row::before, .ledger__dots, .ledger__num { transition: none !important; }
 }
+
+/* ============================ Manifesto ============================
+   Satu pita bergerak yang BERISI. Versi lama hanya mengulang satu
+   slogan ("Work, not words" + "aruthtale") — heroik tapi hampa, karena
+   teks sebesar itu tidak membawa informasi apa pun. Sekarang pita
+   bergantian antara PERNYATAAN (kata raksasa bergaris) dan BUKTI
+   (angka nyata dari repo): yang bergulir adalah substansi, bukan hiasan.
+   Kontras garis juga dinaikkan — versi lama 1px `--border-strong` di
+   atas hitam terbaca sebagai ruang kosong, bukan sebagai elemen. */
+.manifesto__word {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -.045em;
+  line-height: 1.06;
+  font-size: clamp(1.9rem, 6.4vw, 5.5rem);
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--text) 62%, transparent);
+}
+.manifesto__word--accent {
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--accent) 88%, transparent);
+}
+.manifesto__proof {
+  display: inline-flex;
+  align-items: baseline;
+  gap: .55rem;
+  font-family: var(--font-mono);
+  font-size: clamp(.8rem, 1.3vw, 1rem);
+  text-transform: uppercase;
+  letter-spacing: .13em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.manifesto__proof b {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3.6vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+.manifesto__sep { color: var(--accent); font-size: 1rem; opacity: .75; }
