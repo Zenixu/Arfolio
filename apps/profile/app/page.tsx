@@ -141,6 +141,7 @@ export default function ProfileHome() {
           eyebrow="Tentang"
           title="Siapa saya"
           description={bio.short}
+          action={<Button href="/contact" variant="link">Kontak</Button>}
         />
         <div className="grid-12">
           <div className="col-span-12 lg:col-span-7">
