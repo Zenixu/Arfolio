@@ -148,6 +148,16 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
   padding-left: 1.25rem;
 }
 
+/* Frasa penekanan di dalam judul — italic sans (Instrument Sans punya
+   italic asli, jadi tidak ada kemiringan sintetis yang terlihat murah). */
+.accent-italic {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -.01em;
+  color: var(--accent);
+}
+
 .mono-label {
   font-family: var(--font-mono);
   font-size: .6875rem;              /* 11px */
@@ -695,3 +705,178 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
   background: linear-gradient(90deg, transparent, var(--bg));
 }
 @media (min-width: 768px) { .rail-hint::after { display: none; } }
+
+/* ------------------------------------------------------------------ *
+ * Learning Vault — brankas arsip yang membuka saat digulir.
+ *
+ * Kenapa bukan orbit: orbit sudah dipakai untuk keahlian di halaman
+ * profil, dan thumbnail lab berbentuk lanskap 16:10 — kalau diputar
+ * kecil, isinya tak terbaca. Di sini nama bagiannya ("vault") yang
+ * diubah menjadi gerak: pintu logam terbuka, lalu entri bermunculan.
+ *
+ * Konten selalu ada di DOM; pintu hanya lapisan hiasan di atasnya
+ * (pointer-events: none). Tanpa JS kelas `.js` tidak ada, sehingga
+ * pintu tidak dirender sama sekali dan isi langsung terbaca.
+ * ------------------------------------------------------------------ */
+.vault { position: relative; }
+
+/* Panggung = kisi entri + pintu yang menutupinya. `isolation: isolate`
+   membuat lapisan pintu (z-index 3) tidak menimpa tautan di bawah. */
+.vault__stage { position: relative; isolation: isolate; }
+
+.vault__grid {
+  display: grid; gap: 0.7rem; list-style: none; margin: 0; padding: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+@media (min-width: 640px) {
+  .vault__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.8rem; }
+}
+@media (min-width: 1024px) {
+  .vault__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* Entri: tersembunyi hanya ketika JS hidup, lalu bermunculan berurutan
+   setelah pintu terbuka. Ada pengaman waktu di sisi JS (<= 2,4 dtk). */
+.vault__cell { min-width: 0; }
+.js .vault__cell {
+  opacity: 0; transform: translateY(22px) scale(0.985);
+  transition: opacity 620ms var(--ease-out), transform 620ms var(--ease-out);
+  transition-delay: calc(320ms + var(--i, 0) * 55ms);
+}
+.js .vault.is-open .vault__cell { opacity: 1; transform: none; }
+
+.vault-item {
+  display: flex; flex-direction: column; height: 100%; overflow: hidden;
+  border-radius: var(--radius-md); border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  transition: border-color 220ms ease, transform 320ms var(--ease-out), box-shadow 320ms var(--ease-out);
+}
+a.vault-item:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-strong); box-shadow: var(--shadow);
+}
+.vault-item--locked { opacity: 0.55; }
+
+.vault-item__media {
+  position: relative; display: block; aspect-ratio: 16 / 10;
+  overflow: hidden; background: var(--bg-sunken);
+}
+.vault-item__media img {
+  transition: transform 700ms var(--ease-out);
+}
+a.vault-item:hover .vault-item__media img { transform: scale(1.05); }
+
+.vault-item__no,
+.vault-item__flag {
+  position: absolute; top: 0.45rem; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 0.5625rem; line-height: 1;
+  padding: 0.22rem 0.42rem;
+}
+.vault-item__no {
+  left: 0.45rem; letter-spacing: 0.06em;
+  color: #fff; background: rgba(0, 0, 0, 0.55); backdrop-filter: blur(4px);
+}
+.vault-item__flag {
+  right: 0.45rem; text-transform: uppercase; letter-spacing: 0.12em;
+  color: var(--text-muted); background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-strong);
+}
+
+.vault-item__body { display: flex; flex-direction: column; gap: 0.3rem; padding: 0.7rem 0.75rem 0.8rem; }
+
+/* Judul entri memakai font display — memberi karakter editorial yang
+   jelas berbeda dari teks isi (ini yang sebelumnya terasa "polos"). */
+.vault-item__title {
+  font-family: var(--font-display);
+  font-size: 0.875rem; font-weight: 600; line-height: 1.22; letter-spacing: -0.015em;
+  transition: color 200ms ease;
+}
+a.vault-item:hover .vault-item__title { color: var(--accent); }
+
+.vault-item__desc {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  font-size: 0.75rem; line-height: 1.45; color: var(--text-muted);
+}
+.vault-item__meta { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-top: 0.15rem; }
+.vault-item__meta > span {
+  font-size: 0.625rem; padding: 0.12rem 0.42rem; gap: 0.3rem;
+}
+
+/* ---- Pintu brankas (hanya saat JS hidup) ---- */
+.vault__frame { display: none; }
+.js .vault__frame {
+  display: block; position: absolute; inset: 0; z-index: 3;
+  pointer-events: none; overflow: hidden; border-radius: var(--radius-lg);
+}
+
+.vault__door {
+  position: absolute; left: 0; right: 0; height: 50.5%;
+  background: linear-gradient(180deg, #17171d 0%, #0d0d11 100%);
+  box-shadow: inset 0 0 70px rgba(0, 0, 0, 0.6);
+  transition: transform 880ms var(--ease-in-out);
+}
+.vault__door::after {
+  content: ""; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.035) 0 1px, transparent 1px 9px);
+  opacity: 0.55;
+}
+.vault__door--top { top: 0; border-bottom: 1px solid var(--border-strong); }
+.vault__door--bottom { bottom: 0; border-top: 1px solid var(--border-strong); }
+.vault.is-open .vault__door--top { transform: translateY(-101%); }
+.vault.is-open .vault__door--bottom { transform: translateY(101%); }
+
+.vault__dial {
+  position: absolute; left: 50%; top: 50%; translate: -50% -50%;
+  display: grid; place-items: center;
+  width: 4.25rem; height: 4.25rem; border-radius: 50%;
+  background: radial-gradient(circle at 50% 38%, #1d1d25, #0a0a0d 72%);
+  border: 1px solid var(--border-strong);
+  box-shadow: 0 0 0 7px rgba(0, 0, 0, 0.35), inset 0 2px 12px rgba(255, 255, 255, 0.07);
+  transition: opacity 400ms ease, scale 880ms var(--ease-out);
+}
+.vault.is-open .vault__dial { opacity: 0; scale: 1.45; }
+
+.vault__dial-ring {
+  position: absolute; inset: 8px; border-radius: 50%;
+  border: 2px dashed rgba(255, 255, 255, 0.16);
+  animation: vault-spin 16s linear infinite;
+}
+.vault__dial-mark {
+  position: absolute; top: 3px; left: 50%; translate: -50% 0;
+  width: 2px; height: 9px; border-radius: 2px; background: var(--accent);
+}
+.vault__dial-core {
+  width: 0.5rem; height: 0.5rem; border-radius: 50%;
+  background: var(--text-muted);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 65%, transparent);
+}
+
+.vault__plate {
+  position: absolute; left: 50%; bottom: 1.3rem; translate: -50% 0;
+  display: inline-flex; align-items: center; gap: 0.45rem; white-space: nowrap;
+  font-family: var(--font-mono); font-size: 0.625rem;
+  text-transform: uppercase; letter-spacing: 0.16em; color: var(--text-muted);
+  transition: opacity 260ms ease;
+}
+.vault.is-open .vault__plate { opacity: 0; }
+.vault__dot {
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+  box-shadow: 0 0 8px var(--accent);
+}
+
+@keyframes vault-spin { to { rotate: 360deg; } }
+
+/* Tautan keluar vault */
+.vault__more {
+  margin-top: 1.5rem; display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.875rem; font-weight: 500; color: var(--accent);
+  transition: gap 220ms var(--ease-out);
+}
+.vault__more:hover { gap: 0.9rem; }
+.vault__more-n { font-family: var(--font-mono); font-size: 0.6875rem; color: var(--text-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .js .vault__cell { opacity: 1 !important; transform: none !important; }
+  .vault__door, .vault__dial, .vault__plate { transition: none !important; }
+  .vault__dial-ring { animation: none; }
+}

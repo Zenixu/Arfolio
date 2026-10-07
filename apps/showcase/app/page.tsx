@@ -5,7 +5,7 @@ import {
   ProjectCard, SectionHeading, Reveal, Button, Tag,
   Marquee, CountUp, SpotlightCard, TechStack, ArrowRight, ArrowDown, Quote, Star,
   Parallax, TextReveal, ScrollTicker, AruthtaleMark, VideoBanner,
-  Code, Layers, Shield, Globe, Sparkle, MapPin, ArrowUpRight,
+  Code, Layers, Shield, Globe, Sparkle, MapPin, ArrowUpRight, LearningVault,
 } from "@arufolio/ui";
 
 /** Teknologi untuk marquee — diambil dari tag proyek + daftar inti. */
@@ -325,18 +325,11 @@ export default function HomePage() {
         <SectionHeading
           index="04"
           eyebrow="Learning Vault"
-          title="Things I built to learn — not to impress."
+          title={<>Things I built to learn — <span className="accent-italic">not to impress.</span></>}
           description={`${lab.length} eksperimen kecil sepanjang perjalanan belajar. Sebelum ada proyek besar, ada repo-repo kecil yang membuat saya paham cara kerjanya.`}
           action={<Button href="/lab" variant="link">Masuk vault</Button>}
         />
-        <div className="flex flex-wrap gap-2">
-          {lab.slice(0, 14).map((l) => <Tag key={l.slug} tech>{l.title}</Tag>)}
-          {lab.length > 14 && (
-            <a href="/lab" className="inline-flex items-center rounded-full border border-dashed border-[var(--border-strong)] px-3 py-1 font-mono text-[11px] text-[var(--text-muted)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]">
-              +{lab.length - 14} lainnya
-            </a>
-          )}
-        </div>
+        <LearningVault items={lab.filter((l) => l.thumb).slice(0, 8)} total={lab.length} />
       </section>
 
       {/* ═══════════════════════ CTA ═══════════════════════ */}

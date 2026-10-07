@@ -17,7 +17,7 @@ export default function LabPage() {
       <SectionHeading
         index="02"
         eyebrow="Learning Vault"
-        title={<>Things I built to learn — <span className="text-[var(--accent)]">not to impress.</span></>}
+        title={<>Things I built to learn — <span className="accent-italic">not to impress.</span></>}
         description={`${lab.length} eksperimen & latihan sepanjang perjalanan belajar. Sebelum ada proyek besar, ada repo-repo kecil yang membuat saya paham cara kerjanya.`}
       />
 
