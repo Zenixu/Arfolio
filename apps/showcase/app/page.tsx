@@ -247,7 +247,7 @@ export default function HomePage() {
         <SectionHeading
           index="01"
           eyebrow="Filosofi"
-          title={<>Kenapa namanya <span className="text-[var(--accent)]">aruthtale</span>?</>}
+          title={<>Why <span className="text-[var(--accent)]">Aruthtale</span>?</>}
           description={philosophy.nameOrigin.explanation}
         />
 
