@@ -13,6 +13,7 @@ export { Thumb } from "./components/Thumb";
 export { Button } from "./components/Button";
 export { SectionHeading } from "./components/SectionHeading";
 export { Reveal } from "./components/Reveal";
+export { JsonLd } from "./components/JsonLd";
 export { ThemeToggle } from "./components/ThemeToggle";
 
 /* Navigasi & kerangka */

@@ -5,6 +5,7 @@ import { SectionHeading, CertificateCard, Reveal, CountUp } from "@arufolio/ui";
 export const metadata: Metadata = {
   title: "Sertifikat",
   description: "Sertifikat kursus dan penghargaan kompetisi.",
+  alternates: { canonical: "/certificates" },
 };
 
 export default function CertificatesPage() {

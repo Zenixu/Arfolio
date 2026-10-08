@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
-import { sites, nav } from "@arufolio/config";
+import { sites, nav, websiteSchema, personSchema, socialSameAs } from "@arufolio/config";
 import {
-  Navbar, Footer, ThemeToggle, ScrollProgress, CursorDot,
+  Navbar, Footer, ThemeToggle, ScrollProgress, CursorDot, JsonLd,
   GitHub, Instagram, Mail, WhatsApp,
 } from "@arufolio/ui";
 import { rchibnu } from "@arufolio/data";
@@ -29,12 +29,22 @@ export const metadata: Metadata = {
   metadataBase: new URL(sites.profile.url),
   title: { default: sites.profile.title, template: "%s — Rchibnu" },
   description: sites.profile.description,
+  keywords: [...sites.profile.keywords],
+  applicationName: sites.profile.shortTitle,
+  authors: [{ name: rchibnu.identity.fullName, url: sites.profile.url }],
+  creator: rchibnu.identity.fullName,
+  alternates: { canonical: "/" },
   openGraph: {
     type: "profile", url: sites.profile.url,
     title: sites.profile.title, description: sites.profile.description,
-    siteName: "Rchibnu",
+    siteName: sites.profile.shortTitle,
+    locale: sites.profile.locale,
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", title: sites.profile.title, description: sites.profile.description },
+  robots: {
+    index: true, follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
 };
 
 // Menandai bahwa JS hidup: animasi reveal baru diaktifkan lewat kelas .js ini.
@@ -48,6 +58,35 @@ const socials = [
   { label: "WhatsApp", href: `https://wa.me/${rchibnu.contact.whatsapp}`, icon: <WhatsApp size={16} /> },
 ];
 
+/* ── Structured data (schema.org) ───────────────────────────────────────────
+ * WebSite + Person. Person inilah yang menghubungkan nama "Rchibnu" /
+ * "Ibnu Hambal" dengan situs ini di mata Google (Knowledge Graph). */
+const sameAs = socialSameAs(rchibnu.contact);
+const knowsAbout = rchibnu.skills.groups.flatMap((g) => g.items).slice(0, 30);
+
+const structuredData = [
+  websiteSchema({
+    siteUrl: sites.profile.url,
+    name: sites.profile.shortTitle,
+    alternateName: rchibnu.identity.fullName,
+    description: sites.profile.description,
+    logoUrl: `${sites.profile.url}/icon.png`,
+    sameAs,
+  }),
+  personSchema({
+    name: rchibnu.identity.fullName,
+    alternateName: rchibnu.identity.handle,
+    url: sites.profile.url,
+    jobTitle: rchibnu.identity.role,
+    description: rchibnu.bio.short,
+    imageUrl: rchibnu.identity.photo ? `${sites.profile.url}${rchibnu.identity.photo}` : undefined,
+    location: rchibnu.identity.location,
+    sameAs,
+    knowsAbout,
+    worksFor: "PT ASQI Digital Innovation",
+  }),
+];
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -56,7 +95,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
       className={`${display.variable} ${body.variable} ${mono.variable}`}
     >
-      <head><script dangerouslySetInnerHTML={{ __html: themeScript }} /></head>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {structuredData.map((schema, i) => (
+          <JsonLd key={i} data={schema} />
+        ))}
+      </head>
       <body>
         <a
           href="#main"

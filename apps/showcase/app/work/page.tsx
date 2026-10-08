@@ -5,6 +5,7 @@ import { ProjectCard, SectionHeading, Reveal, CountUp } from "@arufolio/ui";
 export const metadata: Metadata = {
   title: "The Work",
   description: "Karya nyata — aplikasi, platform, dan alat yang sudah dibangun.",
+  alternates: { canonical: "/work" },
 };
 
 export default function WorkPage() {

@@ -8,6 +8,7 @@ import {
 export const metadata: Metadata = {
   title: "Kontak",
   description: "Hubungi saya untuk proyek atau kolaborasi.",
+  alternates: { canonical: "/contact" },
 };
 
 export default function ContactPage() {

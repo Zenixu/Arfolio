@@ -5,6 +5,7 @@ import { LabCard, SectionHeading, Reveal, CountUp, Marquee, TechStack } from "@a
 export const metadata: Metadata = {
   title: "Learning Vault",
   description: "Things I built to learn — not to impress. Arsip eksperimen & latihan.",
+  alternates: { canonical: "/lab" },
 };
 
 export default function LabPage() {

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { projects, getProject } from "@arufolio/data";
+import { sites, breadcrumbSchema, softwareSchema } from "@arufolio/config";
 import {
   Button, SectionHeading, Thumb, Reveal, CountUp,
-  SpotlightCard, ArrowUpRight, TechList, GitHub, Globe,
+  SpotlightCard, ArrowUpRight, TechList, GitHub, Globe, JsonLd,
 } from "@arufolio/ui";
 
 export function generateStaticParams() {
@@ -14,7 +15,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const p = getProject(slug);
   if (!p) return {};
-  return { title: p.title, description: p.summary };
+  const url = `${sites.showcase.url}/work/${p.slug}`;
+  return {
+    title: p.title,
+    description: p.summary,
+    alternates: { canonical: `/work/${p.slug}` },
+    openGraph: {
+      type: "article", url, title: `${p.title} — Aruthtale`, description: p.summary,
+    },
+    twitter: { card: "summary_large_image", title: p.title, description: p.summary },
+  };
 }
 
 export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -25,8 +35,31 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   const idx = projects.findIndex((x) => x.slug === p.slug);
   const next = projects[(idx + 1) % projects.length];
 
+  const projectUrl = `${sites.showcase.url}/work/${p.slug}`;
+  const schemas = [
+    breadcrumbSchema([
+      { name: "Beranda", url: sites.showcase.url },
+      { name: "Work", url: `${sites.showcase.url}/work` },
+      { name: p.title, url: projectUrl },
+    ]),
+    softwareSchema({
+      name: p.title,
+      description: p.summary,
+      url: projectUrl,
+      category: p.category,
+      keywords: p.tags,
+      imageUrl: p.thumbnail ? `${sites.showcase.url}${p.thumbnail}` : undefined,
+      authorName: sites.showcase.shortTitle,
+      authorUrl: sites.showcase.url,
+      sameAs: [p.links.live, p.links.repo].filter((u): u is string => typeof u === "string"),
+    }),
+  ];
+
   return (
     <article>
+      {schemas.map((s, i) => (
+        <JsonLd key={i} data={s} />
+      ))}
       {/* ── Kepala ── */}
       <header className="relative overflow-hidden border-b border-[var(--border)] pt-[clamp(48px,9vh,104px)] pb-[clamp(40px,6vh,72px)]">
         <div

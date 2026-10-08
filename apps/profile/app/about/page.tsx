@@ -7,6 +7,7 @@ import {
 export const metadata: Metadata = {
   title: "Tentang",
   description: "Perjalanan, pengalaman, dan pendidikan.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from "next/font/google";
-import { sites, nav } from "@arufolio/config";
+import { sites, nav, websiteSchema, serviceSchema, socialSameAs } from "@arufolio/config";
 import {
-  Navbar, Footer, ThemeToggle, ScrollProgress, CursorDot,
+  Navbar, Footer, ThemeToggle, ScrollProgress, CursorDot, JsonLd,
   GitHub, Instagram, Mail, WhatsApp,
 } from "@arufolio/ui";
 import { aruthtale } from "@arufolio/data";
@@ -26,14 +26,26 @@ const mono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(sites.showcase.url),
-  title: { default: sites.showcase.title, template: "%s — aruthtale" },
+  title: { default: sites.showcase.title, template: "%s — Aruthtale" },
   description: sites.showcase.description,
+  keywords: [...sites.showcase.keywords],
+  applicationName: sites.showcase.shortTitle,
+  authors: [{ name: "Ibnu Hambal Al Bantani Rch", url: sites.profile.url }],
+  creator: "Ibnu Hambal Al Bantani Rch",
+  publisher: "Aruthtale",
+  category: "technology",
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website", url: sites.showcase.url,
     title: sites.showcase.title, description: sites.showcase.description,
-    siteName: "aruthtale",
+    siteName: sites.showcase.shortTitle,
+    locale: sites.showcase.locale,
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", title: sites.showcase.title, description: sites.showcase.description },
+  robots: {
+    index: true, follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
 };
 
 // Menandai bahwa JS hidup: animasi reveal baru diaktifkan lewat kelas .js ini.
@@ -47,6 +59,34 @@ const socials = [
   { label: "WhatsApp", href: `https://wa.me/${aruthtale.contact.whatsapp}`, icon: <WhatsApp size={16} /> },
 ];
 
+/* ── Structured data (schema.org) ───────────────────────────────────────────
+ * Dipasang di layout supaya berlaku untuk SEMUA halaman showcase.
+ * Memberi tahu Google: ini situs apa, milik siapa, dan layanan apa yang dijual. */
+const sameAs = socialSameAs(aruthtale.contact);
+const services = aruthtale.services as { slug: string; name: string; description: string }[];
+
+const structuredData = [
+  websiteSchema({
+    siteUrl: sites.showcase.url,
+    name: sites.showcase.shortTitle,
+    alternateName: "aruthtale",
+    description: sites.showcase.description,
+    logoUrl: `${sites.showcase.url}/icon.png`,
+    sameAs,
+    founderName: "Ibnu Hambal Al Bantani Rch",
+    founderUrl: sites.profile.url,
+    founderJobTitle: "Fullstack Developer",
+  }),
+  serviceSchema({
+    siteUrl: sites.showcase.url,
+    name: sites.showcase.shortTitle,
+    description: sites.showcase.description,
+    areaServed: "Indonesia",
+    services: services.map((s) => ({ name: s.name, description: s.description })),
+    sameAs,
+  }),
+];
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -55,7 +95,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
       className={`${display.variable} ${body.variable} ${mono.variable}`}
     >
-      <head><script dangerouslySetInnerHTML={{ __html: themeScript }} /></head>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {structuredData.map((schema, i) => (
+          <JsonLd key={i} data={schema} />
+        ))}
+      </head>
       <body>
         <a
           href="#main"

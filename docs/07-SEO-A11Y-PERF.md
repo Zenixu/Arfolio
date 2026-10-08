@@ -1,5 +1,36 @@
 # SEO, Aksesibilitas & Performa — Arufolio
 
+## 0. Status implementasi (yang SUDAH terpasang di kode)
+
+| Elemen | Showcase | Profile | File |
+|---|---|---|---|
+| `sitemap.xml` | ✅ 12 URL | ✅ 5 URL | `app/sitemap.ts` |
+| `robots.txt` | ✅ | ✅ | `app/robots.ts` |
+| `canonical` | ✅ semua halaman | ✅ semua halaman | `app/**/page.tsx` (`alternates`) |
+| `metadataBase` | ✅ | ✅ | `app/layout.tsx` |
+| Title ber-kata kunci | ✅ | ✅ | `packages/config/src/site.ts` |
+| `keywords` + `robots` googleBot | ✅ | ✅ | `app/layout.tsx` |
+| **OG image dinamis (PNG)** | ✅ + per proyek | ✅ | `app/opengraph-image.tsx` |
+| **JSON-LD** | `WebSite` `Organization` `ProfessionalService` + `BreadcrumbList` `SoftwareApplication` (proyek) | `WebSite` `Organization` `Person` | `app/layout.tsx`, `work/[slug]/page.tsx` |
+
+**Pembangun JSON-LD:** `packages/config/src/jsonld.ts`
+(`websiteSchema`, `personSchema`, `serviceSchema`, `breadcrumbSchema`, `softwareSchema`, `socialSameAs`)
+**Komponen render:** `packages/ui/src/components/JsonLd.tsx` (escape `<` → `\u003c`).
+
+### Yang HARUS dilakukan di luar kode (dashboard)
+1. **Google Search Console** — verifikasi domain, kirim `sitemap.xml`, klik *Request Indexing*.
+   Ini pengungkit terbesar untuk situs baru; tanpa ini Google hanya menebak.
+2. **Bing Webmaster Tools** — impor dari GSC, satu klik.
+3. **Redirect `arfolio-eta.vercel.app`** → `aruthtales.my.id` (Vercel → Settings → Domains)
+   supaya tidak ada konten kembar yang bersaing.
+
+### Jebakan yang sudah dihindari
+- **`og:image` tidak boleh WebP** — Facebook/LinkedIn/WhatsApp menolaknya. Karena itu
+  OG image dibuat PNG dinamis via `next/og`, bukan memakai thumbnail `.webp`.
+- **Satori (next/og) mewajibkan `display: flex`** pada SETIAP `<div>`, termasuk yang
+  berisi satu potong teks. Teks gabungan harus ditulis sebagai satu string
+  (`` {`${a} · ${b}`} ``), bukan potongan bersebelahan — kalau tidak, build gagal.
+
 ## 1. SEO
 
 ### Struktur domain
@@ -20,6 +51,11 @@
 - Teks unik & bermakna (hindari lorem).
 - Alt text deskriptif pada gambar proyek.
 - Internal linking kuat (Showcase ⇄ Profile).
+
+### Ekspektasi realistis
+- **Pencarian nama merek** (`aruthtale`, `rchibnu`) → bisa peringkat 1 karena tidak ada pesaing.
+- **Pencarian umum** (`fullstack developer cianjur`) → butuh 1–3 bulan + backlink; bukan hasil instan.
+
 
 ## 2. Aksesibilitas (WCAG 2.2 AA)
 

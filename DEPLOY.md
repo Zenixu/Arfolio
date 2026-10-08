@@ -152,7 +152,56 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 
 ---
 
-## 9. Aturan emas
+## 9. Agar muncul di Google (SEO)
+
+### Sudah beres di kode (tidak perlu diapa-apakan lagi)
+`sitemap.xml` · `robots.txt` · `canonical` tiap halaman · title ber-kata kunci ·
+OG image dinamis (PNG, tampil saat link dibagikan) · JSON-LD
+(`WebSite`, `Organization`, `Person`, `ProfessionalService`, `SoftwareApplication`, `BreadcrumbList`).
+
+Detail teknis: [`docs/07-SEO-A11Y-PERF.md`](docs/07-SEO-A11Y-PERF.md)
+
+### Wajib dilakukan di dashboard — INI pengungkit terbesarnya
+
+**Google Search Console** (`search.google.com/search-console`)
+
+1. **Add property** → pilih **Domain** → ketik `aruthtales.my.id`
+2. Verifikasi lewat **DNS TXT record** di Rumahweb (Vercel tidak bisa taruh file verifikasi
+   di root, jadi cara DNS paling aman). Salin nilai TXT dari Google → tambah di Rumahweb
+   → klik Verify.
+3. Ulangi untuk `rchibnu.aruthtales.my.id` (atau cukup satu property `aruthtales.my.id`
+   karena subdomain ikut terpantau lewat prefix).
+4. **Sitemaps** → kirim `https://aruthtales.my.id/sitemap.xml` dan
+   `https://rchibnu.aruthtales.my.id/sitemap.xml`
+5. **URL Inspection** → tempel URL → **Request Indexing**. Lakukan untuk halaman penting
+   (beranda, `/work`, tiap proyek). Ini mempercepat Google mengunjungi ulang.
+
+**Bing Webmaster Tools** (`bing.com/webmasters`) — bisa impor langsung dari GSC.
+
+### Ekspektasi realistis (jujur)
+| Pencarian | Perkiraan |
+|---|---|
+| `aruthtale`, `aruthtales`, `rchibnu` | Bisa **peringkat 1** — tidak ada pesaing nama ini |
+| `fullstack developer cianjur`, `jasa pembuatan web` | **1–3 bulan** + perlu backlink; bukan instan |
+
+> Siapa pun yang menjanjikan "peringkat 1 dalam 3 hari" itu tidak benar. Yang mempercepat
+> nyata: Search Console + konten unik + tautan dari situs lain (GitHub, LinkedIn, dll).
+
+### Rapikan (opsional tapi disarankan)
+- Redirect `arfolio-eta.vercel.app` → `aruthtales.my.id` di Vercel → Settings → Domains,
+  supaya tidak ada dua alamat dengan isi sama (konten duplikat).
+
+### Cek sendiri kapan saja
+```bash
+# sudah terindeks?
+#   buka Google, ketik:  site:aruthtales.my.id
+# cek kartu share:  https://www.opengraph.xyz/  (tempel URL)
+# validasi JSON-LD: https://search.google.com/test/rich-results
+```
+
+---
+
+## 10. Aturan emas
 
 1. **Selalu `pnpm build` sebelum push** — menangkap error lebih awal daripada menunggu Vercel.
 2. **Jangan commit rahasia** — pakai Environment Variables di Vercel.
@@ -162,7 +211,7 @@ curl -s -o /dev/null -w "%{http_code}\n" \
 
 ---
 
-## 10. Perintah harian
+## 11. Perintah harian
 
 ```bash
 pnpm dev              # jalankan kedua situs (3000 showcase, 3001 profile)

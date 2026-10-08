@@ -7,6 +7,7 @@ import {
 export const metadata: Metadata = {
   title: "Keahlian",
   description: "Teknologi, konsep, dan tools yang saya gunakan.",
+  alternates: { canonical: "/skills" },
 };
 
 export default function SkillsPage() {
