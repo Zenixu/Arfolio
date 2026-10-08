@@ -163,20 +163,69 @@ Detail teknis: [`docs/07-SEO-A11Y-PERF.md`](docs/07-SEO-A11Y-PERF.md)
 
 ### Wajib dilakukan di dashboard — INI pengungkit terbesarnya
 
-**Google Search Console** (`search.google.com/search-console`)
+> **Kenapa harus cara DNS?** Vercel tidak bisa menaruh file verifikasi di root domain,
+> jadi satu-satunya cara yang bisa diandalkan adalah **DNS TXT record**. Tidak perlu
+> bongkar kode, tidak perlu deploy ulang.
 
-1. **Add property** → pilih **Domain** → ketik `aruthtales.my.id`
-2. Verifikasi lewat **DNS TXT record** di Rumahweb (Vercel tidak bisa taruh file verifikasi
-   di root, jadi cara DNS paling aman). Salin nilai TXT dari Google → tambah di Rumahweb
-   → klik Verify.
-3. Ulangi untuk `rchibnu.aruthtales.my.id` (atau cukup satu property `aruthtales.my.id`
-   karena subdomain ikut terpantau lewat prefix).
-4. **Sitemaps** → kirim `https://aruthtales.my.id/sitemap.xml` dan
-   `https://rchibnu.aruthtales.my.id/sitemap.xml`
-5. **URL Inspection** → tempel URL → **Request Indexing**. Lakukan untuk halaman penting
-   (beranda, `/work`, tiap proyek). Ini mempercepat Google mengunjungi ulang.
+#### A. Google Search Console — langkah demi langkah
 
-**Bing Webmaster Tools** (`bing.com/webmasters`) — bisa impor langsung dari GSC.
+**1. Buka & masuk**
+- Kunjungi `https://search.google.com/search-console`
+- Masuk dengan akun Google yang kamu pakai untuk bisnis/pribadi.
+
+**2. Tambah properti**
+- Klik **Add property** (kiri atas).
+- Muncul dua pilihan: **Domain** dan **URL prefix**.
+- **Pilih `Domain`** (kotak kiri) — lebih baik karena mencakup semua subdomain
+  (`www`, `rchibnu`) sekaligus.
+- Ketik: `aruthtales.my.id` → klik **Continue**.
+
+**3. Ambil nilai verifikasi**
+- Google menampilkan tabel DNS. Salin **nilai TXT** — bentuknya seperti:
+  ```
+  google-site-verification=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  ```
+- **Klik ikon Copy.** Jangan ketik manual (panjang, gampang salah).
+
+**4. Pasang di Rumahweb**
+- Buka `https://new.clientzone.rumahweb.com` → **Domain** → `aruthtales.my.id`
+  → **Manajemen DNS**.
+- Klik **+ Tambah Record Baru**, isi:
+
+  | Field | Isi |
+  |---|---|
+  | Domain | *(kosongkan — artinya `@` / akar domain)* |
+  | TTL | `300` |
+  | Tipe Record | **TXT** |
+  | IP atau Hostname | *(paste nilai `google-site-verification=...` tadi)* |
+
+- Klik **Tambah Record**.
+- ⚠️ **Jangan sentuh** record `A @`, `CNAME www`, `CNAME rchibnu` yang sudah ada.
+
+**5. Verifikasi**
+- Kembali ke tab Google Search Console → klik **Verify**.
+- Kalau muncul "Verification failed", **tunggu 5–10 menit** lalu klik Verify lagi
+  (TTL 300 = perlu waktu menyebar). Ini normal, bukan berarti salah.
+
+**6. Kirim sitemap**
+- Menu kiri → **Sitemaps**.
+- Di kolom "Add a new sitemap", ketik: `sitemap.xml` → klik **Submit**.
+- Status akan berubah jadi **Success** dalam beberapa jam.
+
+**7. Minta Google mengindeks halaman penting**
+- Di kolom pencarian atas (URL Inspection), tempel `https://aruthtales.my.id/`
+  → Enter → klik **Request Indexing**.
+- Ulangi untuk: `https://aruthtales.my.id/work`,
+  `https://rchibnu.aruthtales.my.id/`.
+- Kuota Request Indexing terbatas per hari — dahulukan yang terpenting.
+
+**8. Selesai.** Pantau di menu **Pages** (berapa yang terindeks) dan
+**Performance** (kata kunci apa yang orang pakai untuk menemukanmu).
+Datanya muncul setelah 2–3 hari.
+
+#### B. Bing Webmaster Tools (opsional, cepat)
+- Buka `https://www.bing.com/webmasters` → **Import from Google Search Console**.
+- Satu klik, selesai. Bing juga memberi data ke DuckDuckGo & Yahoo.
 
 ### Ekspektasi realistis (jujur)
 | Pencarian | Perkiraan |
@@ -186,18 +235,22 @@ Detail teknis: [`docs/07-SEO-A11Y-PERF.md`](docs/07-SEO-A11Y-PERF.md)
 
 > Siapa pun yang menjanjikan "peringkat 1 dalam 3 hari" itu tidak benar. Yang mempercepat
 > nyata: Search Console + konten unik + tautan dari situs lain (GitHub, LinkedIn, dll).
+>
+> **Cara mempercepat yang nyata:** taruh `https://aruthtales.my.id` di bio GitHub,
+> LinkedIn, Instagram, dan profil lain. Tiap tautan itu "suara" yang menaikkan
+> kepercayaan Google terhadap situsmu.
 
 ### Rapikan (opsional tapi disarankan)
 - Redirect `arfolio-eta.vercel.app` → `aruthtales.my.id` di Vercel → Settings → Domains,
   supaya tidak ada dua alamat dengan isi sama (konten duplikat).
 
 ### Cek sendiri kapan saja
-```bash
-# sudah terindeks?
-#   buka Google, ketik:  site:aruthtales.my.id
-# cek kartu share:  https://www.opengraph.xyz/  (tempel URL)
-# validasi JSON-LD: https://search.google.com/test/rich-results
-```
+| Mau cek apa | Caranya |
+|---|---|
+| Sudah terindeks? | Google → ketik `site:aruthtales.my.id` |
+| Kartu share tampil? | `https://www.opengraph.xyz/` → tempel URL |
+| JSON-LD valid? | `https://search.google.com/test/rich-results` |
+| TXT verifikasi terpasang? | `dig +short aruthtales.my.id TXT` |
 
 ---
 
