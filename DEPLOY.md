@@ -209,8 +209,21 @@ Detail teknis: [`docs/07-SEO-A11Y-PERF.md`](docs/07-SEO-A11Y-PERF.md)
 
 **6. Kirim sitemap**
 - Menu kiri → **Sitemaps**.
-- Di kolom "Add a new sitemap", ketik: `sitemap.xml` → klik **Submit**.
+- ⚠️ **Properti tipe Domain menolak path relatif.** Kalau kamu mengetik `sitemap.xml`
+  saja, muncul error **"Invalid sitemap address / Alamat sitemap tidak valid"**.
+  Yang benar adalah **URL lengkap**:
+  ```
+  https://aruthtales.my.id/sitemap.xml
+  ```
+- Klik **Submit**. (Cara ini berlaku karena properti kamu tipe `Domain`
+  — terlihat dari `resource_id=sc-domain:...` di address bar.)
+- Lalu submit yang kedua untuk profil:
+  ```
+  https://rchibnu.aruthtales.my.id/sitemap.xml
+  ```
 - Status akan berubah jadi **Success** dalam beberapa jam.
+  Kalau sementara tertulis "Couldn't fetch", itu **normal** (placeholder sebelum
+  crawl pertama) — asalkan URL-nya balas `200` saat dites `curl`.
 
 **7. Minta Google mengindeks halaman penting**
 - Di kolom pencarian atas (URL Inspection), tempel `https://aruthtales.my.id/`
