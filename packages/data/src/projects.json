@@ -1,5 +1,45 @@
 [
   {
+    "slug": "specta",
+    "type": "project",
+    "title": "Specta",
+    "summary": "Aplikasi manajemen/absensi berbasis QR dengan backend Laravel, frontend web Vite+Tailwind, dan aplikasi mobile Flutter (Specta-Admin-Mobile).",
+    "year": 2026,
+    "role": "Creator & Developer",
+    "duration": "berjalan",
+    "category": "application",
+    "tags": [
+      "Laravel",
+      "Sanctum",
+      "Socialite",
+      "Flutter",
+      "Vite",
+      "Tailwind CSS",
+      "QR Code"
+    ],
+    "featured": true,
+    "thumbnail": "/images/projects/specta/thumb.webp",
+    "gallery": [],
+    "links": {
+      "live": null,
+      "repo": null
+    },
+    "metrics": [
+      {
+        "label": "Platform",
+        "value": 3
+      }
+    ],
+    "highlights": [
+      "Backend Laravel dengan auth API (Sanctum) & OAuth (Socialite).",
+      "Generate QR Code (simple-qrcode) & export PDF (dompdf).",
+      "Manipulasi gambar (intervention/image) untuk foto/watermark.",
+      "Aplikasi mobile admin berbasis Flutter.",
+      "Catatan: sumber masih lokal (Projects/Done/Specta)."
+    ],
+    "body": "content/work/specta.mdx"
+  },
+  {
     "slug": "arplication",
     "type": "project",
     "title": "Arplication",
@@ -78,36 +118,6 @@
     "body": "content/work/routinezie.mdx"
   },
   {
-    "slug": "arutha",
-    "type": "project",
-    "title": "Arutha",
-    "summary": "Aplikasi self-improvement & kesehatan mental berkonsep RPG: hidup pengguna diperlakukan sebagai quest besar, tiap tindakan nyata memberi progres karakter.",
-    "year": 2026,
-    "role": "Creator & Developer",
-    "duration": "proyek lomba",
-    "category": "application",
-    "tags": [
-      "Google Gemini",
-      "AI",
-      "RPG",
-      "Dark Theme"
-    ],
-    "featured": true,
-    "thumbnail": "/images/projects/arutha/thumb.webp",
-    "gallery": [],
-    "links": {
-      "live": null,
-      "repo": "https://github.com/Aruthtale/Arutha"
-    },
-    "metrics": [],
-    "highlights": [
-      "Konsep \"Hidup adalah RPG\" dengan tema Dark RPG sinematik.",
-      "Sistem 5 dimensi statistik: JIWA, RAGA, HARTA, ILMU, KARMA.",
-      "AI Game Master (Google Gemini) membuat Daily Quest personal berdasarkan mood & statistik terendah."
-    ],
-    "body": "content/work/arutha.mdx"
-  },
-  {
     "slug": "arverz",
     "type": "project",
     "title": "Arverz (AruthtaleWA)",
@@ -141,46 +151,6 @@
     "body": "content/work/arverz.mdx"
   },
   {
-    "slug": "specta",
-    "type": "project",
-    "title": "Specta",
-    "summary": "Aplikasi manajemen/absensi berbasis QR dengan backend Laravel, frontend web Vite+Tailwind, dan aplikasi mobile Flutter (Specta-Admin-Mobile).",
-    "year": 2026,
-    "role": "Creator & Developer",
-    "duration": "berjalan",
-    "category": "application",
-    "tags": [
-      "Laravel",
-      "Sanctum",
-      "Socialite",
-      "Flutter",
-      "Vite",
-      "Tailwind CSS",
-      "QR Code"
-    ],
-    "featured": true,
-    "thumbnail": "/images/projects/specta/thumb.webp",
-    "gallery": [],
-    "links": {
-      "live": null,
-      "repo": null
-    },
-    "metrics": [
-      {
-        "label": "Platform",
-        "value": 3
-      }
-    ],
-    "highlights": [
-      "Backend Laravel dengan auth API (Sanctum) & OAuth (Socialite).",
-      "Generate QR Code (simple-qrcode) & export PDF (dompdf).",
-      "Manipulasi gambar (intervention/image) untuk foto/watermark.",
-      "Aplikasi mobile admin berbasis Flutter.",
-      "Catatan: sumber masih lokal (Projects/Done/Specta)."
-    ],
-    "body": "content/work/specta.mdx"
-  },
-  {
     "slug": "loketkita",
     "type": "project",
     "title": "LoketKita.com (Ticketing SaaS)",
@@ -196,7 +166,7 @@
       "Tailwind CSS",
       "Google OAuth"
     ],
-    "featured": false,
+    "featured": true,
     "thumbnail": "/images/projects/loketkita/thumb.webp",
     "gallery": [],
     "links": {
