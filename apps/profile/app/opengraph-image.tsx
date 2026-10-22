@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { sites } from "@arufolio/config";
 import { rchibnu } from "@arufolio/data";
+import { EMBLEM } from "./og-emblem";
 
 /**
  * Kartu share (og:image) untuk situs profil.
@@ -34,22 +35,12 @@ export default function OpengraphImage() {
       >
         {/* Kepala: monogram + brand */}
         <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
-          <div
-            style={{
-              display: "flex",
-              width: 74,
-              height: 74,
-              borderRadius: 20,
-              background: "linear-gradient(135deg, #E3A57C, #B79CE0)",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 38,
-              fontWeight: 700,
-              color: "#121016",
-            }}
-          >
-            R
-          </div>
+          <img
+            src={EMBLEM}
+            width={74}
+            height={74}
+            style={{ width: 74, height: 74, objectFit: "contain" }}
+          />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: -0.5 }}>Rchibnu</div>
             <div style={{ fontSize: 19, color: "#A096AE", letterSpacing: 3, textTransform: "uppercase" }}>

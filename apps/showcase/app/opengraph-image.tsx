@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { sites } from "@arufolio/config";
+import { EMBLEM } from "./og-emblem";
 
 /**
  * Kartu share (og:image) untuk situs showcase.
@@ -32,22 +33,12 @@ export default function OpengraphImage() {
       >
         {/* Kepala: tanda + nama brand */}
         <div style={{ display: "flex", alignItems: "center", gap: 22 }}>
-          <div
-            style={{
-              display: "flex",
-              width: 74,
-              height: 74,
-              borderRadius: 20,
-              background: "linear-gradient(135deg, #6366F1, #38E1B0)",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 40,
-              fontWeight: 700,
-              color: "#08080A",
-            }}
-          >
-            a
-          </div>
+          <img
+            src={EMBLEM}
+            width={74}
+            height={74}
+            style={{ width: 74, height: 74, objectFit: "contain" }}
+          />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: -0.5 }}>aruthtale</div>
             <div style={{ fontSize: 19, color: "#9AA0AE", letterSpacing: 3, textTransform: "uppercase" }}>

@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getProject, projects } from "@arufolio/data";
 import { sites } from "@arufolio/config";
+import { EMBLEM } from "../../og-emblem";
 
 /**
  * Kartu share per proyek (og:image), dibuat saat build.
@@ -49,22 +50,12 @@ export default async function OpengraphImage({ params }: { params: Promise<{ slu
         {/* Kepala */}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-            <div
-              style={{
-                display: "flex",
-                width: 58,
-                height: 58,
-                borderRadius: 16,
-                background: "linear-gradient(135deg, #6366F1, #38E1B0)",
-                alignItems: "center",
-                justifyContent: "center",
-                fontSize: 32,
-                fontWeight: 700,
-                color: "#08080A",
-              }}
-            >
-              a
-            </div>
+            <img
+              src={EMBLEM}
+              width={58}
+              height={58}
+              style={{ width: 58, height: 58, objectFit: "contain" }}
+            />
             <div style={{ display: "flex", fontSize: 26, fontWeight: 700 }}>aruthtale</div>
           </div>
           <div

@@ -86,14 +86,16 @@ Rchibnu di Cianjur, Indonesia.
 
 Hasil: semua 9 halaman kini 133–154 karakter dan memuat nama brand.
 
-### C2. Tidak ada gambar Open Graph — SELESAI
+### C2. Kartu og:image tidak memakai lambang brand — SELESAI
 
-`twitter.card` sudah `summary_large_image` tetapi tidak ada `og:image`, jadi kartu
-tautan (X, WhatsApp, LinkedIn, AI crawler) tampil tanpa gambar.
+`og:image` sebenarnya sudah ada: Next.js memakai konvensi `app/opengraph-image.tsx`
+(dan `app/work/[slug]/opengraph-image.tsx` untuk halaman proyek). Yang salah isinya —
+petaknya kotak gradien dengan satu huruf generik (`a` / `R`), bukan lambang brand.
 
-Hasil: `apps/{showcase,profile}/public/og-image.webp` (1200×630, ±27 KB) dipakai di
-`openGraph.images` dan `twitter.images` kedua layout. Dihasilkan oleh
-`scripts/make-brand-marks.py`.
+Hasil: ketiga route OG kini memakai `EMBLEM` dari `app/og-emblem.ts` (data URL PNG
+transparan 148px, ±12 KB base64, dihasilkan `scripts/make-brand-marks.py`). Konvensi
+`opengraph-image` tetap dipakai karena otomatis menggantikan `openGraph.images`
+dari metadata.
 
 ### D. Sitemap profil belum punya halaman work/proyek — MASIH TERBUKA
 
