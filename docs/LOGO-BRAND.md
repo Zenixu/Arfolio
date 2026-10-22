@@ -3,9 +3,31 @@
 Status: **draft kerja** (boleh dipakai; belum ada uji merek dagang).
 Dibuat dengan alur skill `logo-design`: brief → 3 konsep → uji 16 px → koreksi optik → berkas.
 
+> **PERINGATAN — dokumen ini tertinggal.** Bagian 1–2 menjelaskan konsep "Leaf-nib"
+> dan monogram "R · I" hasil 7 Oktober 2026. Lambang yang benar-benar dipakai situs
+> sekarang berbeda; lihat **Bagian 0** di bawah. Tabel berkas di Bagian 3 juga sudah
+> tidak cocok (ikon situs sekarang `.png`, bukan `.svg`).
+
 ---
 
-## 1. aruthtale — “Leaf-nib” (daun + mata pena)
+## 0. Lambang yang dipakai sekarang (22 Oktober 2026)
+
+| Situs | Lambang | Sumber |
+|---|---|---|
+| showcase `aruthtales.my.id` | Emblem arch emas + monogram "A" ivory + bunga + 4 bintang, di atas lempeng navy + cincin emas | `brand/Aruthtales_logo.jpg` (master 1792×2400) |
+| profil `rchibnu.aruthtales.my.id` | Monogram "R" + kepala rubah + wisteria, emas di atas indigo | `brand/rchibnu-logo.png` |
+
+Semua turunan (mark halaman, `icon.png`, `apple-icon.png`, `favicon.ico`, lambang
+kartu `og:image`) dibangkitkan oleh `scripts/make-brand-marks.py` dari kedua master
+itu. Jangan menyunting berkas turunan langsung — ubah master lalu jalankan skrip.
+
+Arsip gambar brand lain: `brand/zcharacter.png` (lembar ilustrasi karakter),
+`brand/rchibnu-mark.png`, `brand/aruthtale-mark.png`. Keduanya **tidak** lagi berada
+di `public/`, jadi tidak ter-serv sebagai berkas publik.
+
+---
+
+## 1. aruthtale — “Leaf-nib” (daun + mata pena) — konsep lama, tidak dipakai
 
 **Ide satu kalimat:** satu bentuk membaca dua hal sekaligus — **daun** (Rue & Hyacinth, dan
 “tumbuh”) dan **mata pena** (Ars = seni/keahlian + Tale = kisah yang ditulis).
@@ -70,11 +92,15 @@ Gradien **hanya** dipakai di berkas web. Versi cetak/satu warna pakai `#E3A57C` 
 
 | Berkas | Isi |
 |---|---|
+| `scripts/make-brand-marks.py` | Generator semua berkas turunan lambang (mark, ikon, favicon, lambang og:image) dari `brand/` |
+| `brand/Aruthtales_logo.jpg` | Master lambang aruthtale (1792×2400) |
+| `brand/rchibnu-logo.png` | Master lambang Rchibnu (monogram R + rubah + wisteria) |
 | `packages/ui/src/components/Logo.tsx` | Komponen React `AruthtaleMark`, `RchibnuMark`, `Mark` |
-| `apps/showcase/app/icon.svg` · `apple-icon.svg` · `favicon.ico` | Ikon situs Showcase |
-| `apps/profile/app/icon.svg` · `apple-icon.svg` · `favicon.ico` | Ikon situs Profile |
+| `apps/showcase/app/icon.png` · `apple-icon.png` · `favicon.ico` | Ikon situs Showcase |
+| `apps/profile/app/icon.png` · `apple-icon.png` · `favicon.ico` | Ikon situs Profile |
 | `brand/concepts/*.svg` | 6 konsep awal (arsip) |
 | `brand/final/*.svg` | Salinan lambang final |
+| `brand/zcharacter.png` | Lembar ilustrasi karakter (arsip, tidak dipakai situs) |
 
 ## 4. Belum dikerjakan (menunggu keputusan pemilik)
 - Nama huruf untuk logotype kata (“aruthtale”, “Rchibnu”) belum dibakukan — sekarang memakai
