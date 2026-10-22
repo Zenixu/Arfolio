@@ -16,7 +16,7 @@ export const sites = {
     title: "Aruthtale — Studio Web & Fullstack Developer Cianjur",
     shortTitle: "Aruthtale",
     description:
-      "Studio pengembangan web yang mengubah ide menjadi aplikasi fungsional, interaktif, dan rapi. Jasa pembuatan website, web app, POS, dan SaaS dari Cianjur, Indonesia.",
+      "Studio pengembangan web aruthtale — mengubah ide menjadi aplikasi fungsional, interaktif, dan rapi. Jasa website, web app, POS, dan SaaS dari Cianjur.",
     keywords: [
       "Aruthtale",
       "aruthtales",
@@ -39,7 +39,7 @@ export const sites = {
     title: "Rchibnu — Fullstack Developer Cianjur",
     shortTitle: "Rchibnu",
     description:
-      "Ibnu Hambal Al Bantani Rch (Rchibnu) — Fullstack Developer dari Cianjur, Jawa Barat. Membangun aplikasi web yang fungsional, interaktif, dan berpusat pada pengguna.",
+      "Ibnu Hambal Al Bantani Rch (Rchibnu) — Fullstack Developer dari Cianjur. Membangun aplikasi web yang fungsional, interaktif, dan berpusat pada pengguna.",
     keywords: [
       "Rchibnu",
       "Rch Ibnu",

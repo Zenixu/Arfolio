@@ -7,7 +7,8 @@ import {
 
 export const metadata: Metadata = {
   title: "Kontak",
-  description: "Hubungi saya.",
+  description:
+    "Kontak Rchibnu (Ibnu Hambal Al Bantani Rch) — terbuka untuk kolaborasi, proyek, atau diskusi teknologi. Email, GitHub, Instagram, dan WhatsApp.",
   alternates: { canonical: "/contact" },
 };
 
@@ -59,9 +60,10 @@ export default function ContactPage() {
   return (
     <section className="section container">
       <SectionHeading
+        as="h1"
         index="01"
         eyebrow="Kontak"
-        title={<>Mari <span className="afterglow-gradient">terhubung</span>.</>}
+        title={<>Kontak Rchibnu — <span className="afterglow-gradient">mari terhubung</span>.</>}
         description="Terbuka untuk kolaborasi, proyek, atau sekadar berdiskusi soal teknologi. Pilih jalur yang paling nyaman."
       />
 

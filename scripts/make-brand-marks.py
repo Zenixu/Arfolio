@@ -23,7 +23,7 @@ di atas lempeng navy datar sehingga tidak ada sambungan seam.
 import pathlib
 import statistics
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 MASTER = ROOT / "brand" / "Aruthtales_logo.jpg"
@@ -82,6 +82,57 @@ def on_plate(art: Image.Image, circle: bool) -> Image.Image:
     return plate
 
 
+OG_W, OG_H = 1200, 630          # ukuran kartu Open Graph standar
+OG_FONT = "/usr/share/fonts/google-noto-vf/NotoSans[wght].ttf"
+IVORY = (0xF5, 0xF1, 0xE8)
+MUTED = (0x9A, 0xA3, 0xC0)
+TARGET = (0x1C, 0x22, 0x48)      # ujung gradien latar kartu OG
+
+
+def og_card(title: str, lines: list[str], accent: tuple[int, int, int], dest: pathlib.Path) -> None:
+    """Kartu Open Graph 1200x630: lambang + nama brand + dua baris meta."""
+    base = Image.new("RGB", (OG_W, OG_H), NAVY)
+    # gradien navy lembut supaya latar tidak datar
+    grad = ImageDraw.Draw(base)
+    for y in range(OG_H):
+        t = y / OG_H
+        row = tuple(int(NAVY[i] + (TARGET[i] - NAVY[i]) * t) for i in range(3))
+        grad.line([(0, y), (OG_W, y)], fill=row)
+
+    # pendar lembut di belakang lambang
+    glow = Image.new("L", (OG_W, OG_H), 0)
+    ImageDraw.Draw(glow).ellipse((-260, -260, 620, OG_H + 260), fill=70)
+    base = Image.composite(
+        Image.new("RGB", (OG_W, OG_H), (0x3A, 0x44, 0x78)),
+        base,
+        glow.point(lambda v: int(v * 0.55)),
+    )
+
+    # lambang brand (alpha dari master, latar navy jadi transparan)
+    art = emblem_art()
+    eh = 330
+    art = art.resize((int(art.width * (eh / art.height)), eh), Image.Resampling.LANCZOS)
+    card = Image.new("RGBA", (OG_W, OG_H), (0, 0, 0, 0))
+    card.alpha_composite(art, (96, (OG_H - eh) // 2))
+    base = Image.alpha_composite(base.convert("RGBA"), card).convert("RGB")
+
+    draw = ImageDraw.Draw(base)
+    x = 500
+    try:
+        big = ImageFont.truetype(OG_FONT, 78)
+        big.set_variation_by_axes([700])
+        small = ImageFont.truetype(OG_FONT, 31)
+        small.set_variation_by_axes([400])
+    except Exception:
+        big = small = ImageFont.load_default()
+    draw.text((x, OG_H // 2 - 92), title, font=big, fill=IVORY)
+    for i, line in enumerate(lines):
+        draw.text((x, OG_H // 2 + 8 + i * 44), line, font=small, fill=accent if i == 0 else MUTED)
+
+    base.save(dest, "WEBP", quality=88, method=6)
+    print(f"og card     : {dest} ({dest.stat().st_size} B)")
+
+
 def main() -> int:
     if not MASTER.exists():
         print(f"master tidak ditemukan: {MASTER}")
@@ -109,6 +160,11 @@ def main() -> int:
     ico = SCRATCH / "favicon.ico"
     circle.resize((256, 256), Image.Resampling.LANCZOS).save(ico, sizes=[(16, 16), (32, 32), (48, 48)])
     print(f"favicon     : {ico} ({ico.stat().st_size} B)")
+
+    og_card("aruthtale", ["Studio Web & Fullstack Developer", "Cianjur, Indonesia"],
+            (0x63, 0x66, 0xF1), ROOT / "apps/showcase/public/og-image.webp")
+    og_card("Rchibnu", ["Ibnu Hambal Al Bantani Rch", "Fullstack Developer · Cianjur"],
+            (0xE3, 0xA5, 0x7C), ROOT / "apps/profile/public/og-image.webp")
 
     return 0
 

@@ -4,7 +4,8 @@ import { SectionHeading, CertificateCard, Reveal, CountUp } from "@arufolio/ui";
 
 export const metadata: Metadata = {
   title: "Sertifikat",
-  description: "Sertifikat kursus dan penghargaan kompetisi.",
+  description:
+    "Sertifikat dan penghargaan Rchibnu (Ibnu Hambal Al Bantani Rch) — 10 kredensial: 8 sertifikasi kursus, 2 penghargaan kompetisi, dengan tautan verifikasi.",
   alternates: { canonical: "/certificates" },
 };
 
@@ -12,9 +13,10 @@ export default function CertificatesPage() {
   return (
     <section className="section container">
       <SectionHeading
+        as="h1"
         index="01"
         eyebrow="Kredensial"
-        title={<>Sertifikat & <span className="afterglow-gradient">penghargaan</span></>}
+        title={<>Sertifikat & <span className="afterglow-gradient">penghargaan Rchibnu</span></>}
         description={`${certificates.length} kredensial — ${courses.length} sertifikasi kursus dan ${awards.length} penghargaan kompetisi.`}
       />
 

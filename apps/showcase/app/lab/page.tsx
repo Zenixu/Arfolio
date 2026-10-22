@@ -4,7 +4,8 @@ import { LabCard, SectionHeading, Reveal, CountUp, Marquee, TechStack } from "@a
 
 export const metadata: Metadata = {
   title: "Learning Vault",
-  description: "Things I built to learn — not to impress. Arsip eksperimen & latihan.",
+  description:
+    "Learning Vault aruthtale — arsip eksperimen dan latihan coding Ibnu Hambal Al Bantani Rch sebelum lahir proyek besar. Dibangun untuk belajar, bukan pamer.",
   alternates: { canonical: "/lab" },
 };
 
@@ -16,9 +17,10 @@ export default function LabPage() {
   return (
     <section className="section container">
       <SectionHeading
+        as="h1"
         index="02"
         eyebrow="Learning Vault"
-        title={<>Things I built to learn — <span className="accent-italic">not to impress.</span></>}
+        title={<>Learning Vault aruthtale — <span className="accent-italic">things I built to learn</span></>}
         description={`${lab.length} eksperimen & latihan sepanjang perjalanan belajar. Sebelum ada proyek besar, ada repo-repo kecil yang membuat saya paham cara kerjanya.`}
       />
 

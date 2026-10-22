@@ -6,7 +6,8 @@ import {
 
 export const metadata: Metadata = {
   title: "Tentang",
-  description: "Perjalanan, pengalaman, dan pendidikan.",
+  description:
+    "Tentang Rchibnu (Ibnu Hambal Al Bantani Rch): perjalanan, pengalaman kerja, dan pendidikan fullstack developer 17 tahun dari SMK Negeri 1 Cianjur.",
   alternates: { canonical: "/about" },
 };
 
@@ -18,9 +19,10 @@ export default function AboutPage() {
       {/* Kepala */}
       <section className="section--tight container pt-[clamp(56px,9vh,96px)]">
         <SectionHeading
+          as="h1"
           index="01"
           eyebrow="Tentang"
-          title={<>Perjalanan <span className="afterglow-gradient">saya</span></>}
+          title={<>Tentang Rchibnu — <span className="afterglow-gradient">Ibnu Hambal Al Bantani Rch</span></>}
           description={bio.short}
           divider
         />

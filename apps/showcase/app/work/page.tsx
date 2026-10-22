@@ -4,7 +4,8 @@ import { ProjectCard, SectionHeading, Reveal, CountUp } from "@arufolio/ui";
 
 export const metadata: Metadata = {
   title: "The Work",
-  description: "Karya nyata — aplikasi, platform, dan alat yang sudah dibangun.",
+  description:
+    "Portofolio karya nyata aruthtale — aplikasi, platform, dan alat yang sudah dibangun Ibnu Hambal Al Bantani Rch, dengan peran, stack, dan hasil.",
   alternates: { canonical: "/work" },
 };
 
@@ -15,9 +16,10 @@ export default function WorkPage() {
   return (
     <section className="section container">
       <SectionHeading
+        as="h1"
         index="01"
         eyebrow="The Work"
-        title={<>Yang benar-benar <span className="text-[var(--accent)]">sudah dibangun</span></>}
+        title={<>Karya aruthtale — <span className="text-[var(--accent)]">yang benar-benar sudah dibangun</span></>}
         description="Yang menjawab pertanyaan: apa yang bisa saya lakukan. Tiap proyek punya peran, stack, dan hasil yang bisa diperiksa — bukan sekadar daftar tautan."
       />
 

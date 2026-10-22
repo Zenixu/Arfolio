@@ -3,6 +3,11 @@
 > Audit publik, 22 Oktober 2026. Tidak ada file proyek yang diubah.
 > Cakupan: `aruthtales.my.id` dan subdomain `rchibnu.aruthtales.my.id`.
 
+> **Update 22 Oktober 2026 — perbaikan sudah dikerjakan.** Semua halaman kini punya
+> tepat satu `<h1>` berisi nama brand, meta description dalam rentang 120–155 karakter,
+> dan kartu Open Graph 1200×630 dipasang di kedua situs. Yang masih terbuka: verifikasi
+> index lewat Google Search Console (bagian 7).
+
 ## 1. Target
 
 Prioritas bukan dulu mengejar kata kunci umum seperti "jasa website Cianjur".
@@ -38,7 +43,7 @@ di Google Search Console, jadi status index definitif tetap harus dicek di GSC.
 
 ## 3. Temuan yang perlu diperbaiki
 
-### A. Homepage domain utama belum menampilkan `aruthtale` pada `<h1>`
+### A. Homepage domain utama belum menampilkan `aruthtale` pada `<h1>` — SELESAI
 
 Pemeriksaan Googlebot terhadap `https://aruthtales.my.id/` menemukan teks `<h1>` hanya
 `Work, not words.` Padahal `aruthtale` sudah kuat di title, JSON-LD, dan konten halaman.
@@ -47,7 +52,10 @@ Untuk pencarian nama brand, jangan mengganti seluruh hero dengan hanya kata bran
 Gunakan satu `<h1>` yang berisi `aruthtale` (misalnya `aruthtale — Work, not words.`),
 lalu tetap pertahankan kalimat hero sebagai konteks. Hindari menambah H1 kedua.
 
-### B. Homepage subdomain sudah menampilkan `Ibnu`, tetapi belum konsisten dengan nama publik
+Hasil: H1 homepage showcase sekarang `aruthtale — not words.` (brand di baris pertama,
+kalimat hero tetap jadi baris kedua).
+
+### B. Homepage subdomain sudah menampilkan `Ibnu`, tetapi belum konsisten dengan nama publik — SELESAI
 
 Homepage `rchibnu.aruthtales.my.id` saat ini memakai H1 `Hai, saya Ibnu`; nama lengkap
 sudah tampil di bawahnya, dan JSON-LD memakai `Ibnu Hambal Al Bantani Rch`.
@@ -56,7 +64,9 @@ Untuk pencarian nama, gunakan satu H1 yang langsung menampilkan nama publik:
 `Rchibnu` atau `Rchibnu — Ibnu Hambal Al Bantani Rch`. Ini membuat brand name ada di
 title, H1, JSON-LD, dan tautan masuk dengan bentuk yang sama.
 
-### C. Meta description beberapa halaman terlalu pendek
+Hasil: H1 homepage profil sekarang `Rchibnu — Ibnu Hambal Al Bantani Rch`.
+
+### C. Meta description beberapa halaman terlalu pendek — SELESAI
 
 Contoh dari pemeriksaan HTML:
 
@@ -74,7 +84,18 @@ Karya aruthtale — aplikasi web, POS, SaaS, dan project nyata dari Fullstack De
 Rchibnu di Cianjur, Indonesia.
 ```
 
-### D. Sitemap profil belum punya halaman work/proyek
+Hasil: semua 9 halaman kini 133–154 karakter dan memuat nama brand.
+
+### C2. Tidak ada gambar Open Graph — SELESAI
+
+`twitter.card` sudah `summary_large_image` tetapi tidak ada `og:image`, jadi kartu
+tautan (X, WhatsApp, LinkedIn, AI crawler) tampil tanpa gambar.
+
+Hasil: `apps/{showcase,profile}/public/og-image.webp` (1200×630, ±27 KB) dipakai di
+`openGraph.images` dan `twitter.images` kedua layout. Dihasilkan oleh
+`scripts/make-brand-marks.py`.
+
+### D. Sitemap profil belum punya halaman work/proyek — MASIH TERBUKA
 
 Sitemap showcase berisi proyek, tetapi sitemap profil hanya berisi profil.
 Untuk pencarian nama, ini bisa diterima dulu, tetapi Google perlu melihat tautan dari
@@ -82,13 +103,16 @@ profil ke karya agar identitas personal dan brand terhubung.
 
 ## 4. Kerja minimum yang disarankan
 
-1. Ubah homepage subdomain agar punya satu H1:
-   `Rchibnu` atau `Ibnu Hambal Al Bantani Rch`.
-2. Pastikan homepage domain utama tetap punya satu H1 brand `aruthtale`.
-3. Samakan nama lengkap di title, JSON-LD, dan data profil:
-   `Ibnu Hambal Al Bantani Rch`.
-4. Perbaiki meta description halaman utama, work, lab, contact, about, certificates,
-   dan skills agar memuat nama brand dan 120–155 karakter.
+Status per 22 Oktober 2026: poin 1–4 selesai dan sudah ter-deploy. Poin 5–8 butuh akses
+Google Search Console milik pemilik akun.
+
+1. ~~Ubah homepage subdomain agar punya satu H1:
+   `Rchibnu` atau `Ibnu Hambal Al Bantani Rch`.~~ Selesai.
+2. ~~Pastikan homepage domain utama tetap punya satu H1 brand `aruthtale`.~~ Selesai.
+3. ~~Samakan nama lengkap di title, JSON-LD, dan data profil:
+   `Ibnu Hambal Al Bantani Rch`.~~ Sudah konsisten sejak awal.
+4. ~~Perbaiki meta description halaman utama, work, lab, contact, about, certificates,
+   dan skills agar memuat nama brand dan 120–155 karakter.~~ Selesai.
 5. Kirim dua sitemap ke Google Search Console:
    - `https://aruthtales.my.id/sitemap.xml`
    - `https://rchibnu.aruthtales.my.id/sitemap.xml`
@@ -114,6 +138,7 @@ bisa berubah tergantung lokasi, perangkat, dan personalisasi pencarian.
 | Canonical | Lolos |
 | Sitemap | Lolos |
 | HTTPS/HSTS | Lolos |
+| OG image | Lolos (1200×630) |
 | Structured data | Lolos |
-| On-page brand signal | Perlu perbaikan kecil |
+| On-page brand signal | Lolos (9/9 halaman) |
 | Backlink | Belum ada bukti |

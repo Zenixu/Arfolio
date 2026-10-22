@@ -5,14 +5,18 @@ import { cn } from "../lib/cn";
  * Judul bagian bergaya editorial:
  * nomor indeks (01, 02, …) + label mono + judul besar.
  * Nomor indeks inilah yang memberi kesan "halaman cetak", bukan template SaaS.
+ *
+ * `as` hanya dipakai untuk heading teratas sebuah halaman, supaya tiap
+ * halaman punya tepat satu <h1>. Heading bagian di bawahnya tetap <h2>.
  */
 export function SectionHeading({
-  eyebrow, title, description, action, index, align = "left", className, divider = false,
+  eyebrow, title, description, action, index, align = "left", className, divider = false, as = "h2",
 }: {
   eyebrow?: string; title: ReactNode; description?: ReactNode;
   action?: ReactNode; index?: string; align?: "left" | "center"; className?: string;
-  divider?: boolean;
+  divider?: boolean; as?: "h1" | "h2";
 }) {
+  const Heading = as;
   return (
     <div className={cn("mb-12", className)}>
       {(eyebrow || index) && (
@@ -27,7 +31,7 @@ export function SectionHeading({
         align === "center" && "flex-col items-center text-center"
       )}>
         <div className={cn("max-w-2xl", align === "center" && "mx-auto")}>
-          <h2 className="h2 text-balance">{title}</h2>
+          <Heading className="h2 text-balance">{title}</Heading>
           {description && (
             <p className="mt-4 text-[var(--text-muted)] leading-relaxed">{description}</p>
           )}

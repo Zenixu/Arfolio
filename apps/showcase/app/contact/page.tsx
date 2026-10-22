@@ -7,7 +7,8 @@ import {
 
 export const metadata: Metadata = {
   title: "Kontak",
-  description: "Hubungi saya untuk proyek atau kolaborasi.",
+  description:
+    "Hubungi aruthtale, brand milik Ibnu Hambal Al Bantani Rch di Cianjur — terbuka untuk proyek freelance, kolaborasi, dan peluang kerja.",
   alternates: { canonical: "/contact" },
 };
 
@@ -57,9 +58,10 @@ export default function ContactPage() {
   return (
     <section className="section container">
       <SectionHeading
+        as="h1"
         index="05"
         eyebrow="Kontak"
-        title={<>Mari <span className="text-[var(--accent)]">bicara</span>.</>}
+        title={<>Hubungi aruthtale — <span className="text-[var(--accent)]">mari bicara</span>.</>}
         description="Terbuka untuk proyek freelance, kolaborasi, atau peluang kerja. Pilih jalur yang paling nyaman untukmu."
       />
 

@@ -6,7 +6,8 @@ import {
 
 export const metadata: Metadata = {
   title: "Keahlian",
-  description: "Teknologi, konsep, dan tools yang saya gunakan.",
+  description:
+    "Keahlian Rchibnu — teknologi, konsep, dan tools sehari-hari Ibnu Hambal Al Bantani Rch untuk membangun aplikasi, dari antarmuka sampai basis data.",
   alternates: { canonical: "/skills" },
 };
 
@@ -33,9 +34,10 @@ export default function SkillsPage() {
 
       <section className="section container">
         <SectionHeading
+          as="h1"
           index="01"
           eyebrow="Keahlian"
-          title={<>Teknologi & <span className="afterglow-gradient">tools</span></>}
+          title={<>Keahlian Rchibnu — <span className="afterglow-gradient">teknologi & tools</span></>}
           description="Yang saya pakai sehari-hari untuk membangun aplikasi — dari antarmuka sampai basis data."
         />
 
