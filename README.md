@@ -6,10 +6,12 @@ Arufolio adalah monorepo yang menampung **dua situs** yang saling terhubung:
 
 | Situs | Domain | Peran | Fokus |
 |---|---|---|---|
-| **Showcase** | `aruthtales.my.id` | THE WORK | Aplikasi/karya, layanan, bukti teknis, demo, case study |
-| **Profile** | `rchibnu.aruthtales.my.id` | THE PERSON | Bio, pengalaman, sertifikat, CV, kontak |
+| **Showcase** | [aruthtales.my.id](https://aruthtales.my.id) | THE WORK | Aplikasi/karya, layanan, bukti teknis, demo, case study |
+| **Profile** | [rchibnu.aruthtales.my.id](https://rchibnu.aruthtales.my.id) | THE PERSON | Bio, pengalaman, sertifikat, CV, kontak |
 
 Situs utama (karya) ada di domain utama untuk alasan SEO; profil berada di subdomain sebagai pendukung kredibilitas.
+
+**Live:** <https://aruthtales.my.id> · <https://rchibnu.aruthtales.my.id>
 
 > **Filosofi:** *"Proof, not promises."* — lihat `docs/10-BRAND-PHILOSOPHY.md`.
 
@@ -54,15 +56,15 @@ Situs utama (karya) ada di domain utama untuk alasan SEO; profil berada di subdo
 ### `apps/` — Dua situs
 | App | Domain | Rute |
 |---|---|---|
-| [`apps/showcase`](apps/showcase) | `aruthtales.my.id` | `/` · `/work` · `/work/[slug]` · `/lab` · `/contact` |
-| [`apps/profile`](apps/profile) | `rchibnu.aruthtales.my.id` | `/` · `/about` · `/certificates` · `/skills` · `/contact` |
+| [`apps/showcase`](apps/showcase) | [aruthtales.my.id](https://aruthtales.my.id) | `/` · `/work` · `/work/[slug]` · `/lab` · `/contact` |
+| [`apps/profile`](apps/profile) | [rchibnu.aruthtales.my.id](https://rchibnu.aruthtales.my.id) | `/` · `/about` · `/certificates` · `/skills` · `/contact` |
 
 ### Konten & aset
 | Lokasi | Isi |
 |---|---|
 | [`packages/data/src/*.json`](packages/data/src) | `aruthtales` · `rchibnu` · `certificates` · `projects` · `account` |
-| [`Sertifikat/`](Sertifikat) | 8 PDF asli (Dicoding, UNS, SMK N 1 Cianjur) |
-| [`apps/profile/public/certificates/`](apps/profile/public/certificates) | 16 WebP hasil konversi PDF (full + thumb) — **642 KB** dari 7,1 MB |
+| [`Sertifikat/`](Sertifikat) | 10 PDF asli (Dicoding, RedTeam Leaders, UNS, SMK N 1 Cianjur) |
+| [`apps/profile/public/certificates/`](apps/profile/public/certificates) | 20 WebP hasil konversi PDF (full + thumb) — **642 KB** dari 7,1 MB |
 
 ---
 
@@ -70,12 +72,14 @@ Situs utama (karya) ada di domain utama untuk alasan SEO; profil berada di subdo
 
 | Aspek | Keadaan |
 |---|---|
-| Dokumentasi | ✅ 12 dokumen produk + 7 arsitektur |
+| Dokumentasi | ✅ 13 dokumen produk + 7 arsitektur |
 | Data | ✅ JSON + skema zod, tervalidasi saat impor |
 | Scaffold monorepo | ✅ pnpm workspaces, 2 app + 3 paket |
 | Build | ✅ Showcase 17 halaman statis · Profile 10 halaman statis |
 | Aset sertifikat | ✅ PDF → WebP (hemat 91%) |
-| **Menunggu** | ⏳ logo, thumbnail 8 proyek, CV, live URL |
+| Lambang brand | ✅ arch aruthtale + monogram Rchibnu, dibangkitkan `scripts/make-brand-marks.py` |
+| **Live** | ✅ `aruthtales.my.id` + `rchibnu.aruthtales.my.id` (Vercel) |
+| **Menunggu** | ⏳ thumbnail 8 proyek, CV, verifikasi index di Google Search Console |
 
 ## Menjalankan
 
@@ -89,9 +93,9 @@ pnpm data:validate    # validasi semua JSON terhadap skema zod
 ```
 
 ## Langkah Berikutnya
-1. **Logo** aruthtale & Rchibnu (indigo untuk brand, nuansa Afterglow untuk personal).
+1. ~~**Logo** aruthtale & Rchibnu~~ — selesai; lihat `docs/LOGO-BRAND.md` Bagian 0.
 2. **Thumbnail 8 proyek** → taruh di `apps/showcase/public/images/projects/<slug>/thumb.webp`, lalu isi field `thumbnail`.
-3. **Live URL** untuk proyek yang sudah deploy → isi `links.live` di `projects.json`.
+3. ~~**Live URL** untuk proyek yang sudah deploy~~ — domain sudah live; tinggal isi `links.live` di `projects.json`.
 4. **CV** (PDF) → taruh di `apps/profile/public/`, isi field `cv`.
 5. **Case study MDX** untuk 5 proyek unggulan di `content/work/*.mdx`.
-6. **Deploy ke Vercel**: 2 project, Root Directory `apps/showcase` & `apps/profile` (lihat `architecture/05-DNS-AND-DEPLOYMENT.md`).
+6. ~~**Deploy ke Vercel**~~ — sudah jalan. Sisa: daftarkan kedua sitemap di Google Search Console lalu Request Indexing (lihat `docs/13-SEO-BRAND-FOCUS.md`).
