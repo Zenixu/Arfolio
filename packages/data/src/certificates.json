@@ -150,5 +150,41 @@
     "featured": false,
     "image": "/certificates/smkn1-tangible-coding-2024.webp",
     "thumb": "/certificates/smkn1-tangible-coding-2024-thumb.webp"
+  },
+  {
+    "id": "redteam-foundations-log-analysis",
+    "title": "Foundations of Log Analysis for Cyber Defense",
+    "issuer": "RedTeam Leaders",
+    "credentialId": "e2dcefd6802b9ec1",
+    "date": "2026-10-14",
+    "type": "course",
+    "skills": [
+      "Cyber Defense",
+      "Log Analysis",
+      "Security Operations"
+    ],
+    "file": "Sertifikat/foundations_certificate.pdf",
+    "verifyUrl": "https://courses.redteamleaders.com/completion/e2dcefd6802b9ec1",
+    "featured": true,
+    "image": "/certificates/foundations_certificate.webp",
+    "thumb": "/certificates/foundations_certificate-thumb.webp"
+  },
+  {
+    "id": "redteam-introduction-bug-bounty",
+    "title": "Introduction to Bug Bounty",
+    "issuer": "RedTeam Leaders",
+    "credentialId": "0a5aff5e2160b191",
+    "date": "2026-10-14",
+    "type": "course",
+    "skills": [
+      "Bug Bounty",
+      "Web Security",
+      "Penetration Testing"
+    ],
+    "file": "Sertifikat/introduction_certificate.pdf",
+    "verifyUrl": "https://courses.redteamleaders.com/completion/0a5aff5e2160b191",
+    "featured": true,
+    "image": "/certificates/introduction_certificate.webp",
+    "thumb": "/certificates/introduction_certificate-thumb.webp"
   }
 ]

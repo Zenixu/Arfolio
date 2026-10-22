@@ -70,9 +70,9 @@ export default function ProfileHome() {
               </p>
             </Reveal>
 
-            <h1 className="display display--sm max-w-[16ch] text-balance">
-              <TextReveal text="Hai, saya" delay={80} />{" "}
-              <TextReveal text={identity.displayName + ""} delay={260} className="afterglow-gradient" />
+            <h1 className="display display--sm max-w-[26ch] text-balance">
+              <TextReveal text="Rchibnu —" delay={80} />{" "}
+              <TextReveal text={identity.fullName + ""} delay={260} className="afterglow-gradient" />
             </h1>
 
             {/* Nama lengkap + brand — sebelumnya keduanya tidak muncul di UI */}

@@ -39,8 +39,9 @@ export default function HomePage() {
     <>
       {/* ═══════════════════════ HERO ═══════════════════════ */}
       <section className="relative overflow-hidden pt-[clamp(64px,12vh,132px)] pb-[clamp(48px,8vh,96px)]">
-        {/* Latar bergerak: klip aurora 58 KB + poster WebP.
-            Mati otomatis saat pengguna minta gerak dikurangi. */}
+        {/* Latar bergerak: klip aurora 8 detik + poster WebP (dibuat dari
+            frame pertama klip yang sama). Mati otomatis saat pengguna minta
+            gerak dikurangi. */}
         <VideoBanner src="/media/banner-aurora.mp4" poster="/media/banner-poster.webp" opacity={0.5} />
 
         {/* Bercak gradien yang mengapung pelan + bergerak mengikuti gulir */}
@@ -62,7 +63,7 @@ export default function HomePage() {
         <div className="container relative">
           {/* Judul utama — muncul kata demi kata */}
           <h1 className="display max-w-[15ch] text-balance">
-            <TextReveal text="Work," delay={80} />
+            <TextReveal text="aruthtale —" delay={80} />
             <br />
             <TextReveal text="not words." delay={240} className="grad-text" />
           </h1>

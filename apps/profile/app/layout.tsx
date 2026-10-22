@@ -113,7 +113,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CursorDot />
 
         <Navbar
-          brand="RchIbnu"
+          brand="Rchibnu"
           site="profile"
           links={nav.profile}
           right={<ThemeToggle />}

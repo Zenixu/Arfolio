@@ -5,10 +5,12 @@ import { cn } from "../lib/cn";
 /**
  * VideoBanner — latar bergerak untuk hero.
  *
- * Kenapa video, bukan GIF: GIF tidak punya kompresi antar-frame, jadi
- * beberapa detik saja bisa 2–8 MB. Klip H.264 8 detik di sini hanya ~58 KB
- * dan bisa dijeda saat tab tidak aktif. Poster WebP dipakai sebagai gambar
- * pertama sebelum video siap, jadi tidak ada kedipan.
+ * Kenapa video, bukan GIF atau WebP animasi: GIF tidak punya kompresi
+ * antar-frame, dan WebP animasi justru lebih besar dari MP4 pada resolusi
+ * yang sama (terukur: 960×540 q50 → 2,9 MB vs MP4 960×540 → ~0,5 MB).
+ * H.264 di-decode hardware, bisa dijeda saat tab tidak aktif, dan punya
+ * poster. Poster WebP dipakai sebagai gambar pertama sebelum video siap,
+ * jadi tidak ada kedipan — dan harus di-regenerate tiap video diganti.
  *
  * Aturan main:
  * — selalu `muted` + `playsInline`, kalau tidak, peramban menolak autoplay
