@@ -375,7 +375,7 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 .crosslink__mark {
   display: grid;
   place-items: center;
-  height: 2.6rem; width: 2.6rem;
+  height: 2.9rem; width: 2.9rem;
   flex-shrink: 0;
   border-radius: var(--radius-md);
   background: color-mix(in srgb, var(--accent) 10%, transparent);

@@ -25,7 +25,7 @@ export function CrossLink({
   return (
     <a href={href} className={cn("crosslink group/cross", className)}>
       <span className="crosslink__mark">
-        <Mark site={site} size={30} />
+        <Mark site={site} size={38} />
       </span>
       <span className="crosslink__text">
         <span className="crosslink__label">

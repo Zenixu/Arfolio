@@ -5,9 +5,10 @@ type MarkProps = { size?: number; className?: string };
 /**
  * ── Lambang aruthtale ───────────────────────────────────────────────────────
  *
- * SATU berkas saja: `aruthtale-mark.webp` — koin ivory dengan emblem indigo
- * di tengahnya. Karena lambangnya sudah punya cakram (latar) sendiri, ia
- * terbaca jelas di tema gelap MAUPUN terang tanpa perlu dua varian gambar.
+ * SATU berkas saja: `aruthtale-mark.webp` — lambang utama brand (arch emas
+ * ganda + monogram "A" ivory + bunga, 4 bintang di poros) di atas lempeng navy
+ * bundar. Karena lambangnya sudah punya lempeng(latar) sendiri, ia terbaca
+ * jelas di tema gelap MAUPUN terang tanpa perlu dua varian gambar.
  *
  * (Dulu ada dua berkas — `-ivory` & `-indigo` — yang ditumpuk lalu ditukar
  * lewat CSS `[data-theme]`. Salah satu berkasnya bahkan tidak pernah ikut
