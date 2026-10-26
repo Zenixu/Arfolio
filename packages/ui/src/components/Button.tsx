@@ -7,7 +7,7 @@ type Size = "md" | "lg";
 
 const styles: Record<Variant, string> = {
   primary:
-    "bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)] shadow-[0_10px_30px_-12px_color-mix(in_srgb,var(--accent)_70%,transparent)] hover:shadow-[0_16px_38px_-12px_color-mix(in_srgb,var(--accent)_80%,transparent)]",
+    "bg-[var(--accent)] text-[var(--accent-ink)] hover:bg-[var(--accent-hover)] shadow-[0_10px_30px_-12px_color-mix(in_srgb,var(--accent)_70%,transparent)] hover:shadow-[0_16px_38px_-12px_color-mix(in_srgb,var(--accent)_80%,transparent)]",
   ghost:
     "border border-[var(--border-strong)] text-[var(--text)] hover:border-[var(--accent)] hover:text-[var(--accent)] hover:bg-[var(--accent-soft)]",
   soft:

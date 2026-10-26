@@ -26,6 +26,7 @@
   --accent-hover: #EFBE9C;
   --accent-soft: color-mix(in srgb, var(--accent) 15%, transparent);
   --accent-2: #B79CE0;      /* wisteria */
+  --accent-ink: #121016;
   --wisteria: #B79CE0;
   --mirror: #9AA6B2;
   --ramen: #F3E7D6;
@@ -49,6 +50,7 @@
   --accent-hover: #B36C3D;
   --accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
   --accent-2: #8E6FC0;
+  --accent-ink: #FFFFFF;
   --wisteria: #8E6FC0;
   --mirror: #6E7A88;
   --ramen: #7A5A38;

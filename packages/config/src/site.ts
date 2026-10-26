@@ -16,7 +16,7 @@ export const sites = {
     title: "Aruthtale — Studio Web & Fullstack Developer Cianjur",
     shortTitle: "Aruthtale",
     description:
-      "Studio pengembangan web aruthtale — mengubah ide menjadi aplikasi fungsional, interaktif, dan rapi. Jasa website, web app, POS, dan SaaS dari Cianjur.",
+      "Jasa pembuatan website, web app, POS, dan SaaS dari Cianjur. Dikerjakan sendiri, dari sketsa sampai deploy.",
     keywords: [
       "Aruthtale",
       "aruthtales",
@@ -58,9 +58,9 @@ export const sites = {
 
 export const nav = {
   showcase: [
-    { label: "Work", href: "/work" },
+    { label: "Karya", href: "/work" },
     { label: "Lab", href: "/lab" },
-    { label: "Contact", href: "/contact" },
+    { label: "Kontak", href: "/contact" },
   ],
   profile: [
     { label: "About", href: "/about" },

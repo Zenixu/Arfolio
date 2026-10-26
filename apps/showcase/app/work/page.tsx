@@ -3,9 +3,9 @@ import { projects, lab } from "@arufolio/data";
 import { ProjectCard, SectionHeading, Reveal, CountUp } from "@arufolio/ui";
 
 export const metadata: Metadata = {
-  title: "The Work",
+  title: "Karya",
   description:
-    "Portofolio karya nyata aruthtale — aplikasi, platform, dan alat yang sudah dibangun Ibnu Hambal Al Bantani Rch, dengan peran, stack, dan hasil.",
+    "Portofolio aruthtale: aplikasi, platform, dan alat yang dibangun Ibnu Hambal Al Bantani Rch. Tiap proyek mencantumkan peran, stack, dan hasilnya.",
   alternates: { canonical: "/work" },
 };
 
@@ -18,9 +18,9 @@ export default function WorkPage() {
       <SectionHeading
         as="h1"
         index="01"
-        eyebrow="The Work"
-        title={<>Karya aruthtale — <span className="text-[var(--accent)]">yang benar-benar sudah dibangun</span></>}
-        description="Yang menjawab pertanyaan: apa yang bisa saya lakukan. Tiap proyek punya peran, stack, dan hasil yang bisa diperiksa — bukan sekadar daftar tautan."
+        eyebrow="Portofolio"
+        title={<>Karya <span className="text-[var(--accent)]">aruthtale</span></>}
+        description="Aplikasi, platform, dan alat yang sudah selesai. Tiap baris mencantumkan peran, stack, dan hasil yang bisa diperiksa."
       />
 
       {/* Ringkasan angka */}

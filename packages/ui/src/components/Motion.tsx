@@ -140,15 +140,34 @@ export function Marquee({
 
 /* ------------------------------------------------------------------ *
  * CountUp — angka berhitung naik saat masuk viewport.
+ *
+ * PENTING: angka akhir dirender dari server (`useState(to)`), bukan 0.
+ * Versi lama memulai dari 0, jadi tanpa JS — atau sebelum hidrasi selesai —
+ * halaman menampilkan "0 proyek" dan itu informasi yang salah. Sekarang:
+ *   - Angka yang sudah terlihat saat halaman dimuat langsung tampil final
+ *     (tidak ada lompatan 7 → 0 → 7).
+ *   - Hanya angka di bawah lipatan yang dianimasikan saat digulir.
  * ------------------------------------------------------------------ */
 export function CountUp({
   to, duration = 1200, suffix = "", className,
 }: { to: number; duration?: number; suffix?: string; className?: string }) {
   const { ref, inView } = useInView<HTMLSpanElement>(0.4);
-  const [n, setN] = useState(0);
+  const [n, setN] = useState(to);
+  const visibleOnMount = useRef<boolean | null>(null);
+  const animated = useRef(false);
+
+  // Catat apakah elemen sudah terlihat sejak awal, sebelum animasi apa pun.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    visibleOnMount.current = r.top < window.innerHeight && r.bottom > 0;
+  }, [ref]);
 
   useEffect(() => {
-    if (!inView) return;
+    if (animated.current || !inView) return;
+    if (visibleOnMount.current) { setN(to); return; }
+    animated.current = true;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) { setN(to); return; }
     let raf = 0; const t0 = performance.now();
     const tick = (t: number) => {

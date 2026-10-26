@@ -23,7 +23,7 @@ export function CertificateCard({ cert }: { cert: Certificate }) {
           />
         </div>
         {isAward && (
-          <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-[var(--accent)] px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-wider text-white shadow-sm">
+          <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-[var(--accent)] px-2.5 py-1 font-mono text-[10px] font-medium uppercase tracking-wider text-[var(--accent-ink)] shadow-sm">
             <Verified size={11} /> Penghargaan
           </span>
         )}

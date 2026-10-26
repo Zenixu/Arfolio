@@ -74,7 +74,7 @@ export function Footer({
                   href={waLink(whatsapp, `Halo, saya menemukan ${brand} dan ingin bertanya.`)}
                   target="_blank"
                   rel="noreferrer"
-                  className="group inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-medium text-white transition-all duration-200 [transition-timing-function:var(--ease-out)] hover:-translate-y-0.5 hover:brightness-110 sm:w-auto"
+                  className="group inline-flex w-full items-center justify-center gap-2.5 rounded-full bg-[var(--accent)] px-5 py-3 text-sm font-medium text-[var(--accent-ink)] transition-all duration-200 [transition-timing-function:var(--ease-out)] hover:-translate-y-0.5 hover:brightness-110 sm:w-auto"
                 >
                   <WhatsApp size={16} />
                   Chat WhatsApp
@@ -151,7 +151,7 @@ export function Footer({
               <ul className="space-y-2.5 text-sm text-[var(--text-muted)] sm:space-y-3">
                 {status.available && (
                   <li className="inline-flex items-center gap-2 text-[var(--text)]">
-                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent-2)]" aria-hidden="true" />
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" aria-hidden="true" />
                     Available for projects
                   </li>
                 )}

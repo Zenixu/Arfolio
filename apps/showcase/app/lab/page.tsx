@@ -5,7 +5,7 @@ import { LabCard, SectionHeading, Reveal, CountUp, Marquee, TechStack } from "@a
 export const metadata: Metadata = {
   title: "Learning Vault",
   description:
-    "Learning Vault aruthtale — arsip eksperimen dan latihan coding Ibnu Hambal Al Bantani Rch sebelum lahir proyek besar. Dibangun untuk belajar, bukan pamer.",
+    "Learning Vault aruthtale: arsip eksperimen dan latihan coding Ibnu Hambal Al Bantani Rch sebelum proyek besar. Sebagian masih dipakai, sebagian diarsipkan.",
   alternates: { canonical: "/lab" },
 };
 
@@ -20,8 +20,8 @@ export default function LabPage() {
         as="h1"
         index="02"
         eyebrow="Learning Vault"
-        title={<>Learning Vault aruthtale — <span className="accent-italic">things I built to learn</span></>}
-        description={`${lab.length} eksperimen & latihan sepanjang perjalanan belajar. Sebelum ada proyek besar, ada repo-repo kecil yang membuat saya paham cara kerjanya.`}
+        title={<>Learning Vault <span className="accent-italic">aruthtale</span></>}
+        description={`${lab.length} eksperimen dan latihan sepanjang perjalanan belajar. Satu repo untuk satu hal yang ingin dipahami.`}
       />
 
       {/* Statistik */}

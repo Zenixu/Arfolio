@@ -4,7 +4,7 @@ import {
 import {
   SectionHeading, Reveal, Button,
   CountUp, SpotlightCard, TechStack, ArrowRight, Quote, Star,
-  Parallax, TextReveal, ScrollSweep, AruthtaleMark, VideoBanner,
+  Parallax, TextReveal, ScrollSweep, AruthtaleMark,
   Code, Layers, Shield, Globe, Sparkle, ArrowUpRight, LearningVault,
   CrossLink, Ouroboros, WorkStage,
 } from "@arufolio/ui";
@@ -27,6 +27,15 @@ const OUROBOROS_CORE = [
 /** Ikon per layanan — supaya sel tidak terasa kosong. */
 const SERVICE_ICONS = [Globe, Sparkle, Layers, Code, Shield, Star];
 
+/** Label kategori untuk pita karya — supaya tidak menampilkan slug Inggris. */
+const CATEGORY_LABEL: Record<string, string> = {
+  application: "aplikasi",
+  automation: "otomasi",
+  saas: "SaaS",
+  website: "situs",
+  tool: "alat",
+};
+
 export default function HomePage() {
   const services = aruthtale.services as { slug: string; name: string; description: string }[];
   const philosophy = aruthtale.philosophy as {
@@ -39,51 +48,35 @@ export default function HomePage() {
     <>
       {/* ═══════════════════════ HERO ═══════════════════════ */}
       <section className="relative overflow-hidden pt-[clamp(64px,12vh,132px)] pb-[clamp(48px,8vh,96px)]">
-        {/* Latar bergerak: klip aurora 8 detik + poster WebP (dibuat dari
-            frame pertama klip yang sama). Mati otomatis saat pengguna minta
-            gerak dikurangi. */}
-        <VideoBanner src="/media/banner-aurora.mp4" poster="/media/banner-poster.webp" opacity={0.5} />
-
-        {/* Bercak gradien yang mengapung pelan + bergerak mengikuti gulir */}
-        <Parallax speed={0.16} className="pointer-events-none absolute inset-0">
-          <div
-            aria-hidden="true"
-            className="aurora -left-24 -top-24 h-[420px] w-[420px] rounded-full"
-            style={{ background: "radial-gradient(circle, color-mix(in srgb, var(--accent) 42%, transparent), transparent 68%)" }}
-          />
-        </Parallax>
-        <Parallax speed={-0.1} className="pointer-events-none absolute inset-0">
-          <div
-            aria-hidden="true"
-            className="aurora right-0 top-40 h-[320px] w-[320px] rounded-full"
-            style={{ background: "radial-gradient(circle, color-mix(in srgb, var(--accent-2) 26%, transparent), transparent 68%)", animationDelay: "-8s" }}
-          />
-        </Parallax>
-
+        {/* Latar polos. Sebelumnya di sini ada klip aurora ungu-hijau plus dua
+            bercak gradien yang bergerak mengikuti gulir. Kombinasi itu yang
+            paling khas "situs buatan model", dan warnanya tidak mungkin
+            disamakan dengan navy + kuningan. Dibuang, bukan ditambahi. */}
         <div className="container relative">
-          {/* Judul utama — muncul kata demi kata */}
-          <h1 className="display max-w-[15ch] text-balance">
-            <TextReveal text="aruthtale —" delay={80} />
-            <br />
-            <TextReveal text="not words." delay={240} className="grad-text" />
+          {/* Judul utama: nama, lalu satu kalimat yang menyebut siapa & di mana.
+              Versi lama ("aruthtale — not words.") adalah aforisme yang tidak
+              bisa diperiksa; pembaca tidak dapat apa-apa darinya. */}
+          <h1 className="display max-w-[18ch] text-balance">
+            <TextReveal text="aruthtale" delay={80} />
+            <span className="hero-place">Aruthtales Studio</span>
           </h1>
 
           <Reveal delay={360}>
             <p className="lede mt-7">
-              A web development studio turning ideas into functional, interactive,
-              user-centered applications. Every piece of work here is a chapter — not a
-              display, but proof that something was actually built.
+              Aplikasi kasir, katalog produk, dan dashboard internal. Dari sketsa
+              sampai deploy, dikerjakan sendiri. Tujuh proyek sudah selesai dan
+              bisa diperiksa satu per satu di halaman Karya.
             </p>
           </Reveal>
 
           <Reveal delay={480}>
             <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Button href="/work" size="lg" withArrow>See the Work</Button>
+              <Button href="/work" size="lg" withArrow>Lihat karya</Button>
               <a
                 href="/contact"
                 className="group inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--text-muted)] transition-colors hover:text-[var(--accent)]"
               >
-                Start a conversation
+                Mulai percakapan
                 <ArrowUpRight size={13} className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
             </div>
@@ -97,7 +90,7 @@ export default function HomePage() {
               href="https://rchibnu.aruthtales.my.id"
               site="profile"
               label="Kenal Saya"
-              sub="Siapa orang di balik aruthtale — perjalanan, keahlian, dan sertifikat."
+              sub="Perjalanan, keahlian, dan sertifikat."
               className="mt-6"
             />
           </Reveal>
@@ -111,43 +104,43 @@ export default function HomePage() {
           <Reveal delay={540}>
             <div className="ledger">
               <div className="ledger__head">
-                <span className="mono-label">By the numbers</span>
-                <span className="mono-label">Ledger · 2024 — now</span>
+                <span className="mono-label">Angka</span>
+                <span className="mono-label">Catatan · 2024–2026</span>
               </div>
 
               <div className="ledger__row">
-                <span className="ledger__label">Real projects</span>
+                <span className="ledger__label">Proyek nyata</span>
                 <span className="ledger__dots" aria-hidden="true" />
                 <span className="ledger__num"><CountUp to={projects.length} /></span>
-                <span className="ledger__note">Shipped &amp; documented</span>
+                <span className="ledger__note">Selesai &amp; terdokumentasi</span>
               </div>
 
               <div className="ledger__row">
-                <span className="ledger__label">Experiments</span>
+                <span className="ledger__label">Eksperimen</span>
                 <span className="ledger__dots" aria-hidden="true" />
                 <span className="ledger__num"><CountUp to={lab.length} /></span>
-                <span className="ledger__note">Built to learn</span>
+                <span className="ledger__note">Dibuat untuk belajar</span>
               </div>
 
               <div className="ledger__row">
-                <span className="ledger__label">Certificates</span>
+                <span className="ledger__label">Sertifikat</span>
                 <span className="ledger__dots" aria-hidden="true" />
                 <span className="ledger__num"><CountUp to={certificates.length} /></span>
-                <span className="ledger__note">Verified programs</span>
+                <span className="ledger__note">Program terverifikasi</span>
               </div>
 
               <div className="ledger__row">
-                <span className="ledger__label">Commits</span>
+                <span className="ledger__label">Commit</span>
                 <span className="ledger__dots" aria-hidden="true" />
                 <span className="ledger__num"><CountUp to={github.commits} /></span>
-                <span className="ledger__note">on GitHub · @{github.login}</span>
+                <span className="ledger__note">GitHub · @{github.login}</span>
               </div>
 
               <div className="ledger__row">
-                <span className="ledger__label">Services offered</span>
+                <span className="ledger__label">Layanan</span>
                 <span className="ledger__dots" aria-hidden="true" />
                 <span className="ledger__num"><CountUp to={services.length} /></span>
-                <span className="ledger__note">Open for work</span>
+                <span className="ledger__note">Terbuka untuk kerja</span>
               </div>
             </div>
           </Reveal>
@@ -171,11 +164,11 @@ export default function HomePage() {
             <Reveal delay={120}>
               <div>
                 <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-                  <span className="mono-label">Stack — {MARQUEE.length} tools</span>
+                  <span className="mono-label">Stack · {MARQUEE.length} alat</span>
                   {/* Layar sentuh tidak punya hover — jadi petunjuknya dibedakan
                       per breakpoint, bukan menyuruh sesuatu yang tak bisa. */}
-                  <span className="mono-label hidden sm:inline">Hover the ring to read names</span>
-                  <span className="mono-label sm:hidden">Tap a logo to read its name</span>
+                  <span className="mono-label hidden sm:inline">Arahkan kursor untuk membaca nama</span>
+                  <span className="mono-label sm:hidden">Ketuk logo untuk membaca namanya</span>
                 </div>
                 <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3">
                   {MARQUEE.map((t, i) => (
@@ -194,49 +187,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══════════════════════ PITA MANIFESTO ═══════════════════════
-          SATU pita bergerak — dan ia BERISI. Versi lama hanya mengulang
-          slogan kosong; sekarang pita bergantian antara PERNYATAAN dan
-          BUKTI (angka nyata dari repo). Yang bergulir adalah substansi. */}
+      {/* ═══════════════════════ PITA KARYA ═══════════════════════
+          Dulu pita ini mengulang slogan "Work, not words" — aforisme yang
+          tidak memberi informasi apa pun. Sekarang isinya daftar yang benar-
+          benar ada: nama proyek unggulan + tahun rilisnya. Kalau pita ini
+          gagal dimuat, tidak ada informasi penting yang hilang. */}
       <section
         className="relative overflow-hidden border-y border-[var(--border)] py-14 sm:py-20"
-        aria-label={philosophy.statement}
+        aria-label="Proyek unggulan aruthtale"
       >
-        {/* Label running-head yang menempel di tepi kiri — supaya tidak ada
-            teks yang terasing tanpa konteks (dulu baris hint melayang). */}
         <div className="container mb-8 flex items-center gap-3">
           <span className="h-1.5 w-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
-          <span className="mono-label">Manifesto — aruthtale</span>
+          <span className="mono-label">Karya unggulan</span>
         </div>
 
         <ScrollSweep>
           <div className="flex items-center gap-10 whitespace-nowrap sm:gap-14">
-            {/* SATU salinan (≈3371px) sudah lebih lebar dari layar: saat
-                berada di tengah sapuan, layar tertutup penuh. Fase "masuk
-                dari kiri" & "keluar ke kanan" memang memperlihatkan sisi
-                yang belum/tidak lagi terisi — itulah efek sapuannya. Satu
-                salinan juga membuat geraknya tidak melesat. */}
+            {/* SATU salinan sudah lebih lebar dari layar: saat berada di tengah
+                sapuan, layar tertutup penuh. Satu salinan juga membuat
+                geraknya tidak melesat. */}
             <span className="inline-flex items-center gap-10 sm:gap-14">
-              <span className="manifesto__word">Work, not words</span>
-
-              <span className="manifesto__proof">
-                <b>{projects.length}</b> real projects <span className="manifesto__sep">◆</span>
-              </span>
-
-              <span className="manifesto__word manifesto__word--accent">aruthtale</span>
-
-              <span className="manifesto__proof">
-                <b>{lab.length}</b> experiments <span className="manifesto__sep">◆</span>
-              </span>
-
-              <span className="manifesto__word">Portfolio · SaaS · POS · Web</span>
-
-              <span className="manifesto__proof">
-                <b>{github.commits}</b> commits <span className="manifesto__sep">◆</span>
-              </span>
-
-              <span className="manifesto__word manifesto__word--accent">Since 2024</span>
-
+              {featuredProjects.map((p) => (
+                <span key={p.slug} className="inline-flex items-baseline gap-5">
+                  <span className="manifesto__word">{p.title.split(" (")[0]}</span>
+                  <span className="manifesto__proof">
+                    <b>{p.year}</b> {CATEGORY_LABEL[p.category] ?? p.category}
+                  </span>
+                </span>
+              ))}
               <AruthtaleMark size={36} className="shrink-0" />
             </span>
           </div>
@@ -248,7 +226,7 @@ export default function HomePage() {
         <SectionHeading
           index="01"
           eyebrow="Filosofi"
-          title={<>Why <span className="text-[var(--accent)]">Aruthtale</span>?</>}
+          title={<>Kenapa <span className="text-[var(--accent)]">aruthtale</span>?</>}
           description={philosophy.nameOrigin.explanation}
         />
 
@@ -293,7 +271,7 @@ export default function HomePage() {
           index="02"
           eyebrow="The Work"
           title="Karya terpilih"
-          description={`${projects.length} proyek nyata — dari aplikasi Android sampai platform SaaS. Tiap proyek punya peran, stack, dan hasil yang bisa diperiksa.`}
+          description={`${projects.length} proyek nyata, dari aplikasi Android sampai platform SaaS. Tiap proyek mencatat peran, stack, dan hasil yang bisa diperiksa.`}
           action={<Button href="/work" variant="link">Semua karya</Button>}
         />
 
@@ -309,7 +287,7 @@ export default function HomePage() {
           index="03"
           eyebrow="Layanan"
           title="Yang bisa saya bangun"
-          description="Dari situs portofolio sederhana sampai aplikasi bersistem. Semua dikerjakan dengan pendekatan yang sama: rapi, cepat, dan benar."
+          description="Dari landing page sampai sistem kasir yang dipakai tiap hari. Lingkup, waktu, dan hasil disepakati sebelum pekerjaan dimulai."
         />
         <div className="grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => {
@@ -348,8 +326,8 @@ export default function HomePage() {
         <SectionHeading
           index="04"
           eyebrow="Learning Vault"
-          title={<>Things I built to learn — <span className="accent-italic">not to impress.</span></>}
-          description={`${lab.length} eksperimen kecil sepanjang perjalanan belajar. Sebelum ada proyek besar, ada repo-repo kecil yang membuat saya paham cara kerjanya.`}
+          title={<>{lab.length} eksperimen sebelum proyek besar.</>}
+          description="Repo kecil tempat saya mempelajari satu hal pada satu waktu. Sebagian masih saya pakai, sebagian sudah diarsipkan."
           action={<Button href="/lab" variant="link">Masuk vault</Button>}
         />
         <LearningVault items={lab.filter((l) => l.thumb).slice(0, 5)} total={lab.length} />
@@ -377,7 +355,7 @@ export default function HomePage() {
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-[var(--text-muted)] leading-relaxed">
                 Saya terbuka untuk proyek freelance, kolaborasi, maupun peluang kerja.
-                Ceritakan idemu — kita bahas bagaimana mewujudkannya.
+                Ceritakan kebutuhanmu lewat formulir atau WhatsApp.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <Button href="/contact" size="lg" withArrow>Hubungi Saya</Button>

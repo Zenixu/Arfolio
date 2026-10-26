@@ -1,5 +1,7 @@
 /* ============================================================================
-   Arufolio Design Tokens — Showcase (aruthtale · indigo)
+   Arufolio Design Tokens — Showcase (aruthtale · navy & kuningan)
+   Palet diambil dari lambang asli (brand/aruthtale-mark.png): navy #101030
+   + kuningan #D0A060. Satu hue aksen saja — bukan pasangan indigo + mint.
    Arah estetika: "Editorial Terminal"
    — grid editorial Swiss (rasional, asimetris) + bawah-sadar teknis (mono, index)
    — bukan glassmorphism SaaS generik, bukan portofolio template
@@ -36,40 +38,46 @@
 
 /* ---------- Gelap (default) ---------- */
 :root, :root[data-theme="dark"] {
-  --bg: #08080A;
-  --bg-elevated: #101013;
-  --bg-sunken: #050506;
-  --border: #232329;
-  --border-strong: #33333C;
-  --text: #F2F2F4;
-  --text-muted: #93939F;
-  --accent: #6366F1;
-  --accent-hover: #818CF8;
+  --bg: #0A0B12;
+  --bg-elevated: #111320;
+  --bg-sunken: #06070C;
+  --border: #232534;
+  --border-strong: #353850;
+  --text: #EDE9DE;
+  --text-muted: #9C978C;
+  --accent: #C9A063;
+  --accent-hover: #DBB57A;
   --accent-soft: color-mix(in srgb, var(--accent) 14%, transparent);
-  --accent-2: #38E1B0;
+  /* Aksen kedua sengaja hanya versi lebih tua dari hue yang sama.
+     Dua hue komplementer (indigo + mint) adalah penanda template AI. */
+  --accent-2: #A8843F;
+  /* Teks di atas bidang aksen. Kuningan itu terang, jadi tinta gelap —
+     putih di atas #C9A063 hanya ~2:1 dan gagal kontras. */
+  --accent-ink: #0A0B12;
   --shadow: 0 18px 44px -18px rgba(0, 0, 0, .85);
   --shadow-lift: 0 28px 60px -22px rgba(0, 0, 0, .92);
   --grain-opacity: .035;
-  --glow: radial-gradient(60% 60% at 50% 0%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 70%);
+  --glow: radial-gradient(60% 60% at 50% 0%, color-mix(in srgb, var(--accent) 9%, transparent), transparent 70%);
 }
 
 /* ---------- Terang ---------- */
 :root[data-theme="light"] {
-  --bg: #FAFAF9;
+  --bg: #F5F3ED;
   --bg-elevated: #FFFFFF;
-  --bg-sunken: #F1F1EF;
-  --border: #E2E2DF;
-  --border-strong: #C9C9C4;
-  --text: #101012;
-  --text-muted: #5A5A63;
-  --accent: #4F46E5;
-  --accent-hover: #4338CA;
+  --bg-sunken: #ECE9E0;
+  --border: #DFDCD2;
+  --border-strong: #C4C0B4;
+  --text: #171821;
+  --text-muted: #5F5C55;
+  --accent: #7A5C22;
+  --accent-hover: #5F4718;
   --accent-soft: color-mix(in srgb, var(--accent) 10%, transparent);
-  --accent-2: #0D9488;
+  --accent-2: #9A7B3A;
+  --accent-ink: #FFFFFF;
   --shadow: 0 14px 34px -16px rgba(16, 16, 18, .22);
   --shadow-lift: 0 22px 48px -20px rgba(16, 16, 18, .3);
   --grain-opacity: .022;
-  --glow: radial-gradient(60% 60% at 50% 0%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 70%);
+  --glow: radial-gradient(60% 60% at 50% 0%, color-mix(in srgb, var(--accent) 7%, transparent), transparent 70%);
 }
 
 /* ============================ Dasar ============================ */
@@ -199,13 +207,17 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
    anak yang punya `transform` (perilaku peramban) — akibatnya teks di
    dalam TextReveal jadi tak terlihat. Karena itu gradien juga dipasang
    langsung pada tiap `.word-inner` lewat variabel di bawah. */
-.grad-text {
-  --grad-fill: linear-gradient(100deg, var(--text) 0%, var(--text) 42%, var(--accent) 78%, var(--accent-2) 100%);
-}
-.grad-text,
-.grad-text .word-inner {
-  background: var(--grad-fill);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+/* Dulu `.grad-text`: gradien dua hue yang dipotong ke huruf. Efek itu
+   sekarang jadi penanda paling khas situs buatan model — dihapus.
+   Baris kedua judul cukup dibedakan lewat ukuran & warna, bukan efek. */
+.hero-place {
+  display: block;
+  margin-top: .42em;
+  font-size: clamp(1rem, 2.1vw, 1.45rem);
+  font-weight: 400;
+  letter-spacing: -.015em;
+  line-height: 1.3;
+  color: var(--text-muted);
 }
 
 /* ============================ Gerak ============================ */
@@ -360,7 +372,7 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
   position: absolute;
   left: 0; top: 0; bottom: 0;
   width: 2px;
-  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  background: var(--accent);
   transform: scaleY(0);
   transform-origin: bottom;
   transition: transform 320ms var(--ease-out);
@@ -410,7 +422,7 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 /* Garis atas berjalan (scroll progress) */
 .progress-bar {
   position: fixed; top: 0; left: 0; height: 2px; z-index: var(--z-overlay);
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  background: var(--accent);
   transform-origin: left; transform: scaleX(0);
   transition: transform 90ms linear;
 }
@@ -461,7 +473,7 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 
 /* Bilah keterampilan */
 .skill-bar { height: 3px; background: var(--border); border-radius: 999px; overflow: hidden; }
-.skill-bar > i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: inherit; transform-origin: left; }
+.skill-bar > i { display: block; height: 100%; background: var(--accent); border-radius: inherit; transform-origin: left; }
 .js .skill-bar > i { transform: scaleX(0); transition: transform 1.1s var(--ease-out); }
 .js .skill-bar.is-visible > i { transform: scaleX(1); }
 
@@ -943,7 +955,7 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
   position: absolute; right: 0.6rem; top: 0.6rem;
   display: inline-flex; align-items: center; gap: 0.3rem;
   border-radius: 999px; padding: 0.2rem 0.55rem;
-  background: var(--accent); color: #fff;
+  background: var(--accent); color: var(--accent-ink);
   font-family: var(--font-mono); font-size: 9px; text-transform: uppercase; letter-spacing: .1em;
 }
 

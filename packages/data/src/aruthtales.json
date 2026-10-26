@@ -2,14 +2,14 @@
   "brand": {
     "name": "aruthtale",
     "handle": "aruthtale",
-    "tagline": "Work, not words.",
+    "tagline": "Aruthtales Studio",
     "domain": "aruthtales.my.id",
     "description": "Aruthtale adalah studio pengembangan web yang mengubah ide menjadi aplikasi fungsional, interaktif, dan rapi dari Cianjur, Indonesia.",
     "logo": null,
     "logoNote": "Lambang aruthtale: daun + mata pena (Ars · Tale)."
   },
   "philosophy": {
-    "summary": "aruthtale adalah kisah yang ditulis dengan kecerdikan, kerendahan hati, dan ketulusan — setiap karya adalah satu bab dari perjalanan yang terus tumbuh.",
+    "summary": "aruthtale adalah nama kerja saya. Setiap proyek diperlakukan sebagai satu bab: masalah awalnya, keputusan yang diambil, dan hasil yang bisa diperiksa.",
     "nameOrigin": {
       "full": "aruthtale",
       "parts": [
@@ -18,22 +18,22 @@
         "Hyacinth",
         "Tale"
       ],
-      "explanation": "Nama aruthtale bukan sekadar label. Ia lahir dari gabungan empat unsur yang masing-masing membawa makna: 'Aruth' (Arsene + Rue + Hyacinth) dan 'Tale' (kisah). Setiap hurufnya sengaja dipilih untuk mewakili cara kerja dan nilai di baliknya."
+      "explanation": "Nama aruthtale lahir dari gabungan empat unsur: 'Aruth' (Arsene + Rue + Hyacinth) dan 'Tale' (kisah). Tiap unsur mewakili satu cara kerja yang saya pegang."
     },
     "elements": [
       {
         "element": "Arsene (Ar)",
-        "symbol": "Arsene Lupin — sang gentleman pencuri dalam karya Maurice Leblanc",
+        "symbol": "Arsene Lupin, sang gentleman pencuri dalam karya Maurice Leblanc",
         "meaning": "Kecerdikan, keanggunan, dan keberanian. 'Ars' juga bermakna seni atau keahlian (bahasa Latin). Mewakili craftsmanship: setiap karya dikerjakan dengan cerdas, presisi, dan elegan."
       },
       {
         "element": "Rue (Ru)",
-        "symbol": "Bunga/herba Rue (Ruta) — lambang penyesalan, ingatan, dan perlindungan",
+        "symbol": "Bunga/herba Rue (Ruta), lambang penyesalan, ingatan, dan perlindungan",
         "meaning": "Kerendahan hati dan ingatan. Setiap proyek menyimpan pelajaran; kesalahan menjadi penyesalan yang menuntun pada perbaikan, bukan alasan berhenti."
       },
       {
         "element": "Hyacinth (Th)",
-        "symbol": "Bunga Hyacinth — dari mitos Yunani Hyacinthus; lambang ketulusan, pengabdian, dan pembaruan",
+        "symbol": "Bunga Hyacinth dari mitos Yunani Hyacinthus, lambang ketulusan dan pembaruan",
         "meaning": "Ketulusan dan pengabdian. Mengerjakan sesuatu dengan sepenuh hati, dan berani terlahir kembali lebih baik di setiap karya berikutnya."
       },
       {
@@ -42,7 +42,7 @@
         "meaning": "Setiap proyek adalah sebuah kisah: ada masalah, ada perjalanan, dan ada penyelesaian. aruthtale adalah tempat kisah-kisah itu diceritakan dan dibuktikan."
       }
     ],
-    "statement": "Kami tidak menjual janji, kami menulis kisah — lalu membuktikannya lewat karya."
+    "statement": "Saya menulis kisahnya, lalu membangunnya. Hasil akhirnya bisa dibuka dan diperiksa."
   },
   "services": [
     {
@@ -73,7 +73,7 @@
     {
       "slug": "custom",
       "name": "Custom Project",
-      "description": "Punya ide lain? Banyak hal bisa diwujudkan — mari kita bahas."
+      "description": "Punya ide lain? Banyak hal bisa diwujudkan. Mari kita bahas."
     }
   ],
   "contact": {

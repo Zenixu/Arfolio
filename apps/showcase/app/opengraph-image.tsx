@@ -9,7 +9,7 @@ import { EMBLEM } from "./og-emblem";
  * packages/config — tidak ada gambar yang bisa jadi usang.
  * Ukuran 1200×630 = rasio standar Open Graph / Twitter large card.
  */
-export const alt = "Aruthtale — Studio Web & Fullstack Developer Cianjur";
+export const alt = "Aruthtale, studio web dan fullstack developer di Cianjur";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -24,10 +24,10 @@ export default function OpengraphImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px 80px",
-          background: "#08080A",
+          background: "#0A0B12",
           backgroundImage:
-            "radial-gradient(60% 55% at 15% 0%, rgba(99,102,241,0.38), transparent 70%), radial-gradient(45% 45% at 100% 100%, rgba(56,225,176,0.20), transparent 70%)",
-          color: "#F5F5F7",
+            "radial-gradient(60% 55% at 15% 0%, rgba(201,160,99,0.20), transparent 70%), radial-gradient(45% 45% at 100% 100%, rgba(201,160,99,0.10), transparent 70%)",
+          color: "#EDE9DE",
           fontFamily: "sans-serif",
         }}
       >
@@ -42,7 +42,7 @@ export default function OpengraphImage() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: -0.5 }}>aruthtale</div>
             <div style={{ fontSize: 19, color: "#9AA0AE", letterSpacing: 3, textTransform: "uppercase" }}>
-              Work, not words.
+              Aruthtales Studio
             </div>
           </div>
         </div>
@@ -52,11 +52,11 @@ export default function OpengraphImage() {
           <div style={{ fontSize: 82, fontWeight: 800, lineHeight: 1.02, letterSpacing: -2.5 }}>
             Studio Web &amp;
           </div>
-          <div style={{ fontSize: 82, fontWeight: 800, lineHeight: 1.02, letterSpacing: -2.5, color: "#818CF8" }}>
+          <div style={{ fontSize: 82, fontWeight: 800, lineHeight: 1.02, letterSpacing: -2.5, color: "#C9A063" }}>
             Fullstack Developer
           </div>
           <div style={{ fontSize: 28, color: "#B4B9C6", marginTop: 8, maxWidth: 900 }}>
-            Aplikasi web yang fungsional, interaktif, dan rapi — dari Cianjur, Indonesia.
+            Aplikasi kasir, katalog, dan dashboard. Dibangun dari Cianjur.
           </div>
         </div>
 

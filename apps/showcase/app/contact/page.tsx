@@ -8,7 +8,7 @@ import {
 export const metadata: Metadata = {
   title: "Kontak",
   description:
-    "Hubungi aruthtale, brand milik Ibnu Hambal Al Bantani Rch di Cianjur — terbuka untuk proyek freelance, kolaborasi, dan peluang kerja.",
+    "Hubungi aruthtale, brand milik Ibnu Hambal Al Bantani Rch di Cianjur. Terbuka untuk proyek freelance, kolaborasi, dan peluang kerja.",
   alternates: { canonical: "/contact" },
 };
 
@@ -40,7 +40,7 @@ export default function ContactPage() {
           label: "WhatsApp",
           value: waDisplay(aruthtale.contact.whatsapp),
           href: waLink(aruthtale.contact.whatsapp),
-          note: "Untuk obrolan cepat — biasanya saya balas di hari yang sama.",
+          note: "Untuk obrolan cepat. Biasanya saya balas di hari yang sama.",
           icon: <WhatsApp size={18} />,
         }]
       : []),
@@ -61,7 +61,7 @@ export default function ContactPage() {
         as="h1"
         index="05"
         eyebrow="Kontak"
-        title={<>Hubungi aruthtale — <span className="text-[var(--accent)]">mari bicara</span>.</>}
+        title={<>Hubungi <span className="text-[var(--accent)]">aruthtale</span>.</>}
         description="Terbuka untuk proyek freelance, kolaborasi, atau peluang kerja. Pilih jalur yang paling nyaman untukmu."
       />
 
@@ -96,8 +96,8 @@ export default function ContactPage() {
               </p>
               <h2 className="h2 mt-3">Kenali orang di balik aruthtale</h2>
               <p className="mt-3 text-[var(--text-muted)] leading-relaxed">
-                Halaman personal saya berisi perjalanan, keahlian, dan sertifikat —
-                kalau kamu ingin tahu siapa yang akan mengerjakan proyekmu.
+                Halaman personal saya berisi perjalanan, keahlian, dan sertifikat.
+                Berguna kalau kamu ingin tahu siapa yang akan mengerjakan proyekmu.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button href="https://rchibnu.aruthtales.my.id" withArrow>Lihat Profil</Button>

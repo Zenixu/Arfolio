@@ -40,10 +40,10 @@ export default async function OpengraphImage({ params }: { params: Promise<{ slu
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "68px 76px",
-          background: "#08080A",
+          background: "#0A0B12",
           backgroundImage:
-            "radial-gradient(55% 50% at 10% 0%, rgba(99,102,241,0.34), transparent 70%), radial-gradient(45% 45% at 100% 100%, rgba(56,225,176,0.18), transparent 70%)",
-          color: "#F5F5F7",
+            "radial-gradient(55% 50% at 10% 0%, rgba(201,160,99,0.18), transparent 70%), radial-gradient(45% 45% at 100% 100%, rgba(201,160,99,0.09), transparent 70%)",
+          color: "#EDE9DE",
           fontFamily: "sans-serif",
         }}
       >
@@ -73,7 +73,7 @@ export default async function OpengraphImage({ params }: { params: Promise<{ slu
 
         {/* Inti */}
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-          <div style={{ display: "flex", fontSize: 30, color: "#818CF8", letterSpacing: 1 }}>{year}</div>
+          <div style={{ display: "flex", fontSize: 30, color: "#C9A063", letterSpacing: 1 }}>{year}</div>
           <div style={{ display: "flex", fontSize: 76, fontWeight: 800, lineHeight: 1.04, letterSpacing: -2 }}>
             {title}
           </div>
