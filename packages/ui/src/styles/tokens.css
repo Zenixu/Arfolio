@@ -94,7 +94,14 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-a { color: inherit; text-decoration: none; }
+/* Aturan dasar HARUS di dalam `@layer base`. Tanpa layer, `a { color: inherit }`
+   mengalahkan SEMUA utility warna Tailwind di `@layer utilities` — jadi
+   `text-[var(--accent-ink)]` pada tombol dan `text-[var(--text-muted)]` pada
+   tautan nav tidak pernah berlaku. Akibatnya label tombol mewarisi warna teks
+   badan (gelap di atas bidang gelap) dan semua tautan nav tampak sama. */
+@layer base {
+  a { color: inherit; text-decoration: none; }
+}
 img, svg { display: block; }
 ::selection { background: color-mix(in srgb, var(--accent) 40%, transparent); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: var(--radius-sm); }
@@ -343,6 +350,7 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 .shine { position: relative; overflow: hidden; }
 .shine::after {
   content: ""; position: absolute; inset: 0;
+  pointer-events: none;              /* kilau tidak boleh menangkap klik */
   background: linear-gradient(105deg, transparent 38%, color-mix(in srgb, #fff 22%, transparent) 50%, transparent 62%);
   transform: translateX(-120%);
   transition: transform 700ms var(--ease-out);

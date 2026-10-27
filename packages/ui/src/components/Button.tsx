@@ -6,8 +6,11 @@ type Variant = "primary" | "ghost" | "link" | "soft";
 type Size = "md" | "lg";
 
 const styles: Record<Variant, string> = {
+  // `font-semibold` pada primary: label 15 px di atas bidang gelap butuh
+  // bobot lebih supaya tepinya tegas. Kontras warnanya sudah 6,2:1 (terang)
+  // dan 8,1:1 (gelap) — di atas ambang WCAG AA 4,5:1.
   primary:
-    "bg-[var(--accent)] text-[var(--accent-ink)] hover:bg-[var(--accent-hover)] shadow-[0_10px_30px_-12px_color-mix(in_srgb,var(--accent)_70%,transparent)] hover:shadow-[0_16px_38px_-12px_color-mix(in_srgb,var(--accent)_80%,transparent)]",
+    "bg-[var(--accent)] text-[var(--accent-ink)] font-semibold hover:bg-[var(--accent-hover)] shadow-[0_10px_30px_-12px_color-mix(in_srgb,var(--accent)_70%,transparent)] hover:shadow-[0_16px_38px_-12px_color-mix(in_srgb,var(--accent)_80%,transparent)]",
   ghost:
     "border border-[var(--border-strong)] text-[var(--text)] hover:border-[var(--accent)] hover:text-[var(--accent)] hover:bg-[var(--accent-soft)]",
   soft:

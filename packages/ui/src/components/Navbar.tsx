@@ -86,7 +86,7 @@ export function Navbar({
     >
       {/* Di HP: satu baris flex (brand kiri, aksi kanan).
           Di layar >=sm: grid 3 kolom supaya nav benar-benar terpusat. */}
-      <div className="container flex h-[68px] items-center justify-between gap-4 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-6">
+      <div className="container flex h-16 items-center justify-between gap-4 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-6">
         {/* Brand */}
         <a href={homeHref} className="group/brand flex items-center gap-2.5 justify-self-start" aria-label={`${brand} — beranda`}>
           <span className="transition-transform duration-300 [transition-timing-function:var(--ease-spring)] group-hover/brand:scale-110 group-hover/brand:rotate-[-6deg]">
@@ -106,14 +106,17 @@ export function Navbar({
               aria-current={isActive(l.href) ? "page" : undefined}
               className={cn(
                 "relative rounded-full px-3.5 py-2 text-sm transition-colors duration-200",
+                // Keadaan aktif ditandai warna DAN ketebalan huruf — jangan
+                // hanya warna (WCAG 1.4.1: warna saja tidak cukup sebagai satu-
+                // satunya pembeda).
                 isActive(l.href)
-                  ? "text-[var(--text)]"
+                  ? "font-medium text-[var(--text)]"
                   : "text-[var(--text-muted)] hover:text-[var(--text)]"
               )}
             >
               {l.label}
               {isActive(l.href) && (
-                <span className="absolute inset-x-3 -bottom-px h-px bg-[var(--accent)]" aria-hidden="true" />
+                <span className="absolute inset-x-3 bottom-1 h-[1.5px] rounded-full bg-[var(--accent)]" aria-hidden="true" />
               )}
             </a>
           ))}
@@ -129,9 +132,9 @@ export function Navbar({
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Tutup menu" : "Buka menu"}
-            className="grid h-10 w-10 place-items-center rounded-full border border-[var(--border)] text-[var(--text)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)] sm:hidden"
+            className="grid h-11 w-11 place-items-center rounded-full border border-[var(--border)] text-[var(--text)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)] sm:hidden"
           >
-            {open ? <Close size={17} /> : <Menu size={17} />}
+            {open ? <Close size={19} /> : <Menu size={19} />}
           </button>
         </div>
       </div>
