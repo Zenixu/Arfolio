@@ -66,7 +66,13 @@ export default function ProfileHome() {
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--accent)] opacity-70" />
                   <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--accent)]" />
                 </span>
-                {identity.location}
+                {/* Dulu di sini lokasi ("Cianjur, Jawa Barat, Indonesia"), yang
+                    lalu diulang lagi di kartu profil. Sekarang diisi hal yang
+                    TIDAK muncul di tempat lain: nama studio. Handle @RchIbnu
+                    juga dibuang dari sini karena H1 tepat di bawahnya sudah
+                    menulis "Rchibnu". */}
+                brand{" "}
+                <span className="afterglow-gradient font-medium">{identity.brand}</span>
               </p>
             </Reveal>
 
@@ -75,29 +81,23 @@ export default function ProfileHome() {
               <TextReveal text={identity.fullName + ""} delay={260} className="afterglow-gradient" />
             </h1>
 
-            {/* Nama lengkap + brand — sebelumnya keduanya tidak muncul di UI */}
-            <Reveal delay={340}>
-              <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
-                <span className="text-sm font-medium text-[var(--text)]">{identity.fullName}</span>
-                <span className="h-3 w-px bg-[var(--border-strong)]" aria-hidden="true" />
-                <span className="font-mono text-[11px] text-[var(--text-muted)]">
-                  brand <span className="afterglow-gradient font-medium">aruthtale</span> · @{identity.handle}
-                </span>
-              </div>
-            </Reveal>
+            {/* Baris ini dulu mengulang nama lengkap tepat di bawah H1 yang
+                SUDAH memuat nama lengkap — dua kali dalam satu pandangan, dan
+                itu yang membuat hero terasa mengulang. Isi yang berguna dari
+                baris ini (handle + brand) sudah pindah ke label di atas. */}
 
-            <Reveal delay={420}>
+            <Reveal delay={340}>
               <p className="lede mt-6">{identity.headline}</p>
             </Reveal>
 
-            <Reveal delay={480}>
+            <Reveal delay={420}>
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Button href="/certificates" size="lg" withArrow>Lihat Sertifikat</Button>
               </div>
             </Reveal>
 
             {/* "Lihat Karya" — kartu lintas-situs menuju portofolio utama. */}
-            <Reveal delay={510}>
+            <Reveal delay={460}>
               <CrossLink
                 href="https://aruthtales.my.id"
                 site="showcase"

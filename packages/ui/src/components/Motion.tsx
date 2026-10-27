@@ -1,7 +1,7 @@
 "use client";
 
 import {
-  useEffect, useRef, useState, type ReactNode, type CSSProperties,
+  Fragment, useEffect, useRef, useState, type ReactNode, type CSSProperties,
 } from "react";
 import { cn } from "../lib/cn";
 
@@ -328,12 +328,18 @@ export function TextReveal({
   return (
     <Component ref={ref as React.Ref<never>} className={className}>
       {words.map((w, i) => (
-        <span key={`${w}-${i}`} className="word-mask" data-reveal={on ? "on" : "off"}>
-          <span className="word-inner" style={{ transitionDelay: `${delay + i * stagger}ms` }}>
-            {w}
+        <Fragment key={`${w}-${i}`}>
+          <span className="word-mask" data-reveal={on ? "on" : "off"}>
+            <span className="word-inner" style={{ transitionDelay: `${delay + i * stagger}ms` }}>
+              {w}
+            </span>
           </span>
-          {i < words.length - 1 && <span className="word-gap"> </span>}
-        </span>
+          {/* Spasi ditaruh DI LUAR mask, sebagai simpul teks biasa. Dulu spasi
+              ada di dalam `.word-gap` (inline-block selebar .28em), dan browser
+              tidak menghitungnya sebagai spasi saat teks disalin atau dibaca —
+              nama jadi "IbnuHambalAlBantaniRch". */}
+          {i < words.length - 1 && " "}
+        </Fragment>
       ))}
     </Component>
   );
