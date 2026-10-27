@@ -37,7 +37,10 @@ export default function ProfileHome() {
   return (
     <>
       {/* ═══════════════════════ HERO + KARTU PROFIL ═══════════════════════ */}
-      <section className="relative overflow-hidden pt-[clamp(56px,10vh,112px)] pb-[clamp(40px,6vh,72px)]">
+      {/* Jarak atas dipisah: di HP 104px terlalu jauh (navbar 66px + padding
+          84px), sedangkan di desktop justru pas. HP dapat 3vh, layar lebar
+          kembali ke 8vh. */}
+      <section className="relative overflow-hidden pt-[clamp(16px,3vh,32px)] pb-[clamp(40px,6vh,72px)] md:pt-[clamp(56px,8vh,96px)]">
         {/* Latar bergerak versi Afterglow (senja hangat) — 47 KB + poster. */}
         <VideoBanner src="/media/banner-aurora.mp4" poster="/media/banner-poster.webp" opacity={0.44} />
 
