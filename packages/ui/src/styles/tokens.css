@@ -363,6 +363,25 @@ h3, .h3 { font-family: var(--font-display); font-size: clamp(1.1rem, 1.7vw, 1.35
 }
 .shine:hover::after { transform: translateX(120%); }
 
+/* ── Grid layanan: fokus tunggal saat satu kartu disorot ───────────────────
+   Kartu yang disorot tetap tajam, sisanya diredupkan + diburamkan supaya mata
+   langsung tertuju ke satu hal. Memakai :has() supaya tidak perlu state di
+   JavaScript sama sekali.
+
+   Blur dipasang di `.svc-card` (anak), BUKAN di pembungkus `Reveal`. Pembungkus
+   itu memakai `filter` untuk animasi masuknya sendiri (`.js .reveal`), jadi
+   menaruh blur di sana akan saling menimpa. */
+.svc-grid:has(.svc-card:hover) .svc-card:not(:hover),
+.svc-grid:has(.svc-card:focus-visible) .svc-card:not(:focus-visible) {
+  filter: blur(2px) saturate(.75);
+  opacity: .45;
+}
+.svc-card {
+  transition: filter 320ms var(--ease-out), opacity 320ms var(--ease-out),
+              background-color 300ms var(--ease-out);
+}
+.svc-card:hover { background: var(--bg-sunken); }
+
 /* ── CrossLink: kartu lintas-situs (Kenal Saya / Lihat Karya) ───────────────
    Dua jalur ini adalah alasan utama orang berpindah antar situs, jadi
    dibuat seperti kartu kecil — bukan tombol ghost biasa. Garis gradien di

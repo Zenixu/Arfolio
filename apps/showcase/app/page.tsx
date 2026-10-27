@@ -293,12 +293,19 @@ export default function HomePage() {
           title="Yang bisa saya bangun"
           description="Dari landing page sampai sistem kasir yang dipakai tiap hari. Lingkup, waktu, dan hasil disepakati sebelum pekerjaan dimulai."
         />
-        <div className="grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="svc-grid grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--border)] sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, i) => {
             const Icon = SERVICE_ICONS[i % SERVICE_ICONS.length];
             return (
               <Reveal key={s.slug} delay={i * 55} className="h-full">
-                <div className="group relative flex h-full flex-col overflow-hidden bg-[var(--bg-elevated)] p-6 transition-colors duration-300 hover:bg-[var(--bg-sunken)]">
+                {/* Seluruh kartu adalah tautan ke halaman Kontak — "Diskusikan"
+                    bukan lagi teks mati. Target klik jadi satu bidang penuh,
+                    bukan hanya tulisan kecil di bawah. */}
+                <a
+                  href="/contact"
+                  aria-label={`Diskusikan ${s.name} — buka halaman kontak`}
+                  className="svc-card group relative flex h-full flex-col overflow-hidden bg-[var(--bg-elevated)] p-6"
+                >
                   {/* Garis aksen yang tumbuh dari kiri saat hover */}
                   <span
                     aria-hidden="true"
@@ -318,7 +325,7 @@ export default function HomePage() {
                     Diskusikan
                     <ArrowRight size={13} className="transition-transform duration-300 group-hover:translate-x-1" />
                   </span>
-                </div>
+                </a>
               </Reveal>
             );
           })}

@@ -59,7 +59,7 @@ export default function ContactPage() {
     <section className="section container">
       <SectionHeading
         as="h1"
-        index="05"
+        index="03"
         eyebrow="Kontak"
         title={<>Hubungi <span className="text-[var(--accent)]">aruthtale</span>.</>}
         description="Terbuka untuk proyek freelance, kolaborasi, atau peluang kerja. Pilih jalur yang paling nyaman untukmu."
