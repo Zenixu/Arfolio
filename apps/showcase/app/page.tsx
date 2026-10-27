@@ -47,7 +47,7 @@ export default function HomePage() {
   return (
     <>
       {/* ═══════════════════════ HERO ═══════════════════════ */}
-      <section className="relative overflow-hidden pt-[clamp(64px,12vh,132px)] pb-[clamp(48px,8vh,96px)]">
+      <section className="relative overflow-hidden pt-[clamp(32px,7vh,84px)] pb-[clamp(48px,8vh,96px)]">
         {/* Latar polos. Sebelumnya di sini ada klip aurora ungu-hijau plus dua
             bercak gradien yang bergerak mengikuti gulir. Kombinasi itu yang
             paling khas "situs buatan model", dan warnanya tidak mungkin

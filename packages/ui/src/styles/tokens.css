@@ -135,6 +135,12 @@ body::after {
 .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--pad-x); }
 .section { padding-block: var(--section-y); }
 .section--tight { padding-block: clamp(48px, 7vh, 88px); }
+/* Bagian pertama di dalam <main> tidak butuh jarak atas sebesar jarak
+   antar-bagian: navbar yang menempel di atasnya sudah jadi pemisah. Tanpa ini
+   halaman dalam (Kontak/Karya/Lab) mulai ~157 px dari tepi atas layar HP —
+   terasa seperti ada ruang kosong yang hilang. Spesifisitas (0,2,1) mengalahkan
+   `.section` (0,1,0), jadi tidak perlu `!important`. */
+main > .section:first-child { padding-top: clamp(28px, 4.5vh, 56px); }
 
 /* Grid editorial 12 kolom — dipakai untuk memecah simetri */
 .grid-12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--gutter); }

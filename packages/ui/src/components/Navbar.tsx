@@ -87,12 +87,16 @@ export function Navbar({
       {/* Di HP: satu baris flex (brand kiri, aksi kanan).
           Di layar >=sm: grid 3 kolom supaya nav benar-benar terpusat. */}
       <div className="container flex h-16 items-center justify-between gap-4 sm:grid sm:grid-cols-[1fr_auto_1fr] sm:gap-6">
-        {/* Brand */}
-        <a href={homeHref} className="group/brand flex items-center gap-2.5 justify-self-start" aria-label={`${brand} — beranda`}>
-          <span className="transition-transform duration-300 [transition-timing-function:var(--ease-spring)] group-hover/brand:scale-110 group-hover/brand:rotate-[-6deg]">
-            <Mark site={site} size={28} />
+        {/* Brand — satu kesatuan, bukan dua elemen yang kebetulan berdekatan.
+            Jarak 8 px dan huruf display 15 px/600 dibuat sepadan dengan bobot
+            lambang (cakram navy bertepi emas) supaya tidak terasa "logo berat,
+            teks lemah". `leading-none` membuat kotak teks setinggi huruf saja,
+            jadi pensentralan flex benar-benar optis, bukan geometris. */}
+        <a href={homeHref} className="group/brand flex items-center gap-2 justify-self-start" aria-label={`${brand} — beranda`}>
+          <span className="flex transition-transform duration-300 [transition-timing-function:var(--ease-spring)] group-hover/brand:scale-110 group-hover/brand:rotate-[-6deg]">
+            <Mark site={site} size={30} />
           </span>
-          <span className="font-mono text-[13px] font-medium tracking-tight text-[var(--text)] transition-colors group-hover/brand:text-[var(--accent)]">
+          <span className="font-display text-[15px] font-semibold leading-none tracking-[-0.01em] text-[var(--text)] transition-colors group-hover/brand:text-[var(--accent)]">
             {brand}
           </span>
         </a>
@@ -155,15 +159,17 @@ export function Navbar({
               aria-current={isActive(l.href) ? "page" : undefined}
               style={{ transitionDelay: open ? `${i * 45 + 60}ms` : "0ms" }}
               className={cn(
-                "flex items-center justify-between rounded-[var(--radius-md)] px-3 py-3.5 text-[0.95rem] transition-all duration-300",
+                "flex items-center rounded-[var(--radius-md)] px-3 py-3.5 text-[0.95rem] transition-all duration-300",
                 open ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0",
                 isActive(l.href)
-                  ? "bg-[var(--bg-elevated)] text-[var(--text)]"
+                  ? "bg-[var(--bg-elevated)] font-medium text-[var(--text)]"
                   : "text-[var(--text-muted)] hover:bg-[var(--bg-elevated)] hover:text-[var(--text)]"
               )}
             >
+              {/* Tanpa nomor urut: nomor menu (01–03) tidak sejalan dengan
+                  nomor bagian di halaman (Kontak = 05), jadi justru
+                  membingungkan. Penanda aktif cukup latar + ketebalan. */}
               <span>{l.label}</span>
-              <span className="index-num">{String(i + 1).padStart(2, "0")}</span>
             </a>
           ))}
 
