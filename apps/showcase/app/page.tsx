@@ -47,7 +47,7 @@ export default function HomePage() {
   return (
     <>
       {/* ═══════════════════════ HERO ═══════════════════════ */}
-      <section className="relative overflow-hidden pt-[clamp(32px,7vh,84px)] pb-[clamp(48px,8vh,96px)]">
+      <section className="relative overflow-hidden pt-[clamp(16px,3.5vh,48px)] pb-[clamp(48px,8vh,96px)]">
         {/* Latar polos. Sebelumnya di sini ada klip aurora ungu-hijau plus dua
             bercak gradien yang bergerak mengikuti gulir. Kombinasi itu yang
             paling khas "situs buatan model", dan warnanya tidak mungkin
@@ -58,10 +58,14 @@ export default function HomePage() {
               bisa diperiksa; pembaca tidak dapat apa-apa darinya. */}
           <h1 className="display max-w-[18ch] text-balance">
             <TextReveal text="aruthtale" delay={80} />
-            <span className="hero-place">Aruthtales Studio</span>
+            {/* Dulu baris ini <span> biasa tanpa animasi, jadi ia muncul
+                SENDIRIAN sebelum kata "aruthtale" selesai naik — halaman
+                terlihat setengah jadi selama ~1 detik. Sekarang ikut
+                mekanisme mask yang sama, dengan jeda sesudah kata pertama. */}
+            <TextReveal text="Aruthtales Studio" className="hero-place" delay={170} />
           </h1>
 
-          <Reveal delay={360}>
+          <Reveal delay={320}>
             <p className="lede mt-7">
               Aplikasi kasir, katalog produk, dan dashboard internal. Dari sketsa
               sampai deploy, dikerjakan sendiri. Tujuh proyek sudah selesai dan
@@ -69,7 +73,7 @@ export default function HomePage() {
             </p>
           </Reveal>
 
-          <Reveal delay={480}>
+          <Reveal delay={420}>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <Button href="/work" size="lg" withArrow>Lihat karya</Button>
               <a
@@ -85,7 +89,7 @@ export default function HomePage() {
           {/* "Kenal Saya" — sengaja dibuat lebih spesial daripada tombol ghost:
               kartu lintas-situs dengan lambang, keterangan, dan garis aksen yang
               menyala saat hover. Ini jalur utama menuju profil personal. */}
-          <Reveal delay={520}>
+          <Reveal delay={480}>
             <CrossLink
               href="https://rchibnu.aruthtales.my.id"
               site="profile"
