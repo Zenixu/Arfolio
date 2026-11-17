@@ -8,7 +8,7 @@ import {
 export const metadata: Metadata = {
   title: "Kontak",
   description:
-    "Kontak Rchibnu (Ibnu Hambal Al Bantani Rch) — terbuka untuk kolaborasi, proyek, atau diskusi teknologi. Email, GitHub, Instagram, dan WhatsApp.",
+    "Kontak Rchibnu (Ibnu Hambal Al Bantani Rch) — terbuka untuk kolaborasi, proyek, atau diskusi teknologi. Email, GitHub, dan Instagram.",
   alternates: { canonical: "/contact" },
 };
 

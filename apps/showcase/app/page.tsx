@@ -366,7 +366,7 @@ export default function HomePage() {
               </h2>
               <p className="mx-auto mt-4 max-w-xl text-[var(--text-muted)] leading-relaxed">
                 Saya terbuka untuk proyek freelance, kolaborasi, maupun peluang kerja.
-                Ceritakan kebutuhanmu lewat formulir atau WhatsApp.
+                Ceritakan kebutuhanmu lewat formulir atau email.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <Button href="/contact" size="lg" withArrow>Hubungi Saya</Button>

@@ -8,7 +8,7 @@ export function waLink(number: string, text?: string): string {
   return `https://wa.me/${digits}${q}`;
 }
 
-/** 6285283089860 → "+62 852-8308-9860" (hanya untuk tampilan). */
+/** 6281234567890 → "+62 812-3456-7890" (hanya untuk tampilan). */
 export function waDisplay(number: string): string {
   const d = number.replace(/\D/g, "");
   if (!d.startsWith("62")) return `+${d}`;

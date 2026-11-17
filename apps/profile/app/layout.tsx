@@ -3,7 +3,7 @@ import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import { sites, nav, websiteSchema, personSchema, socialSameAs } from "@arufolio/config";
 import {
   Navbar, Footer, ThemeToggle, ScrollProgress, CursorDot, JsonLd,
-  GitHub, Instagram, Mail, WhatsApp,
+  GitHub, Instagram, Mail, WhatsApp, waLink,
 } from "@arufolio/ui";
 import { rchibnu } from "@arufolio/data";
 import "./globals.css";
@@ -55,7 +55,10 @@ const socials = [
   { label: "GitHub", href: rchibnu.contact.github ?? "#", icon: <GitHub size={16} /> },
   { label: "Instagram", href: rchibnu.contact.instagram ?? "#", icon: <Instagram size={16} /> },
   { label: "Email", href: `mailto:${rchibnu.contact.email}`, icon: <Mail size={16} /> },
-  { label: "WhatsApp", href: `https://wa.me/${rchibnu.contact.whatsapp}`, icon: <WhatsApp size={16} /> },
+  // WhatsApp hanya tampil bila nomornya memang diisi di data kontak.
+  ...(rchibnu.contact.whatsapp
+    ? [{ label: "WhatsApp", href: waLink(rchibnu.contact.whatsapp), icon: <WhatsApp size={16} /> }]
+    : []),
 ];
 
 /* ── Structured data (schema.org) ───────────────────────────────────────────
